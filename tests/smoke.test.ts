@@ -7,8 +7,11 @@ test("package scripts and source entrypoints exist", async () => {
     await readFile(new URL("../package.json", import.meta.url), "utf8"),
   ) as {
     name: string;
+    description: string;
     bin: Record<string, string>;
     scripts: Record<string, string>;
+    keywords: string[];
+    engines?: { node?: string };
   };
   const lock = JSON.parse(
     await readFile(new URL("../package-lock.json", import.meta.url), "utf8"),
@@ -17,10 +20,18 @@ test("package scripts and source entrypoints exist", async () => {
   };
 
   assert.equal(pkg.name, "public-api-toolkit");
+  assert.equal(
+    pkg.description,
+    "A cross-platform MCP server that turns public APIs into clean, agent-ready tools.",
+  );
   assert.equal(lock.name, "public-api-toolkit");
   assert.equal(pkg.bin["public-api-toolkit"], "dist/index.js");
   assert.equal(pkg.scripts.build, "tsc -p tsconfig.json");
   assert.equal(pkg.scripts.test, "tsx --test tests/*.test.ts");
+  assert.match(pkg.engines?.node ?? "", />=18/);
+  assert.ok(pkg.keywords.includes("codex"));
+  assert.ok(pkg.keywords.includes("claude-code"));
+  assert.ok(pkg.keywords.includes("cursor"));
 });
 
 test("packaging assets use the renamed public-api-toolkit identity", async () => {
@@ -96,4 +107,71 @@ test("runtime identity strings match the public product name", async () => {
   assert.match(serverSource, /name:\s*"public-api-toolkit"/);
   assert.match(indexSource, /Failed to start public-api-toolkit\./);
   assert.match(apiFetchSource, /public-api-toolkit\/1\.0/);
+});
+
+test("launch docs exist for supported client setup flows", async () => {
+  const files = await Promise.all([
+    readFile(new URL("../README.md", import.meta.url), "utf8"),
+    readFile(new URL("../docs/getting-started.md", import.meta.url), "utf8"),
+    readFile(new URL("../docs/installation/codex.md", import.meta.url), "utf8"),
+    readFile(
+      new URL("../docs/installation/claude-code.md", import.meta.url),
+      "utf8",
+    ),
+    readFile(new URL("../docs/installation/cursor.md", import.meta.url), "utf8"),
+    readFile(
+      new URL("../docs/installation/chatgpt-mcp.md", import.meta.url),
+      "utf8",
+    ),
+    readFile(
+      new URL("../docs/installation/generic-mcp-clients.md", import.meta.url),
+      "utf8",
+    ),
+    readFile(
+      new URL("../docs/configuration/environment-variables.md", import.meta.url),
+      "utf8",
+    ),
+    readFile(
+      new URL("../docs/configuration/tool-groups.md", import.meta.url),
+      "utf8",
+    ),
+    readFile(new URL("../docs/configuration/api-keys.md", import.meta.url), "utf8"),
+    readFile(new URL("../docs/publishing/npm.md", import.meta.url), "utf8"),
+    readFile(
+      new URL("../docs/publishing/github-release.md", import.meta.url),
+      "utf8",
+    ),
+  ]);
+
+  const [
+    readme,
+    gettingStarted,
+    codexDoc,
+    claudeDoc,
+    cursorDoc,
+    chatgptDoc,
+    genericDoc,
+    envDoc,
+    groupDoc,
+    apiKeysDoc,
+    npmDoc,
+    githubDoc,
+  ] = files;
+
+  assert.match(
+    readme,
+    /cross-platform MCP server that turns public APIs into clean, agent-ready tools/i,
+  );
+  assert.match(readme, /41 grouped `public_api_<group>` tools/i);
+  assert.match(gettingStarted, /That should print `41`\./);
+  assert.match(codexDoc, /~\/\.codex\/config\.toml/);
+  assert.match(claudeDoc, /claude mcp add-json/);
+  assert.match(cursorDoc, /mcp\.json/);
+  assert.match(chatgptDoc, /requires a remote MCP transport/i);
+  assert.match(genericDoc, /"command": "npx"/);
+  assert.match(envDoc, /PUBLIC_APIS_FRED/);
+  assert.match(groupDoc, /public_api_weather/);
+  assert.match(apiKeysDoc, /PUBLIC_APIS_OMDB/);
+  assert.match(npmDoc, /npm publish --access public/);
+  assert.match(githubDoc, /Public API Toolkit v1\.0\.0/);
 });

@@ -12,16 +12,16 @@
 - [x] Approve the Public API Toolkit brand and repo strategy
 - [x] Write the design spec and implementation plan
 - [x] Create the sibling repo and copy the validated baseline
-- [ ] Execute Task 1: repo/package identity and baseline cleanup
-- [ ] Review Task 1 for spec compliance and code quality
-- [ ] Execute Task 2: implementation migration polish and test alignment
-- [ ] Review Task 2 for spec compliance and code quality
-- [ ] Execute Task 3: plugin packaging, skills, and client examples
-- [ ] Review Task 3 for spec compliance and code quality
-- [ ] Execute Task 4: flagship README and installation/configuration docs
-- [ ] Review Task 4 for spec compliance and code quality
-- [ ] Execute Task 5: release metadata and full verification
-- [ ] Review Task 5, then run final repo-wide verification
+- [x] Execute Task 1: repo/package identity and baseline cleanup
+- [x] Review Task 1 for spec compliance and code quality
+- [x] Execute Task 2: implementation migration polish and test alignment
+- [x] Review Task 2 for spec compliance and code quality
+- [x] Execute Task 3: plugin packaging, skills, and client examples
+- [x] Review Task 3 for spec compliance and code quality
+- [x] Execute Task 4: flagship README and installation/configuration docs
+- [x] Review Task 4 for spec compliance and code quality
+- [x] Execute Task 5: release metadata and full verification
+- [x] Review Task 5, then run final repo-wide verification
 
 ## Notes
 - Assumption: `/tmp/public-apis-mcp` is the current validated implementation source and can be used as migration input.
@@ -30,5 +30,5 @@
 
 ## Review
 - Result: Subagent-driven implementation started in `/Users/nikhilreddy/Downloads/public-apis-mcp`
-- Verification: Repo initialized on branch `codex/public-api-toolkit`; validated baseline copied from `/tmp/public-apis-mcp`; approved plan copied into local docs
-- Remaining risk: Pending implementation and review loops for packaging/docs polish
+- Verification: Repo initialized on branch `codex/public-api-toolkit`; Task 1 completed via commits `b1e23d0`, `11a4259`, and `59939ba`; Task 3 completed via commits `e4f6e44` and `8e98fa0`; Task 4 docs passed separate spec and accuracy review; `npm install`, `npm test`, `npm run build`, and a real MCP stdio smoke check against `dist/index.js` all succeeded, with the built server listing `41` tools
+- Remaining risk: ChatGPT support is intentionally documented as remote-transport-only because this release still ships stdio MCP only

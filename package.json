@@ -1,9 +1,14 @@
 {
   "name": "public-api-toolkit",
   "version": "1.0.0",
-  "description": "Public API Toolkit is a TypeScript MCP server wrapping grouped public APIs for AI assistants.",
+  "description": "A cross-platform MCP server that turns public APIs into clean, agent-ready tools.",
   "type": "module",
   "main": "dist/index.js",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "bin": {
     "public-api-toolkit": "dist/index.js"
   },
@@ -18,9 +23,15 @@
     "public-api-toolkit",
     "public-api",
     "public-apis",
+    "codex",
+    "claude-code",
+    "cursor",
     "typescript",
     "model-context-protocol"
   ],
+  "engines": {
+    "node": ">=18"
+  },
   "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.11.0"

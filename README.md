@@ -1,34 +1,71 @@
-# public-api-toolkit
+# Public API Toolkit
 
-`public-api-toolkit` is a TypeScript MCP server that wraps 40+ grouped public API tools behind a single stdio server. It is designed for local AI assistants that want direct JSON responses instead of web search and HTML parsing.
+Public API Toolkit is a cross-platform MCP server that turns public APIs into clean, agent-ready tools.
 
-## What It Exposes
+It packages 41 grouped `public_api_<group>` tools behind one local MCP server, so agents can ask for weather, countries, crypto prices, holidays, Wikipedia summaries, open data, transport lookups, and dozens of other structured API results without scraping web pages first.
 
-The server registers tools named `public_api_<group>`, including:
+## Why It Exists
 
-- `public_api_weather`
-- `public_api_crypto_data`
-- `public_api_country_data`
-- `public_api_wikipedia`
-- `public_api_open_data`
-- `public_api_security_intel`
+- Structured JSON beats brittle scraping for repeatable agent workflows.
+- One MCP server is easier to install than wiring dozens of single-purpose connectors.
+- Premium providers are optional, so the server stays useful even without API keys.
+- The same tool surface can be reused across Codex, Claude Code, Cursor, and other MCP clients.
 
-Each tool accepts an `action` plus group-specific arguments defined in its JSON Schema.
+## Client Support
+
+| Client | Status | Notes |
+| --- | --- | --- |
+| Codex | Direct | Local stdio MCP server via `~/.codex/config.toml` |
+| Claude Code | Direct | Local stdio MCP server via `.mcp.json` or `claude mcp add-json` |
+| Cursor | Direct | Local stdio MCP server via `mcp.json` |
+| Generic MCP clients | Direct | Use the same stdio command shape if the client supports local MCP processes |
+| ChatGPT Apps / remote MCP | Partial | Requires a remote MCP transport; this repo currently ships stdio only |
 
 ## Quick Start
+
+### Run From Source
 
 ```bash
 npm install
 npm test
 npm run build
 node dist/index.js
-# or after installation/linking
-public-api-toolkit
 ```
 
-## Environment Variables
+### Run After npm Publish
 
-Premium-compatible providers use optional environment variables in the form `PUBLIC_APIS_<NAME>`, for example:
+```bash
+npx -y public-api-toolkit
+```
+
+### Add It To A Client
+
+- Codex: [docs/installation/codex.md](docs/installation/codex.md)
+- Claude Code: [docs/installation/claude-code.md](docs/installation/claude-code.md)
+- Cursor: [docs/installation/cursor.md](docs/installation/cursor.md)
+- ChatGPT / remote MCP: [docs/installation/chatgpt-mcp.md](docs/installation/chatgpt-mcp.md)
+- Generic MCP clients: [docs/installation/generic-mcp-clients.md](docs/installation/generic-mcp-clients.md)
+
+## Tool Coverage
+
+Public API Toolkit exposes 41 tools across these categories:
+
+- Data reference: countries, dictionaries, books, universities
+- Geolocation: geocoding and IP lookup
+- Finance: FX, crypto, stocks
+- Weather and environment: forecasts, air quality, carbon
+- Development: HTTP utilities, DNS, code execution, screenshots, placeholder data
+- Text and knowledge: translation, text analysis, Wikipedia, news
+- Media and entertainment: images, music, movies, games
+- Science and lifestyle: math, space, food, blockchain, holidays, transport
+- Validation and security: email, phone, content validation, security feeds, jobs
+- Civic data: government, health, and open data sets
+
+The full catalog lives in [docs/configuration/tool-groups.md](docs/configuration/tool-groups.md).
+
+## API Keys
+
+Most tools work without authentication. Optional premium-compatible providers are activated through `PUBLIC_APIS_<NAME>` environment variables such as:
 
 - `PUBLIC_APIS_FINNHUB`
 - `PUBLIC_APIS_ALPHAVANTAGE`
@@ -36,26 +73,35 @@ Premium-compatible providers use optional environment variables in the form `PUB
 - `PUBLIC_APIS_OMDB`
 - `PUBLIC_APIS_TMDB`
 - `PUBLIC_APIS_CARBON_INTERFACE`
+- `PUBLIC_APIS_MAILCHECK`
 - `PUBLIC_APIS_KICKBOX`
 - `PUBLIC_APIS_OPEN_CHARGE_MAP`
+- `PUBLIC_APIS_FOODDATA_CENTRAL`
 
-If a required key is missing, the tool returns a helpful setup message instead of crashing.
+Details:
 
-## Layout
+- [docs/configuration/environment-variables.md](docs/configuration/environment-variables.md)
+- [docs/configuration/api-keys.md](docs/configuration/api-keys.md)
 
-```text
-src/
-  catalog/
-  groups/
-  lib/
-  server/
-tests/
-plugins/
-skills/
-```
+## Repository Guide
 
-## Notes
+- Start here: [docs/getting-started.md](docs/getting-started.md)
+- Install per client: [docs/installation](docs/installation)
+- Configure keys and tool groups: [docs/configuration](docs/configuration)
+- Publish to npm and GitHub: [docs/publishing](docs/publishing)
 
-- All upstream requests use a 15 second timeout.
-- Responses are truncated at 30,000 characters with a visible truncation marker.
-- The server always sends `User-Agent: public-api-toolkit/1.0`.
+## Packaging
+
+This repo includes:
+
+- `plugins/public-api-toolkit/.mcp.json` for Codex-compatible MCP packaging
+- `plugins/public-api-toolkit/.codex-plugin/plugin.json` for Codex plugin metadata
+- `skills/public-api-toolkit/SKILL.md` for agent routing guidance
+- `examples/` with ready-to-copy config snippets
+
+## Runtime Notes
+
+- Transport: stdio MCP server
+- Upstream timeout: 15 seconds
+- Response cap: 30,000 characters with a truncation marker
+- User agent: `public-api-toolkit/1.0`
