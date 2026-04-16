@@ -82,19 +82,20 @@ test("Gemini release packaging creates a root-level archive", async () => {
     .trim()
     .split(/\r?\n/)
     .filter(Boolean);
-
-  for (const file of [
+  const requiredFiles = new Set([
     "gemini-extension.json",
     "GEMINI.md",
     "README.md",
     "LICENSE",
-  ]) {
+  ]);
+
+  for (const file of requiredFiles) {
     assert.ok(entries.includes(file), `${file} missing from archive`);
   }
 
   assert.ok(
-    entries.every((entry) => !entry.startsWith("public-api-toolkit/")),
-    "archive should not be nested under public-api-toolkit/",
+    entries.every((entry) => !entry.includes("/") && requiredFiles.has(entry)),
+    "archive should not contain nested or unexpected entries",
   );
 
   await execFile("node", ["scripts/verify-gemini-release.mjs"], {

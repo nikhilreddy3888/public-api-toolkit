@@ -49,7 +49,9 @@ async function main() {
 
   await access(path.join(rootDir, "dist", "index.js"));
 
-  await rm(releaseDir, { recursive: true, force: true });
+  await rm(stagingDir, { recursive: true, force: true });
+  await rm(archivePath, { force: true });
+  await mkdir(releaseDir, { recursive: true });
   await mkdir(stagingDir, { recursive: true });
 
   await Promise.all(

@@ -67,8 +67,8 @@ async function main() {
     }
   }
 
-  if (entries.some((entry) => entry.startsWith("public-api-toolkit/"))) {
-    throw new Error("archive should not be nested under public-api-toolkit/");
+  if (entries.some((entry) => entry.includes("/"))) {
+    throw new Error("archive contains nested entries");
   }
 }
 
