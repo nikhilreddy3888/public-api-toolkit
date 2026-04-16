@@ -4,12 +4,41 @@ Public API Toolkit is a cross-platform MCP server that turns public APIs into cl
 
 It packages 41 grouped `public_api_<group>` tools behind one local MCP server, so agents can ask for weather, countries, crypto prices, holidays, Wikipedia summaries, open data, transport lookups, and dozens of other structured API results without scraping web pages first.
 
+## At A Glance
+
+| Area | Status |
+| --- | --- |
+| Package | `public-api-toolkit@1.0.1` |
+| Tool groups | `10` |
+| Tools | `41` |
+| npm | [public-api-toolkit](https://www.npmjs.com/package/public-api-toolkit) |
+| GitHub | [nikhilreddy3888/public-api-toolkit](https://github.com/nikhilreddy3888/public-api-toolkit) |
+
+Repository health references:
+
+- [STATUS.md](STATUS.md)
+- [CONTRIBUTING.md](CONTRIBUTING.md)
+
 ## Why It Exists
 
 - Structured JSON beats brittle scraping for repeatable agent workflows.
 - One MCP server is easier to install than wiring dozens of single-purpose connectors.
 - Premium providers are optional, so the server stays useful even without API keys.
 - The same tool surface can be reused across Codex, Claude Code, Cursor, and other MCP clients.
+
+## When It Helps Most
+
+Public API Toolkit is strongest on structured lookup tasks, where web search tends to waste tokens and return noisy HTML:
+
+- weather and air quality
+- currency and crypto prices
+- country and university data
+- dictionaries and Wikipedia summaries
+- public holidays, geocoding, and open-data lookups
+
+It is less differentiated for open-ended research, editorial comparisons, or tasks where the model still needs to browse multiple human-written sources.
+
+For a current snapshot of known-good areas versus fragile providers, see [STATUS.md](STATUS.md).
 
 ## Client Support
 
@@ -95,6 +124,7 @@ Details:
 - Install per client: [docs/installation](docs/installation)
 - Configure keys and tool groups: [docs/configuration](docs/configuration)
 - Publish to npm and GitHub: [docs/publishing](docs/publishing)
+- Contribute or fix providers: [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## Packaging
 
@@ -114,3 +144,13 @@ This repo includes:
 - Upstream timeout: 15 seconds
 - Response cap: 30,000 characters with a truncation marker
 - User agent: `public-api-toolkit/1.0`
+
+## Roadmap Themes
+
+The highest-value next steps are:
+
+- Add more useful public APIs
+- replace or remove clearly dead upstreams
+- add a first-party provider audit script
+- continue improving fallback behavior for degraded providers
+- improve product positioning around bundled convenience versus token footprint

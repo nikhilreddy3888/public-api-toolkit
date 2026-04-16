@@ -180,6 +180,8 @@ test("runtime identity strings match the public product name", async () => {
 test("launch docs exist for supported client setup flows", async () => {
   const files = await Promise.all([
     readFile(new URL("../README.md", import.meta.url), "utf8"),
+    readFile(new URL("../CONTRIBUTING.md", import.meta.url), "utf8"),
+    readFile(new URL("../STATUS.md", import.meta.url), "utf8"),
     readFile(new URL("../docs/getting-started.md", import.meta.url), "utf8"),
     readFile(new URL("../docs/installation/codex.md", import.meta.url), "utf8"),
     readFile(
@@ -225,6 +227,8 @@ test("launch docs exist for supported client setup flows", async () => {
 
   const [
     readme,
+    contributingDoc,
+    statusDoc,
     gettingStarted,
     codexDoc,
     claudeDoc,
@@ -245,6 +249,11 @@ test("launch docs exist for supported client setup flows", async () => {
     readme,
     /cross-platform MCP server that turns public APIs into clean, agent-ready tools/i,
   );
+  assert.match(readme, /STATUS\.md/);
+  assert.match(contributingDoc, /Contributing to Public API Toolkit/);
+  assert.match(contributingDoc, /Added or updated tests first/i);
+  assert.match(statusDoc, /Total tools:\*\*\s*41/i);
+  assert.match(statusDoc, /Recently Fixed/i);
   assert.match(readme, /41 grouped `public_api_<group>` tools/i);
   assert.match(gettingStarted, /That should print `41`\./);
   assert.match(codexDoc, /~\/\.codex\/config\.toml/);

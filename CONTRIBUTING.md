@@ -1,100 +1,213 @@
-# Contributing to public-apis
+# Contributing to Public API Toolkit
 
-> While the masses of pull requests and community involvement are appreciated, some pull requests have been specifically
-opened to market company APIs that offer paid solutions. This API list is not a marketing tool, but a tool to help the
-community build applications and use free, public APIs quickly and easily. Pull requests that are identified as marketing attempts will not be accepted.
->
-> Please make sure the API you want to add has full, free access or at least a free tier and does not depend on the purchase of a device/service before submitting.  An example that would be rejected is an API that is used to control a smart outlet - the API is free, but you must purchase the smart device.
->
-> Thanks for understanding! :)
+Thanks for helping improve Public API Toolkit.
 
-## Formatting
+This project is a TypeScript MCP server that turns public APIs into 41 grouped, agent-ready tools. Good contributions usually fall into one of three buckets:
 
-Current API entry format:
+- add or improve tool coverage
+- fix broken or degraded upstream providers
+- improve reliability, packaging, or documentation
 
-| API | Description | Auth | HTTPS | CORS | Call this API |
-| --- | --- | --- | --- | --- | --- |
-| API Title(Link to API documentation) | Description of API | Does this API require authentication? * | Does the API support HTTPS? | Does the API support [CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)? * | [Does this API have a public Postman Collection?](https://learning.postman.com/docs/publishing-your-api/run-in-postman/creating-run-button/) | 
+## Quick Links
 
-Example entry:
+- [README.md](./README.md)
+- [STATUS.md](./STATUS.md)
+- [docs/getting-started.md](./docs/getting-started.md)
+- [docs/configuration/tool-groups.md](./docs/configuration/tool-groups.md)
+- [Issues](https://github.com/nikhilreddy3888/public-api-toolkit/issues)
 
+## Development Setup
+
+```bash
+git clone https://github.com/nikhilreddy3888/public-api-toolkit.git
+cd public-api-toolkit
+npm install
+npm test
+npm run build
 ```
-| [NASA](https://api.nasa.gov) | NASA data, including imagery | No | Yes | Yes | [Run in Postman Button]
+
+## Project Structure
+
+```text
+src/
+  catalog/
+  groups/
+  lib/
+  server/
+tests/
+docs/
+examples/
+plugins/
+skills/
 ```
 
-\* Currently, the only accepted inputs for the `Auth` field are as follows:
+The tool groups live in:
 
-* `OAuth` - _the API supports OAuth_
-* `apiKey` - _the API uses a private key string/token for authentication - try and use the correct parameter_
-* `X-Mashape-Key` - _the name of the header which may need to be sent_
-* `No` - _the API requires no authentication to run_
-* `User-Agent` - _the name of the header to be sent with requests to the API_
+- `src/groups/civicData.ts`
+- `src/groups/dataReference.ts`
+- `src/groups/development.ts`
+- `src/groups/finance.ts`
+- `src/groups/funValidationSecurity.ts`
+- `src/groups/geoLocation.ts`
+- `src/groups/mediaEntertainment.ts`
+- `src/groups/scienceLifestyle.ts`
+- `src/groups/textKnowledge.ts`
+- `src/groups/weatherEnvironment.ts`
 
-\* Currently, the only accepted inputs for the `CORS` field are as follows:
+## How To Add Or Update A Tool
 
-* `Yes` - _the API supports CORS_
-* `No` - _the API does not support CORS_
-* `Unknown` - _it is unknown if the API supports CORS_
+### 1. Pick the right group
 
-\* For the Call this API column, add a link to a Postman collection. You may need to [create a collection](https://learning.postman.com/docs/getting-started/first-steps/creating-the-first-collection/) to create a Run in Postman Button. 
+Keep related tools together. If a tool does not fit any existing group well, open an issue before creating a new group.
 
+### 2. Add the tool definition
 
-_Without proper [CORS configuration](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) an API will only be usable server side._
+Follow the existing `createToolGroup(...)` pattern:
 
-After you've created a branch on your fork with your changes, it's time to [make a pull request][pr-link]. 
+```ts
+createToolGroup({
+  key: "new_tool",
+  description: "What this tool does.",
+  inputSchema: objectSchema(["action1", "action2"], {
+    param1: stringProp("Description."),
+    limit: integerProp("Maximum results.", { default: 10 }),
+  }),
+  execute: (input, ctx) =>
+    runActionMap("new_tool", input, ctx, {
+      action1: async () => ctx.fetchJson("https://api.example.com/data"),
+      action2: async () => {
+        const key = ctx.getEnv("EXAMPLE_API");
+        if (!key) {
+          return missingKeyMessage(
+            ["EXAMPLE_API"],
+            "Example API requests require an API key.",
+          );
+        }
 
+        return ctx.fetchJson(
+          withQuery("https://api.example.com/search", {
+            api_key: key,
+            query: readString(input, "param1"),
+          }),
+        );
+      },
+    }),
+});
+```
 
-*Please follow the guidelines given below while making a Pull Request to the Public APIs*
+### 3. Update the catalog description
 
-## Pull Request Guidelines
+Add or update the entry in `src/catalog/groups.ts` so the tool is described correctly in the registry and docs.
 
-* Never put an update/new version of an API that is already listed, the old version of the API gets deprecated.
-* Continue to follow the alphabetical ordering that is in place per section.
-* Each table column should be padded with one space on either side.
-* The Description should not exceed 100 characters.
-* If an API seems to fall into multiple categories, please place the listing within the section most in line with the services offered through the API. For example, the Instagram API is listed under `Social` since it is mainly a social network, even though it could also apply to `Photography`.
-* Add one link per Pull Request.
-* Make sure the PR title is in the format of `Add Api-name API` *for e.g.*: `Add Blockchain API`
-* Use a short descriptive commit message. *for e.g.*: ❌`Update Readme.md`  ✔ `Add Blockchain API to Cryptocurrency`
-* Search previous Pull Requests or Issues before making a new one, as yours may be a duplicate.
-* Don't mention the TLD(Top Level Domain) in the name of the API. *for e.g.*: ❌Gmail.com ✔Gmail
-* Please make sure the API name does not end with `API`. *for e.g.*: ❌Gmail API ✔Gmail 
-* Please make sure the API has proper documentation.
-* Please make sure you squash all commits together before opening a pull request. If your pull request requires changes upon review, please be sure to squash all additional commits as well. [This wiki page][squash-link] outlines the squash process.
-* Target your Pull Request to the `master` branch of the `public-apis`
+### 4. Add tests first
 
-Once you’ve submitted a pull request, the collaborators can review your proposed changes and decide whether or not to incorporate (pull in) your changes.
+Before changing implementation, add a failing test in:
 
-### Pull Request Pro Tips
+- `tests/groups.test.ts` for tool behavior
+- `tests/shared.test.ts` for shared runtime behavior
+- `tests/smoke.test.ts` for packaging or doc-surface guarantees
 
-* [Fork][fork-link] the repository and [clone][clone-link] it locally.
-Connect your local repository to the original `upstream` repository by adding it as a [remote][remote-link].
-Pull in changes from `upstream` often so that you stay up to date and so when you submit your pull request,
-merge conflicts will be less likely. See more detailed instructions [here][syncing-link].
-* Create a [branch][branch-link] for your edits.
-* Contribute in the style of the project as outlined above. This makes it easier for the collaborators to merge
-and for others to understand and maintain in the future.
+### 5. Verify the full repo
 
-### Open Pull Requests
+```bash
+npm test
+npm run build
+```
 
-Once you’ve opened a pull request, a discussion will start around your proposed changes.
+## Broken API Fix Guide
 
-Other contributors and users may chime in, but ultimately the decision is made by the collaborators.
+Public APIs drift. When an upstream breaks, try to fix it in the smallest durable way.
 
-During the discussion, you may be asked to make some changes to your pull request.
+### 1. Reproduce directly
 
-If so, add more commits to your branch and push them – they will automatically go into the existing pull request. But don't forget to squash them.
+```bash
+curl "https://problematic-api.example/endpoint"
+```
 
-Opening a pull request will trigger a build to check the validity of all links in the project. After the build completes, **please ensure that the build has passed**. If the build did not pass, please view the build logs and correct any errors that were found in your contribution. 
+Common failure patterns:
 
-*Thanks for being a part of this project, and we look forward to hearing from you soon!*
+- `404`: endpoint moved or API shape changed
+- `401` or `403`: auth requirement changed
+- `429`: rate limiting
+- `503` or `5xx`: transient outage
+- `ENOTFOUND`: domain or DNS failure
+- TLS or SSL error: certificate or host issue
 
-[branch-link]: <http://guides.github.com/introduction/flow/>
-[clone-link]: <https://help.github.com/articles/cloning-a-repository/>
-[fork-link]: <http://guides.github.com/activities/forking/>
-[oauth-link]: <https://en.wikipedia.org/wiki/OAuth>
-[pr-link]: <https://help.github.com/articles/creating-a-pull-request/>
-[remote-link]: <https://help.github.com/articles/configuring-a-remote-for-a-fork/>
-[syncing-link]: <https://help.github.com/articles/syncing-a-fork>
-[squash-link]: <https://github.com/todotxt/todo.txt-android/wiki/Squash-All-Commits-Related-to-a-Single-Issue-into-a-Single-Commit>
+### 2. Decide the right repair
 
+Preferred order:
+
+1. Fix the endpoint if the provider still exists
+2. Add a fallback if the primary provider is flaky
+3. Mark the provider as key-required if that is the real constraint
+4. Remove or de-emphasize the tool only when the upstream is truly gone
+
+### 3. Document the change
+
+If a provider swap materially changes behavior, update:
+
+- `STATUS.md`
+- `README.md` if user-facing expectations changed
+- relevant config docs if auth requirements changed
+
+## Reliability Guidelines
+
+### Do
+
+- prefer focused, single-call APIs
+- add fallbacks for obviously dead providers
+- use the shared fetch layer for timeout and retry behavior
+- return helpful key-missing guidance through `missingKeyMessage(...)`
+- keep outputs structured and concise for agent use
+
+### Don't
+
+- fetch huge datasets and filter client-side when a query endpoint exists
+- add multiple sequential upstream calls unless the value is clear
+- hardcode secrets or suggest checked-in API keys
+- silently change the MCP contract without tests and docs
+
+## Token Efficiency Guidelines
+
+Public API Toolkit is most valuable when it replaces expensive web-search style flows with compact structured data.
+
+Good additions:
+
+- weather, finance, geolocation, dictionaries, public records, reference data
+- endpoints that return clean JSON with stable query parameters
+
+Lower-value additions:
+
+- providers that mostly return noisy HTML or unstable payloads
+- tools that require heavy client-side stitching across many requests
+
+## Pull Request Checklist
+
+Before opening a PR:
+
+- [ ] Added or updated tests first
+- [ ] `npm test` passes
+- [ ] `npm run build` passes
+- [ ] Updated docs if behavior changed
+- [ ] Updated `STATUS.md` if provider health changed meaningfully
+- [ ] Kept the change focused
+
+## Pull Request Template
+
+```md
+## Summary
+- short description of what changed
+
+## Verification
+- [ ] npm test
+- [ ] npm run build
+- [ ] manual API check if relevant
+
+## Notes
+- provider changes, fallbacks, or API-key implications
+```
+
+## Questions
+
+- Open an [issue](https://github.com/nikhilreddy3888/public-api-toolkit/issues)
+- Or start from an existing provider-health or roadmap issue if one already exists
