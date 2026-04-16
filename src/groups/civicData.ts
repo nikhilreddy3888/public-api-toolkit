@@ -137,12 +137,26 @@ export const civicDataGroups = [
               q: readString(input, "query"),
             }),
           ),
-        city_search: async () =>
-          ctx.fetchJson(
-            withQuery("https://api.teleport.org/api/cities/", {
-              search: readString(input, "query"),
-            }),
-          ),
+        city_search: async () => {
+          const query = readString(input, "query");
+
+          try {
+            return await ctx.fetchJson(
+              withQuery("https://api.teleport.org/api/cities/", {
+                search: query,
+              }),
+            );
+          } catch {
+            return ctx.fetchJson(
+              withQuery("https://geocoding-api.open-meteo.com/v1/search", {
+                name: query,
+                count: 10,
+                language: "en",
+                format: "json",
+              }),
+            );
+          }
+        },
         artic_artworks: async () =>
           ctx.fetchJson(
             withQuery("https://api.artic.edu/api/v1/artworks/search", {

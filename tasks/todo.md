@@ -1,5 +1,5 @@
 # Task
-- Title: Launch Public API Toolkit standalone repository
+- Title: Improve provider reliability for Public API Toolkit
 - Status: in_progress
 - Owner: Codex
 
@@ -36,3 +36,25 @@
 ## Follow-up
 - Additional distribution surfaces added after launch pass: root `.claude-plugin/plugin.json` and `.mcp.json` for GitHub Copilot CLI direct install, `gemini-extension.json` and `GEMINI.md` for Gemini CLI extension install, `.codex/INSTALL.md` and `.opencode/INSTALL.md` for fetch-and-follow setup, plus installation docs and examples for OpenCode and Gemini CLI
 - Verification: `npm test` and `npm run build` passed again after the added integration assets
+
+## Reliability Pass
+- Goal: Improve real-world tool reliability with low-risk fixes that help many endpoints without changing the MCP contract.
+- Priorities:
+  - Add retry handling for transient upstream failures in the shared fetch layer
+  - Replace or fallback from clearly dead upstreams where a public substitute exists
+  - Keep behavior changes minimal and test-backed
+- Plan:
+  - [x] Add failing tests for transient fetch retry behavior
+  - [x] Add failing tests for `random_facts.quote` fallback behavior
+  - [x] Add failing tests for `open_data.city_search` fallback behavior
+  - [x] Implement the minimal shared fetch retry logic
+  - [x] Implement quote and city-search fallbacks
+  - [x] Verify with targeted tests, full test suite, build, and a live MCP smoke check
+- Result:
+  - `apiFetch` now retries transient upstream failures and timeouts up to 3 attempts with short exponential backoff
+  - `public_api_random_facts` falls back from Quotable to ZenQuotes for `quote`
+  - `public_api_open_data` falls back from Teleport city search to Open-Meteo geocoding
+- Verification:
+  - `npm test`
+  - `npm run build`
+  - Live MCP smoke check confirmed working `quote` and `city_search` responses against `dist/index.js`

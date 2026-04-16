@@ -39,7 +39,13 @@ export const funValidationSecurityGroups = [
           }),
         chuck_norris: async () =>
           ctx.fetchJson("https://api.chucknorris.io/jokes/random"),
-        quote: async () => ctx.fetchJson("https://api.quotable.io/random"),
+        quote: async () => {
+          try {
+            return await ctx.fetchJson("https://api.quotable.io/random");
+          } catch {
+            return ctx.fetchJson("https://zenquotes.io/api/random");
+          }
+        },
         advice: async () => ctx.fetchJson("https://api.adviceslip.com/advice"),
         useless_fact: async () =>
           ctx.fetchJson("https://uselessfacts.jsph.pl/api/v2/facts/random"),
