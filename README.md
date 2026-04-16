@@ -18,6 +18,9 @@ It packages 41 grouped `public_api_<group>` tools behind one local MCP server, s
 | Codex | Direct | Local stdio MCP server via `~/.codex/config.toml` |
 | Claude Code | Direct | Local stdio MCP server via `.mcp.json` or `claude mcp add-json` |
 | Cursor | Direct | Local stdio MCP server via `mcp.json` |
+| OpenCode | Direct | Local MCP server via `opencode.jsonc` |
+| Gemini CLI | Direct | Local `settings.json` MCP or extension install from this repo |
+| GitHub Copilot CLI | Direct after publish | Direct repo plugin install via `.claude-plugin` and `.mcp.json` |
 | Generic MCP clients | Direct | Use the same stdio command shape if the client supports local MCP processes |
 | ChatGPT Apps / remote MCP | Partial | Requires a remote MCP transport; this repo currently ships stdio only |
 
@@ -43,6 +46,9 @@ npx -y public-api-toolkit
 - Codex: [docs/installation/codex.md](docs/installation/codex.md)
 - Claude Code: [docs/installation/claude-code.md](docs/installation/claude-code.md)
 - Cursor: [docs/installation/cursor.md](docs/installation/cursor.md)
+- OpenCode: [docs/installation/opencode.md](docs/installation/opencode.md)
+- Gemini CLI: [docs/installation/gemini-cli.md](docs/installation/gemini-cli.md)
+- GitHub Copilot CLI: [docs/installation/github-copilot-cli.md](docs/installation/github-copilot-cli.md)
 - ChatGPT / remote MCP: [docs/installation/chatgpt-mcp.md](docs/installation/chatgpt-mcp.md)
 - Generic MCP clients: [docs/installation/generic-mcp-clients.md](docs/installation/generic-mcp-clients.md)
 
@@ -96,6 +102,9 @@ This repo includes:
 
 - `plugins/public-api-toolkit/.mcp.json` for Codex-compatible MCP packaging
 - `plugins/public-api-toolkit/.codex-plugin/plugin.json` for Codex plugin metadata
+- `.claude-plugin/plugin.json` and root `.mcp.json` for direct GitHub Copilot CLI plugin install
+- `gemini-extension.json` and `GEMINI.md` for Gemini CLI extension install
+- `.codex/INSTALL.md` and `.opencode/INSTALL.md` for fetch-and-follow setup flows
 - `skills/public-api-toolkit/SKILL.md` for agent routing guidance
 - `examples/` with ready-to-copy config snippets
 

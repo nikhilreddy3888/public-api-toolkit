@@ -32,3 +32,7 @@
 - Result: Subagent-driven implementation started in `/Users/nikhilreddy/Downloads/public-apis-mcp`
 - Verification: Repo initialized on branch `codex/public-api-toolkit`; Task 1 completed via commits `b1e23d0`, `11a4259`, and `59939ba`; Task 3 completed via commits `e4f6e44` and `8e98fa0`; Task 4 docs passed separate spec and accuracy review; `npm install`, `npm test`, `npm run build`, and a real MCP stdio smoke check against `dist/index.js` all succeeded, with the built server listing `41` tools
 - Remaining risk: ChatGPT support is intentionally documented as remote-transport-only because this release still ships stdio MCP only
+
+## Follow-up
+- Additional distribution surfaces added after launch pass: root `.claude-plugin/plugin.json` and `.mcp.json` for GitHub Copilot CLI direct install, `gemini-extension.json` and `GEMINI.md` for Gemini CLI extension install, `.codex/INSTALL.md` and `.opencode/INSTALL.md` for fetch-and-follow setup, plus installation docs and examples for OpenCode and Gemini CLI
+- Verification: `npm test` and `npm run build` passed again after the added integration assets

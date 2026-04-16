@@ -1,0 +1,10 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "public-api-toolkit": {
+      "type": "local",
+      "command": ["npx", "-y", "public-api-toolkit"],
+      "enabled": true
+    }
+  }
+}

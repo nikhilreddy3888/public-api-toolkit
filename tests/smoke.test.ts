@@ -38,11 +38,19 @@ test("packaging assets use the renamed public-api-toolkit identity", async () =>
   const [
     pluginRaw,
     pluginManifestRaw,
+    rootPluginManifestRaw,
+    rootMcpRaw,
+    geminiExtensionRaw,
+    geminiInstructionsRaw,
+    codexInstallRaw,
+    opencodeInstallRaw,
     skillRaw,
     codexRaw,
     claudeRaw,
     cursorRaw,
     genericRaw,
+    geminiSettingsRaw,
+    opencodeRaw,
   ] = await Promise.all([
     readFile(
       new URL("../plugins/public-api-toolkit/.mcp.json", import.meta.url),
@@ -55,11 +63,19 @@ test("packaging assets use the renamed public-api-toolkit identity", async () =>
       ),
       "utf8",
     ),
+    readFile(new URL("../.claude-plugin/plugin.json", import.meta.url), "utf8"),
+    readFile(new URL("../.mcp.json", import.meta.url), "utf8"),
+    readFile(new URL("../gemini-extension.json", import.meta.url), "utf8"),
+    readFile(new URL("../GEMINI.md", import.meta.url), "utf8"),
+    readFile(new URL("../.codex/INSTALL.md", import.meta.url), "utf8"),
+    readFile(new URL("../.opencode/INSTALL.md", import.meta.url), "utf8"),
     readFile(new URL("../skills/public-api-toolkit/SKILL.md", import.meta.url), "utf8"),
     readFile(new URL("../examples/codex/config.toml", import.meta.url), "utf8"),
     readFile(new URL("../examples/claude-code/mcp.json", import.meta.url), "utf8"),
     readFile(new URL("../examples/cursor/mcp.json", import.meta.url), "utf8"),
     readFile(new URL("../examples/generic/stdio.json", import.meta.url), "utf8"),
+    readFile(new URL("../examples/gemini/settings.json", import.meta.url), "utf8"),
+    readFile(new URL("../examples/opencode/opencode.jsonc", import.meta.url), "utf8"),
   ]);
 
   const plugin = JSON.parse(pluginRaw) as { command: string; args: string[] };
@@ -68,6 +84,17 @@ test("packaging assets use the renamed public-api-toolkit identity", async () =>
     description: string;
     mcp: { config: string };
   };
+  const rootPluginManifest = JSON.parse(rootPluginManifestRaw) as {
+    name: string;
+    description: string;
+    mcp: { config: string };
+  };
+  const rootMcp = JSON.parse(rootMcpRaw) as { command: string; args: string[] };
+  const geminiExtension = JSON.parse(geminiExtensionRaw) as {
+    name: string;
+    contextFileName: string;
+    mcpServers: Record<string, { command: string; args: string[] }>;
+  };
   const claude = JSON.parse(claudeRaw) as {
     mcpServers: Record<string, { command: string; args: string[] }>;
   };
@@ -75,11 +102,31 @@ test("packaging assets use the renamed public-api-toolkit identity", async () =>
     mcpServers: Record<string, { command: string; args: string[] }>;
   };
   const generic = JSON.parse(genericRaw) as { command: string; args: string[] };
+  const geminiSettings = JSON.parse(geminiSettingsRaw) as {
+    mcpServers: Record<string, { command: string; args: string[] }>;
+  };
 
   assert.equal(plugin.command, "node");
   assert.deepEqual(plugin.args, ["dist/index.js"]);
   assert.equal(pluginManifest.name, "public-api-toolkit");
   assert.equal(pluginManifest.mcp.config, ".mcp.json");
+  assert.equal(rootPluginManifest.name, "public-api-toolkit");
+  assert.equal(rootPluginManifest.mcp.config, ".mcp.json");
+  assert.equal(rootMcp.command, "npx");
+  assert.deepEqual(rootMcp.args, ["-y", "public-api-toolkit"]);
+  assert.equal(geminiExtension.name, "public-api-toolkit");
+  assert.equal(geminiExtension.contextFileName, "GEMINI.md");
+  assert.equal(
+    geminiExtension.mcpServers["public-api-toolkit"].command,
+    "npx",
+  );
+  assert.deepEqual(geminiExtension.mcpServers["public-api-toolkit"].args, [
+    "-y",
+    "public-api-toolkit",
+  ]);
+  assert.match(geminiInstructionsRaw, /Prefer this extension/i);
+  assert.match(codexInstallRaw, /\[mcp_servers\.public-api-toolkit\]/);
+  assert.match(opencodeInstallRaw, /"type": "local"/);
   assert.match(skillRaw, /name:\s*public-api-toolkit/);
   assert.match(codexRaw, /\[mcp_servers\.public-api-toolkit\]/);
   assert.match(codexRaw, /command\s*=\s*"npx"/);
@@ -95,6 +142,9 @@ test("packaging assets use the renamed public-api-toolkit identity", async () =>
   ]);
   assert.equal(generic.command, "npx");
   assert.deepEqual(generic.args, ["-y", "public-api-toolkit"]);
+  assert.equal(geminiSettings.mcpServers["public-api-toolkit"].command, "npx");
+  assert.match(opencodeRaw, /"public-api-toolkit"/);
+  assert.match(opencodeRaw, /"type": "local"/);
 });
 
 test("runtime identity strings match the public product name", async () => {
@@ -119,6 +169,18 @@ test("launch docs exist for supported client setup flows", async () => {
       "utf8",
     ),
     readFile(new URL("../docs/installation/cursor.md", import.meta.url), "utf8"),
+    readFile(
+      new URL("../docs/installation/opencode.md", import.meta.url),
+      "utf8",
+    ),
+    readFile(
+      new URL("../docs/installation/gemini-cli.md", import.meta.url),
+      "utf8",
+    ),
+    readFile(
+      new URL("../docs/installation/github-copilot-cli.md", import.meta.url),
+      "utf8",
+    ),
     readFile(
       new URL("../docs/installation/chatgpt-mcp.md", import.meta.url),
       "utf8",
@@ -149,6 +211,9 @@ test("launch docs exist for supported client setup flows", async () => {
     codexDoc,
     claudeDoc,
     cursorDoc,
+    opencodeDoc,
+    geminiDoc,
+    copilotDoc,
     chatgptDoc,
     genericDoc,
     envDoc,
@@ -167,6 +232,9 @@ test("launch docs exist for supported client setup flows", async () => {
   assert.match(codexDoc, /~\/\.codex\/config\.toml/);
   assert.match(claudeDoc, /claude mcp add-json/);
   assert.match(cursorDoc, /mcp\.json/);
+  assert.match(opencodeDoc, /opencode\.jsonc/);
+  assert.match(geminiDoc, /gemini extensions install/);
+  assert.match(copilotDoc, /copilot plugin install/);
   assert.match(chatgptDoc, /requires a remote MCP transport/i);
   assert.match(genericDoc, /"command": "npx"/);
   assert.match(envDoc, /PUBLIC_APIS_FRED/);

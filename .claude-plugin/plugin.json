@@ -1,0 +1,8 @@
+{
+  "name": "public-api-toolkit",
+  "version": "1.0.0",
+  "description": "A cross-platform MCP server that turns public APIs into clean, agent-ready tools.",
+  "mcp": {
+    "config": ".mcp.json"
+  }
+}

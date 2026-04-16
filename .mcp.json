@@ -1,0 +1,4 @@
+{
+  "command": "npx",
+  "args": ["-y", "public-api-toolkit"]
+}
