@@ -304,3 +304,25 @@ test("launch docs exist for supported client setup flows", async () => {
   assert.match(npmDoc, /npm publish --access public/);
   assert.match(githubDoc, /Public API Toolkit v1\.0\.0/);
 });
+
+test("static landing page assets and copy exist", async () => {
+  const [siteHtml, siteCss, siteJs, readme, logo] = await Promise.all([
+    readFile(new URL("../site/index.html", import.meta.url), "utf8"),
+    readFile(new URL("../site/styles.css", import.meta.url), "utf8"),
+    readFile(new URL("../site/script.js", import.meta.url), "utf8"),
+    readFile(new URL("../README.md", import.meta.url), "utf8"),
+    readFile(new URL("../site/assets/logo.png", import.meta.url)),
+  ]);
+
+  assert.match(
+    siteHtml,
+    /Stop wasting tokens on things free APIs can answer instantly\./i,
+  );
+  assert.match(siteHtml, /AI is solving easy problems the hard way\./i);
+  assert.match(siteHtml, /What Public API Toolkit actually is\./i);
+  assert.match(siteHtml, /assets\/logo\.png/i);
+  assert.match(siteCss, /grid|radial-gradient|linear-gradient/i);
+  assert.match(siteJs, /DOMContentLoaded|copy/i);
+  assert.ok(logo.byteLength > 0);
+  assert.match(readme, /landing page|GitHub Pages|site\//i);
+});

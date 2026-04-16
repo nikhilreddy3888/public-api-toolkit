@@ -6,6 +6,15 @@ Public API Toolkit is a cross-platform MCP server that turns public APIs into cl
 
 It packages 41 grouped `public_api_<group>` tools behind one local MCP server, so agents can ask for weather, countries, crypto prices, holidays, Wikipedia summaries, open data, transport lookups, and dozens of other structured API results without scraping web pages first.
 
+## Landing Page
+
+The repository includes a static GitHub Pages-style landing page in [`site/`](site/) for launch storytelling, product screenshots, and direct install links.
+
+- Open [`site/index.html`](site/index.html) locally for a no-build preview
+- Reuse the page for GitHub Pages or any static host
+- Publish it directly with the included GitHub Pages workflow
+- Keep the product README focused on setup while the landing page handles narrative and marketing
+
 ## At A Glance
 
 | Area | Status |
