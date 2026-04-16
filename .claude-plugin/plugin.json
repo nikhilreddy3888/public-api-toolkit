@@ -1,8 +1,18 @@
 {
   "name": "public-api-toolkit",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "A cross-platform MCP server that turns public APIs into clean, agent-ready tools.",
-  "mcp": {
-    "config": ".mcp.json"
-  }
+  "author": {
+    "name": "Nikhil Reddy"
+  },
+  "homepage": "https://nikhilreddy3888.github.io/public-api-toolkit/",
+  "repository": "https://github.com/nikhilreddy3888/public-api-toolkit",
+  "license": "MIT",
+  "keywords": [
+    "mcp",
+    "public-api",
+    "public-data",
+    "ai-agents"
+  ],
+  "mcpServers": "./.mcp.json"
 }
