@@ -1,6 +1,10 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { readFile } from "node:fs/promises";
+import { access, readFile, rm } from "node:fs/promises";
+import { execFile as execFileCallback } from "node:child_process";
+import { promisify } from "node:util";
+
+const execFile = promisify(execFileCallback);
 
 test("Gemini manifest version and runtime package match package.json", async () => {
   const [packageRaw, manifestRaw] = await Promise.all([
@@ -49,4 +53,51 @@ test("gitignore excludes generated Gemini release assets", async () => {
   );
 
   assert.match(gitignore, /^release\/$/m);
+});
+
+test("Gemini release packaging creates a root-level archive", async () => {
+  const releaseDir = new URL("../release", import.meta.url);
+  const archivePath = new URL(
+    "../release/public-api-toolkit-gemini-extension.tar.gz",
+    import.meta.url,
+  );
+
+  await rm(releaseDir, { recursive: true, force: true });
+
+  await execFile("node", ["scripts/package-gemini-extension.mjs"], {
+    cwd: new URL("..", import.meta.url),
+  });
+
+  await access(archivePath);
+
+  const { stdout } = await execFile(
+    "tar",
+    ["-tzf", "release/public-api-toolkit-gemini-extension.tar.gz"],
+    {
+      cwd: new URL("..", import.meta.url),
+    },
+  );
+
+  const entries = stdout
+    .trim()
+    .split(/\r?\n/)
+    .filter(Boolean);
+
+  for (const file of [
+    "gemini-extension.json",
+    "GEMINI.md",
+    "README.md",
+    "LICENSE",
+  ]) {
+    assert.ok(entries.includes(file), `${file} missing from archive`);
+  }
+
+  assert.ok(
+    entries.every((entry) => !entry.startsWith("public-api-toolkit/")),
+    "archive should not be nested under public-api-toolkit/",
+  );
+
+  await execFile("node", ["scripts/verify-gemini-release.mjs"], {
+    cwd: new URL("..", import.meta.url),
+  });
 });
