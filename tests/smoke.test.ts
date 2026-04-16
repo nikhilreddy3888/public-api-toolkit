@@ -1,6 +1,10 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { execFile } from "node:child_process";
 import { readFile } from "node:fs/promises";
+import { promisify } from "node:util";
+
+const execFileAsync = promisify(execFile);
 
 test("package scripts and source entrypoints exist", async () => {
   const pkg = JSON.parse(
@@ -108,7 +112,7 @@ test("packaging assets use the renamed public-api-toolkit identity", async () =>
   const rootPluginManifest = JSON.parse(rootPluginManifestRaw) as {
     name: string;
     description: string;
-    mcp: { config: string };
+    mcpServers: string;
   };
   const rootMcp = JSON.parse(rootMcpRaw) as { command: string; args: string[] };
   const geminiExtension = JSON.parse(geminiExtensionRaw) as {
@@ -132,7 +136,7 @@ test("packaging assets use the renamed public-api-toolkit identity", async () =>
   assert.equal(pluginManifest.name, "public-api-toolkit");
   assert.equal(pluginManifest.mcp.config, ".mcp.json");
   assert.equal(rootPluginManifest.name, "public-api-toolkit");
-  assert.equal(rootPluginManifest.mcp.config, ".mcp.json");
+  assert.equal(rootPluginManifest.mcpServers, "./.mcp.json");
   assert.equal(rootMcp.command, "npx");
   assert.deepEqual(rootMcp.args, ["-y", "public-api-toolkit"]);
   assert.equal(geminiExtension.name, "public-api-toolkit");
@@ -143,7 +147,7 @@ test("packaging assets use the renamed public-api-toolkit identity", async () =>
   );
   assert.deepEqual(geminiExtension.mcpServers["public-api-toolkit"].args, [
     "-y",
-    "public-api-toolkit",
+    "public-api-toolkit@1.0.3",
   ]);
   assert.match(geminiInstructionsRaw, /Prefer this extension/i);
   assert.match(codexInstallRaw, /\[mcp_servers\.public-api-toolkit\]/);
@@ -225,6 +229,10 @@ test("launch docs exist for supported client setup flows", async () => {
       "utf8",
     ),
     readFile(
+      new URL("../docs/installation/openclaw.md", import.meta.url),
+      "utf8",
+    ),
+    readFile(
       new URL("../docs/installation/chatgpt-mcp.md", import.meta.url),
       "utf8",
     ),
@@ -263,6 +271,7 @@ test("launch docs exist for supported client setup flows", async () => {
     opencodeDoc,
     geminiDoc,
     copilotDoc,
+    openclawDoc,
     chatgptDoc,
     genericDoc,
     envDoc,
@@ -274,11 +283,10 @@ test("launch docs exist for supported client setup flows", async () => {
 
   assert.match(
     readme,
-    /Structured public data for AI agents\./i,
+    /41 APIs.*One command/i,
   );
   assert.match(readme, /STATUS\.md/);
-  assert.match(readme, /Why Teams Use It/i);
-  assert.match(readme, /Why It Is Bundled/i);
+  assert.match(readme, /Why It Matters/i);
   assert.match(contributingDoc, /Contributing to Public API Toolkit/);
   assert.match(contributingDoc, /Added or updated tests first/i);
   assert.match(statusDoc, /Total tools:\*\*\s*41/i);
@@ -288,7 +296,7 @@ test("launch docs exist for supported client setup flows", async () => {
   assert.match(ciWorkflow, /npm ci/);
   assert.match(marketingDoc, /Product Hunt/i);
   assert.match(marketingDoc, /r\/ClaudeAI/i);
-  assert.match(readme, /41 grouped `public_api_<group>` tools/i);
+  assert.match(readme, /41 tools across 10 categories/i);
   assert.match(gettingStarted, /That should print `41`\./);
   assert.match(codexDoc, /~\/\.codex\/config\.toml/);
   assert.match(claudeDoc, /claude mcp add-json/);
@@ -296,6 +304,8 @@ test("launch docs exist for supported client setup flows", async () => {
   assert.match(opencodeDoc, /opencode\.jsonc/);
   assert.match(geminiDoc, /gemini extensions install/);
   assert.match(copilotDoc, /copilot plugin install/);
+  assert.match(openclawDoc, /openclaw plugins install public-api-toolkit/);
+  assert.match(openclawDoc, /openclaw gateway restart/);
   assert.match(chatgptDoc, /requires a remote MCP transport/i);
   assert.match(genericDoc, /"command": "npx"/);
   assert.match(envDoc, /PUBLIC_APIS_FRED/);
@@ -303,6 +313,25 @@ test("launch docs exist for supported client setup flows", async () => {
   assert.match(apiKeysDoc, /PUBLIC_APIS_OMDB/);
   assert.match(npmDoc, /npm publish --access public/);
   assert.match(githubDoc, /Public API Toolkit v1\.0\.0/);
+  assert.match(readme, /OpenClaw/);
+});
+
+test("npm pack includes OpenClaw bundle assets", async () => {
+  const { stdout } = await execFileAsync(
+    "npm",
+    ["pack", "--json", "--dry-run"],
+    {
+      cwd: new URL("..", import.meta.url),
+    },
+  );
+  const packResult = JSON.parse(stdout) as Array<{
+    files: Array<{ path: string }>;
+  }>;
+  const packedPaths = new Set(packResult[0]?.files.map((file) => file.path));
+
+  assert.ok(packedPaths.has(".claude-plugin/plugin.json"));
+  assert.ok(packedPaths.has(".mcp.json"));
+  assert.ok(packedPaths.has("skills/public-api-toolkit/SKILL.md"));
 });
 
 test("static landing page assets and copy exist", async () => {
@@ -316,10 +345,10 @@ test("static landing page assets and copy exist", async () => {
 
   assert.match(
     siteHtml,
-    /Stop wasting tokens on things free APIs can answer instantly\./i,
+    /41 APIs.*One Command/i,
   );
   assert.match(siteHtml, /AI is solving easy problems the hard way\./i);
-  assert.match(siteHtml, /What Public API Toolkit actually is\./i);
+  assert.match(siteHtml, /Stop scraping.*Start calling/i);
   assert.match(siteHtml, /assets\/logo\.png/i);
   assert.match(siteCss, /grid|radial-gradient|linear-gradient/i);
   assert.match(siteJs, /DOMContentLoaded|copy/i);

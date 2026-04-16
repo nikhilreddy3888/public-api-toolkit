@@ -41,6 +41,7 @@ You usually will not interact with that command directly. Your MCP client starts
 - Codex: [installation/codex.md](installation/codex.md)
 - Claude Code: [installation/claude-code.md](installation/claude-code.md)
 - Cursor: [installation/cursor.md](installation/cursor.md)
+- OpenClaw: [installation/openclaw.md](installation/openclaw.md)
 - OpenCode: [installation/opencode.md](installation/opencode.md)
 - Gemini CLI: [installation/gemini-cli.md](installation/gemini-cli.md)
 - GitHub Copilot CLI: [installation/github-copilot-cli.md](installation/github-copilot-cli.md)

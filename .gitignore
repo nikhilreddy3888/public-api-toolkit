@@ -19,3 +19,5 @@ coverage/
 
 # Local tooling state
 .superpowers/
+.playwright-cli/
+tasks/

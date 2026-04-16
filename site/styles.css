@@ -460,6 +460,245 @@ img {
   align-items: center;
 }
 
+.hero h1 .accent,
+.section-heading h2 .accent,
+.cta-section h2 .accent {
+  color: var(--accent);
+}
+
+.install-line {
+  margin-top: 20px;
+  margin-bottom: 8px;
+}
+
+.code-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(35, 31, 26, 0.96);
+  border: 1px solid rgba(155, 99, 33, 0.15);
+  border-radius: 14px;
+  padding: 14px 20px;
+  font-family: var(--mono);
+  font-size: 0.95rem;
+  color: #fff7ef;
+  position: relative;
+  max-width: 100%;
+}
+
+.code-inline .code-prompt {
+  color: var(--accent);
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.code-inline code {
+  color: #fff7ef;
+  white-space: nowrap;
+  overflow-x: auto;
+}
+
+.code-inline .copy-button {
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 18px;
+  margin-top: 28px;
+}
+
+.tool-card {
+  padding: 20px;
+  border: 1px solid rgba(155, 99, 33, 0.12);
+  background: var(--surface);
+  border-radius: 22px;
+  box-shadow: var(--shadow);
+  transition: transform 160ms ease, border-color 160ms ease;
+}
+
+.tool-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(222, 110, 28, 0.24);
+}
+
+.tool-card-more {
+  background: linear-gradient(180deg, rgba(255, 240, 227, 0.6), var(--surface));
+}
+
+.tool-icon {
+  font-size: 1.6rem;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.tool-name {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--accent-strong);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.tool-label {
+  font-size: 1rem;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.tool-desc {
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--muted);
+  line-height: 1.5;
+  display: block;
+}
+
+.mission-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.comparison-bad {
+  color: #c0392b;
+}
+
+.comparison-good {
+  color: #27ae60;
+}
+
+.faq-list {
+  margin-top: 28px;
+}
+
+.faq-item {
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.faq-q {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  gap: 12px;
+}
+
+.faq-q:hover {
+  color: var(--accent-strong);
+}
+
+.faq-arrow {
+  flex-shrink: 0;
+  font-family: var(--mono);
+  font-size: 1.1rem;
+  color: var(--muted);
+  transition: transform 0.2s;
+}
+
+.faq-item.open .faq-arrow {
+  transform: rotate(45deg);
+  color: var(--accent-strong);
+}
+
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+  font-family: var(--mono);
+  font-size: 0.88rem;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.faq-a a {
+  color: var(--accent-strong);
+}
+
+.faq-a a:hover {
+  text-decoration: underline;
+}
+
+.faq-item.open .faq-a {
+  max-height: 400px;
+  padding-bottom: 18px;
+}
+
+.install-tabs {
+  display: flex;
+  gap: 2px;
+  margin-top: 28px;
+  border-bottom: 2px solid var(--line);
+}
+
+.tab-btn {
+  padding: 12px 20px;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.tab-btn:hover {
+  color: var(--text);
+}
+
+.tab-btn.active {
+  color: var(--accent-strong);
+  border-bottom-color: var(--accent);
+}
+
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+.more-clients {
+  font-family: var(--mono);
+  font-size: 0.88rem;
+  color: var(--muted);
+  margin-top: 18px;
+}
+
+.more-clients a {
+  color: var(--accent-strong);
+}
+
+.more-clients a:hover {
+  text-decoration: underline;
+}
+
+.credits-section {
+  max-width: 760px;
+}
+
+.credits-section a {
+  color: var(--accent-strong);
+}
+
+.credits-section a:hover {
+  text-decoration: underline;
+}
+
+.cta-visual {
+  min-height: 400px;
+}
+
 .site-footer {
   display: flex;
   align-items: center;
@@ -511,7 +750,8 @@ img {
   .problem-grid,
   .product-grid,
   .client-grid,
-  .use-case-grid {
+  .use-case-grid,
+  .mission-grid {
     grid-template-columns: 1fr;
   }
 
@@ -572,8 +812,14 @@ img {
   .product-card,
   .use-case-card,
   .client-card,
-  .code-panel {
+  .code-panel,
+  .tool-card,
+  .faq-item {
     border-radius: 20px;
+  }
+
+  .tools-grid {
+    grid-template-columns: 1fr;
   }
 
   .site-footer {

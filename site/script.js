@@ -7,21 +7,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 70 * index);
   });
 
-  const copyButton = document.querySelector("[data-copy-target]");
+  document.querySelectorAll("[data-copy-target]").forEach((copyButton) => {
+    if (!(copyButton instanceof HTMLButtonElement)) return;
 
-  if (copyButton instanceof HTMLButtonElement) {
     copyButton.addEventListener("click", async () => {
       const targetId = copyButton.getAttribute("data-copy-target");
 
-      if (!targetId) {
-        return;
-      }
+      if (!targetId) return;
 
       const source = document.getElementById(targetId);
 
-      if (!source) {
-        return;
-      }
+      if (!source) return;
 
       const previousLabel = copyButton.textContent;
 
@@ -36,5 +32,18 @@ document.addEventListener("DOMContentLoaded", () => {
         copyButton.textContent = previousLabel;
       }, 1400);
     });
-  }
+  });
 });
+
+function switchTab(name) {
+  document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
+  document.querySelectorAll(".tab-panel").forEach(p => p.classList.remove("active"));
+  if (event && event.target) event.target.classList.add("active");
+  const panel = document.getElementById("tab-" + name);
+  if (panel) panel.classList.add("active");
+}
+
+function toggleFaq(el) {
+  const item = el.parentElement;
+  item.classList.toggle("open");
+}

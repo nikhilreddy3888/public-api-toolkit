@@ -1,344 +1,693 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Public API Toolkit</title>
-    <meta
-      name="description"
-      content="Stop wasting tokens on things free APIs can answer instantly. Public API Toolkit is a cross-platform MCP server for structured public data."
-    />
-    <script>
-      document.documentElement.classList.add("js");
-    </script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="icon" href="./assets/logo.png" />
-    <link rel="stylesheet" href="./styles.css" />
-  </head>
-  <body>
-    <div class="page-shell">
-      <header class="site-header">
-        <a class="brand" href="#top" aria-label="Public API Toolkit home">
-          <span class="brand-mark"></span>
-          <span class="brand-copy">
-            <strong>Public API Toolkit</strong>
-            <span>Structured public data for AI agents</span>
-          </span>
-        </a>
-        <nav class="site-nav" aria-label="Primary">
-          <a href="#problem">Problem</a>
-          <a href="#product">Product</a>
-          <a href="#clients">Clients</a>
-          <a href="#install">Install</a>
-        </nav>
-        <a
-          class="button button-small button-accent"
-          href="https://github.com/nikhilreddy3888/public-api-toolkit"
-        >
-          View on GitHub
-        </a>
-      </header>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Public API Toolkit — 41 APIs. One Command.</title>
+<meta
+  name="description"
+  content="Stop wasting tokens on things free APIs can answer instantly. One MCP server gives your AI agent structured access to weather, crypto, Wikipedia, maps, holidays, and 36 more APIs."
+/>
+<script>
+  document.documentElement.classList.add("js");
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;700&display=swap"
+  rel="stylesheet"
+/>
+<link rel="icon" href="./assets/logo.png" />
+<link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Public API Toolkit home">
+        <span class="brand-mark"></span>
+        <span class="brand-copy">
+          <strong>Public API Toolkit</strong>
+          <span>Structured public data for AI agents</span>
+        </span>
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="#why">Why</a>
+        <a href="#tools">Tools</a>
+        <a href="#compare">Compare</a>
+        <a href="#install">Install</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a
+        class="button button-small button-accent"
+        href="https://github.com/nikhilreddy3888/public-api-toolkit"
+      >
+        &#9733; Star on GitHub
+      </a>
+    </header>
 
-      <main id="top">
-        <section class="hero section-reveal">
-          <div class="hero-copy">
-            <p class="eyebrow">Cross-platform MCP server</p>
-            <h1>Stop wasting tokens on things free APIs can answer instantly.</h1>
-            <p class="hero-text">
-              Every time an AI assistant searches for weather, reasons about FX
-              conversion, or scrapes news pages for a simple factual answer, it
-              can burn far more tokens than necessary. Public API Toolkit gives
-              agents one maintained MCP surface for structured public data
-              across 41 grouped tools.
-            </p>
-            <div class="hero-actions">
-              <a
-                class="button button-accent"
-                href="https://www.npmjs.com/package/public-api-toolkit"
-              >
-                Install from npm
-              </a>
-              <a class="button button-ghost" href="#clients">
-                See supported clients
-              </a>
-            </div>
-            <div class="proof-strip" aria-label="Directional proof points">
-              <article>
-                <strong>10x–40x</strong>
-                <span>more tokens can be burned when structured lookups fall back to search</span>
-              </article>
-              <article>
-                <strong>2–8s</strong>
-                <span>extra latency is common when agents browse instead of calling APIs</span>
-              </article>
-              <article>
-                <strong>41 tools</strong>
-                <span>grouped MCP surface instead of dozens of narrow one-off installs</span>
-              </article>
-            </div>
-          </div>
+    <main id="top">
+      <section class="hero section-reveal">
+        <div class="hero-copy">
+          <p class="eyebrow">MCP server &middot; v1.0.3 &middot; MIT &middot; Zero config</p>
+          <h1><span class="accent">41 APIs.</span> One command. <span class="accent">Zero waste.</span></h1>
+          <p class="hero-text">
+            Your AI agent shouldn't scrape Wikipedia to tell you the weather.
+            <strong>One MCP server. 41 structured tools. Instant data.</strong>
+          </p>
 
-          <div class="hero-visual" aria-label="Public API Toolkit logo and use cases">
-            <div class="visual-halo"></div>
-            <img
-              src="./assets/logo.png"
-              alt="Public API Toolkit logo"
-              class="hero-logo"
-            />
-            <div class="floating-chip chip-top-left">Weather</div>
-            <div class="floating-chip chip-top-right">Crypto</div>
-            <div class="floating-chip chip-bottom-left">Wikipedia</div>
-            <div class="floating-chip chip-bottom-right">Open Data</div>
-          </div>
-        </section>
-
-        <section id="problem" class="content-section section-reveal">
-          <div class="section-heading">
-            <p class="eyebrow">The problem</p>
-            <h2>AI is solving easy problems the hard way.</h2>
-            <p>
-              Browsing, scraping, and open-ended reasoning are great for messy
-              research. They are often a poor fit for structured factual
-              lookups that already have reliable public APIs behind them.
-            </p>
-          </div>
-
-          <div class="problem-grid">
-            <div class="problem-callout">
-              <p class="problem-title">What happens today</p>
-              <ul>
-                <li>Search for weather that already exists in an API</li>
-                <li>Reason about live FX rates from stale model memory</li>
-                <li>Scrape pages just to answer one deterministic question</li>
-              </ul>
-            </div>
-            <div class="problem-callout warm">
-              <p class="problem-title">What should happen instead</p>
-              <ul>
-                <li>Call the relevant provider directly through MCP</li>
-                <li>Return structured JSON instead of noisy HTML</li>
-                <li>Let the model reason on top of verified current data</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="comparison-table">
-            <div class="comparison-row comparison-head">
-              <span>User asks</span>
-              <span>What AI often does</span>
-              <span>What it should do</span>
-              <span>Toolkit group</span>
-            </div>
-            <div class="comparison-row">
-              <span>What’s the weather in Tokyo tomorrow?</span>
-              <span>Search, scrape, summarize</span>
-              <span>Call forecast endpoints and return clean conditions</span>
-              <span>`public_api_weather`</span>
-            </div>
-            <div class="comparison-row">
-              <span>Convert €450 to USD right now</span>
-              <span>Guess from training data or browse</span>
-              <span>Use live FX APIs with exact rates</span>
-              <span>`public_api_currency_exchange`</span>
-            </div>
-            <div class="comparison-row">
-              <span>What is Bitcoin trading at?</span>
-              <span>Search finance sites or refuse</span>
-              <span>Fetch a live quote with market context</span>
-              <span>`public_api_crypto_data`</span>
-            </div>
-            <div class="comparison-row">
-              <span>Where is this IP address from?</span>
-              <span>Reason from stale geography knowledge</span>
-              <span>Use IP geolocation APIs</span>
-              <span>`public_api_ip_geolocation`</span>
-            </div>
-            <div class="comparison-row">
-              <span>Translate this paragraph to French</span>
-              <span>Spend model tokens on literal translation</span>
-              <span>Use translation APIs and keep the model for reasoning</span>
-              <span>`public_api_translation`</span>
-            </div>
-          </div>
-        </section>
-
-        <section id="product" class="content-section section-reveal">
-          <div class="section-heading">
-            <p class="eyebrow">The product</p>
-            <h2>What Public API Toolkit actually is.</h2>
-            <p>
-              Public API Toolkit is not a magical universal router. It is a
-              practical MCP server that exposes grouped public-data tools for
-              the kinds of questions agents should not have to browse for.
-            </p>
-          </div>
-
-          <div class="product-grid">
-            <article class="product-card">
-              <h3>One local MCP server</h3>
-              <p>
-                Run one server and expose weather, finance, geo, dictionaries,
-                civic data, Wikipedia, transport, media, science, and more
-                through a clean tool surface.
-              </p>
-            </article>
-            <article class="product-card">
-              <h3>41 grouped tools</h3>
-              <p>
-                Related capabilities are bundled into domain tools so agents can
-                discover and use them without juggling a pile of narrow
-                single-purpose installs.
-              </p>
-            </article>
-            <article class="product-card">
-              <h3>Cross-client setup</h3>
-              <p>
-                Works with Codex, Claude Code, Cursor, Gemini CLI, OpenCode,
-                and other MCP clients that support local stdio servers.
-              </p>
-            </article>
-          </div>
-
-          <div class="code-panel">
-            <div class="code-panel-header">
-              <span>Quick install</span>
+          <div class="install-line section-reveal">
+            <div class="code-inline">
+              <span class="code-prompt">$</span>
+              <code id="install-command">npx -y public-api-toolkit</code>
               <button class="copy-button" type="button" data-copy-target="install-command">
                 Copy
               </button>
             </div>
-            <pre><code id="install-command">npx -y public-api-toolkit</code></pre>
+          </div>
+
+          <div class="hero-actions">
+            <a
+              class="button button-accent"
+              href="https://github.com/nikhilreddy3888/public-api-toolkit"
+            >
+              &#9733; Star on GitHub
+            </a>
+            <a class="button button-ghost" href="https://www.npmjs.com/package/public-api-toolkit">
+              &#8599; npm package
+            </a>
+            <a class="button button-ghost" href="#install">
+              &#8595; Install guide
+            </a>
+          </div>
+
+          <div class="proof-strip" aria-label="Directional proof points">
+            <article>
+              <strong>10&ndash;40x</strong>
+              <span>fewer output tokens when agents call structured APIs instead of scraping</span>
+            </article>
+            <article>
+              <strong>&lt;300ms</strong>
+              <span>response time for live weather, FX rates, and country data</span>
+            </article>
+            <article>
+              <strong>1 command</strong>
+              <span>replaces 41 separate MCP installs and configurations</span>
+            </article>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-label="Public API Toolkit logo and use cases">
+          <div class="visual-halo"></div>
+          <img
+            src="./assets/logo.png"
+            alt="Public API Toolkit logo"
+            class="hero-logo"
+          />
+          <div class="floating-chip chip-top-left">Weather</div>
+          <div class="floating-chip chip-top-right">Crypto</div>
+          <div class="floating-chip chip-bottom-left">Wikipedia</div>
+          <div class="floating-chip chip-bottom-right">Open Data</div>
+        </div>
+      </section>
+
+      <section id="why" class="content-section section-reveal">
+        <div class="section-heading">
+          <p class="eyebrow">The problem</p>
+          <h2>AI is solving easy problems the hard way.</h2>
+          <p>
+            Every time an AI assistant browses for weather, hallucinates exchange rates,
+            or scrapes news HTML for a one-line factual answer &mdash; it burns tokens and time
+            that a structured API call would solve in 200ms.
+          </p>
+        </div>
+
+        <div class="problem-grid">
+          <div class="problem-callout">
+            <p class="problem-title">What agents do today (expensive)</p>
+            <ul>
+              <li>Search the web for BTC price &mdash; burns 800+ tokens parsing finance pages</li>
+              <li>Reason about FX rates from stale training data &mdash; answer might be months old</li>
+              <li>Scrape weather.com HTML for tomorrow's forecast &mdash; brittle, slow, wasteful</li>
+              <li>Fetch full Wikipedia pages just to summarize one paragraph</li>
+              <li>Install a different MCP server for every single capability</li>
+            </ul>
+          </div>
+          <div class="problem-callout warm">
+            <p class="problem-title">What they should do (instant)</p>
+            <ul>
+              <li>Call <code>public_api_crypto_data</code> &mdash; structured JSON in &lt;300ms</li>
+              <li>Call <code>public_api_currency_exchange</code> &mdash; live rates, zero hallucination</li>
+              <li>Call <code>public_api_weather</code> &mdash; clean forecast, 0 HTML parsing</li>
+              <li>Call <code>public_api_wikipedia</code> &mdash; structured summary, minimal tokens</li>
+              <li>One <code>npx -y public-api-toolkit</code> covers all 41 tools</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="comparison-table">
+          <div class="comparison-row comparison-head">
+            <span>User asks</span>
+            <span>What AI often does</span>
+            <span>What it should do</span>
+            <span>Toolkit group</span>
+          </div>
+          <div class="comparison-row">
+            <span>What's the weather in Tokyo?</span>
+            <span>Search, scrape, summarize &mdash; 800+ tokens</span>
+            <span>Call forecast endpoint, return clean conditions</span>
+            <span><code>public_api_weather</code></span>
+          </div>
+          <div class="comparison-row">
+            <span>Convert &euro;450 to USD</span>
+            <span>Guess from training data or browse</span>
+            <span>Use live FX APIs with exact rates</span>
+            <span><code>public_api_currency_exchange</code></span>
+          </div>
+          <div class="comparison-row">
+            <span>What's Bitcoin trading at?</span>
+            <span>Search finance sites or refuse</span>
+            <span>Fetch live quote with market context</span>
+            <span><code>public_api_crypto_data</code></span>
+          </div>
+          <div class="comparison-row">
+            <span>Is today a holiday in France?</span>
+            <span>Google search + HTML parse. Unreliable.</span>
+            <span>Call holiday API, get definitive answer</span>
+            <span><code>public_api_holidays</code></span>
+          </div>
+          <div class="comparison-row">
+            <span>Total install time</span>
+            <span>41 separate servers, 41 configs</span>
+            <span>One command. Every tool.</span>
+            <span><code>npx -y public-api-toolkit</code></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section section-reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Why it matters</p>
+          <h2>Less tokens. Less compute. <span class="accent">More signal.</span></h2>
+          <p>
+            Every avoidable web search is wasted compute &mdash; on the GPU that generates it,
+            the data center that processes it, and the energy that powers it. Structured API
+            calls return exactly what the agent needs in a fraction of the tokens, time, and electricity.
+          </p>
+        </div>
+
+        <div class="use-case-grid mission-grid">
+          <article class="use-case-card">
+            <h3>&#9889; 10&ndash;40x fewer output tokens</h3>
+            <p>
+              Structured JSON replaces pages of parsed HTML. The model spends tokens reasoning &mdash; not reading noise.
+            </p>
+          </article>
+          <article class="use-case-card">
+            <h3>&#127793; Less compute, less energy</h3>
+            <p>
+              Fewer generated tokens means less GPU time, less data center load, and a smaller carbon footprint per lookup.
+            </p>
+          </article>
+          <article class="use-case-card">
+            <h3>&#128274; Safe by default</h3>
+            <p>
+              Every upstream is vetted. No scraping brittle websites, no secrets in prompts, no user data in transit.
+              Keys are optional and isolated through environment variables.
+            </p>
+          </article>
+          <article class="use-case-card">
+            <h3>&#129309; Built with contributors</h3>
+            <p>
+              This project thrives because contributors keep adding safe, useful, free APIs.
+              Every new tool means one fewer reason for agents to scrape the web.
+              <a href="https://github.com/nikhilreddy3888/public-api-toolkit/blob/main/CONTRIBUTING.md">Add yours &rarr;</a>
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="tools" class="content-section section-reveal">
+        <div class="section-heading">
+          <p class="eyebrow">41 tools &middot; 10 categories</p>
+          <h2>Stop scraping. Start calling.</h2>
+          <p>
+            Related capabilities are grouped into domain tools. One tool per domain &mdash;
+            agents discover and use them without juggling dozens of connectors.
+          </p>
+        </div>
+
+        <div class="tools-grid">
+          <div class="tool-card">
+            <span class="tool-icon">&#127781;&#65039;</span>
+            <span class="tool-name">public_api_weather</span>
+            <span class="tool-label">Weather &amp; Sky</span>
+            <span class="tool-desc">Forecasts, current conditions, alerts, sun times</span>
+          </div>
+          <div class="tool-card">
+            <span class="tool-icon">&#127988;</span>
+            <span class="tool-name">public_api_air_quality</span>
+            <span class="tool-label">Air &amp; Carbon</span>
+            <span class="tool-desc">Air quality, UK carbon intensity, website carbon</span>
+          </div>
+          <div class="tool-card">
+            <span class="tool-icon">&#128176;</span>
+            <span class="tool-name">public_api_currency_exchange</span>
+            <span class="tool-label">Currency Exchange</span>
+            <span class="tool-desc">Live FX rates, 150+ currencies, historical series</span>
+          </div>
+          <div class="tool-card">
+            <span class="tool-icon">&#8383;</span>
+            <span class="tool-name">public_api_crypto_data</span>
+            <span class="tool-label">Crypto Markets</span>
+            <span class="tool-desc">Bitcoin, altcoins, market cap, 24h change</span>
+          </div>
+          <div class="tool-card">
+            <span class="tool-icon">&#127758;</span>
+            <span class="tool-name">public_api_country_data</span>
+            <span class="tool-label">Countries &amp; Regions</span>
+            <span class="tool-desc">Country profiles, flags, populations, capitals</span>
+          </div>
+          <div class="tool-card">
+            <span class="tool-icon">&#128205;</span>
+            <span class="tool-name">public_api_geocoding</span>
+            <span class="tool-label">Geocoding</span>
+            <span class="tool-desc">Forward geocoding, reverse geocoding, postal lookups</span>
+          </div>
+          <div class="tool-card">
+            <span class="tool-icon">&#127752;</span>
+            <span class="tool-name">public_api_ip_geolocation</span>
+            <span class="tool-label">IP Geolocation</span>
+            <span class="tool-desc">IP lookup for city, region, timezone, network</span>
+          </div>
+          <div class="tool-card">
+            <span class="tool-icon">&#128214;</span>
+            <span class="tool-name">public_api_wikipedia</span>
+            <span class="tool-label">Wikipedia</span>
+            <span class="tool-desc">Structured summaries, search, Wikidata</span>
+          </div>
+          <div class="tool-card">
+            <span class="tool-icon">&#128218;</span>
+            <span class="tool-name">public_api_dictionary</span>
+            <span class="tool-label">Dictionaries &amp; Words</span>
+            <span class="tool-desc">Definitions, synonyms, rhymes, autocomplete</span>
+          </div>
+          <div class="tool-card">
+            <span class="tool-icon">&#127926;</span>
+            <span class="tool-name">public_api_music_data</span>
+            <span class="tool-label">Music</span>
+            <span class="tool-desc">MusicBrainz, iTunes, lyrics, radio, genre helpers</span>
+          </div>
+          <div class="tool-card">
+            <span class="tool-icon">&#127916;</span>
+            <span class="tool-name">public_api_movie_tv_data</span>
+            <span class="tool-label">Movies &amp; TV</span>
+            <span class="tool-desc">Movies, TV, anime, sci-fi, franchise lookups</span>
+          </div>
+          <div class="tool-card">
+            <span class="tool-icon">&#128640;</span>
+            <span class="tool-name">public_api_space</span>
+            <span class="tool-label">Space &amp; Earth</span>
+            <span class="tool-desc">NASA, ISS, launches, SpaceX, earthquake data</span>
+          </div>
+          <div class="tool-card">
+            <span class="tool-icon">&#127881;</span>
+            <span class="tool-name">public_api_holidays</span>
+            <span class="tool-label">Holidays</span>
+            <span class="tool-desc">Public holidays, bank holidays, namedays</span>
+          </div>
+          <div class="tool-card">
+            <span class="tool-icon">&#128652;</span>
+            <span class="tool-name">public_api_transport</span>
+            <span class="tool-label">Transport</span>
+            <span class="tool-desc">Flight, bike share, EV charging, transit</span>
+          </div>
+          <div class="tool-card">
+            <span class="tool-icon">&#128274;</span>
+            <span class="tool-name">public_api_security_intel</span>
+            <span class="tool-label">Security Intel</span>
+            <span class="tool-desc">Vulnerability, phishing, and threat feeds</span>
+          </div>
+          <div class="tool-card">
+            <span class="tool-icon">&#127793;</span>
+            <span class="tool-name">public_api_food_recipes</span>
+            <span class="tool-label">Food &amp; Drink</span>
+            <span class="tool-desc">Recipes, nutrition, breweries, food data</span>
+          </div>
+          <div class="tool-card">
+            <span class="tool-icon">&#128187;</span>
+            <span class="tool-name">public_api_http_utils</span>
+            <span class="tool-label">HTTP Utilities</span>
+            <span class="tool-desc">HTTP introspection, QR codes, URL shortening</span>
+          </div>
+          <div class="tool-card">
+            <span class="tool-icon">&#128202;</span>
+            <span class="tool-name">public_api_stock_market</span>
+            <span class="tool-label">Stocks &amp; Finance</span>
+            <span class="tool-desc">Quotes, symbol search, SEC filings, FRED data</span>
+          </div>
+          <div class="tool-card">
+            <span class="tool-icon">&#127757;</span>
+            <span class="tool-name">public_api_open_data</span>
+            <span class="tool-label">Open Data</span>
+            <span class="tool-desc">Civic, culture, sport, city quality datasets</span>
+          </div>
+          <div class="tool-card tool-card-more">
+            <span class="tool-icon">+</span>
+            <span class="tool-name">...and 22 more</span>
+            <span class="tool-label">See all 41 tools</span>
+            <span class="tool-desc">Books, universities, translation, math, blockchain, email validation, government data, and more</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="clients" class="content-section section-reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Client support</p>
+          <h2>Works where you already work.</h2>
+          <p>
+            Designed for the MCP ecosystem people are actually using.
+            Claude Code, Codex, Cursor, Gemini CLI, OpenCode, Copilot &mdash;
+            each has a dedicated install guide.
+          </p>
+        </div>
+
+        <div class="client-grid">
+          <a class="client-card" href="https://github.com/nikhilreddy3888/public-api-toolkit/blob/main/docs/installation/claude-code.md">
+            <strong>Claude Code</strong>
+            <span>Direct stdio MCP</span>
+          </a>
+          <a class="client-card" href="https://github.com/nikhilreddy3888/public-api-toolkit/blob/main/docs/installation/codex.md">
+            <strong>Codex</strong>
+            <span>Direct stdio MCP</span>
+          </a>
+          <a class="client-card" href="https://github.com/nikhilreddy3888/public-api-toolkit/blob/main/docs/installation/cursor.md">
+            <strong>Cursor</strong>
+            <span><code>mcp.json</code> flow</span>
+          </a>
+          <a class="client-card" href="https://github.com/nikhilreddy3888/public-api-toolkit/blob/main/docs/installation/gemini-cli.md">
+            <strong>Gemini CLI</strong>
+            <span>Extension or settings</span>
+          </a>
+          <a class="client-card" href="https://github.com/nikhilreddy3888/public-api-toolkit/blob/main/docs/installation/opencode.md">
+            <strong>OpenCode</strong>
+            <span>Local MCP config</span>
+          </a>
+          <a class="client-card" href="https://github.com/nikhilreddy3888/public-api-toolkit/blob/main/docs/installation/github-copilot-cli.md">
+            <strong>Copilot CLI</strong>
+            <span>Plugin install</span>
+          </a>
+          <a class="client-card" href="https://github.com/nikhilreddy3888/public-api-toolkit/blob/main/docs/installation/openclaw.md">
+            <strong>OpenClaw</strong>
+            <span>Bundle install</span>
+          </a>
+          <a class="client-card" href="https://github.com/nikhilreddy3888/public-api-toolkit/blob/main/docs/installation/generic-mcp-clients.md">
+            <strong>Any MCP client</strong>
+            <span>Same command, different host</span>
+          </a>
+        </div>
+      </section>
+
+      <section id="compare" class="content-section section-reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Why this beats alternatives</p>
+          <h2>One server beats 41 separate installs.</h2>
+          <p>
+            Every other approach requires you to find, install, configure, and maintain
+            a separate connector for each capability. Public API Toolkit bundles them all.
+          </p>
+        </div>
+
+        <div class="comparison-table">
+          <div class="comparison-row comparison-head">
+            <span>Task</span>
+            <span>Web search / scraping</span>
+            <span>Separate MCP per tool</span>
+            <span>Public API Toolkit &#10003;</span>
+          </div>
+          <div class="comparison-row">
+            <span>Get live BTC price</span>
+            <span class="comparison-bad">500&ndash;2000 tokens. Noisy HTML.</span>
+            <span class="comparison-bad">Install crypto-mcp, configure keys</span>
+            <span class="comparison-good"><code>public_api_crypto_data</code> &#8594; JSON</span>
+          </div>
+          <div class="comparison-row">
+            <span>Weather in Tokyo</span>
+            <span class="comparison-bad">Scrapes weather.com. Often wrong.</span>
+            <span class="comparison-bad">Install weather-mcp, add API key</span>
+            <span class="comparison-good"><code>public_api_weather</code> &#8594; structured</span>
+          </div>
+          <div class="comparison-row">
+            <span>Country info for a flag</span>
+            <span class="comparison-bad">Wikipedia scrape. 800+ tokens.</span>
+            <span class="comparison-bad">No standard tool exists</span>
+            <span class="comparison-good"><code>public_api_country_data</code> &#8594; instant</span>
+          </div>
+          <div class="comparison-row">
+            <span>EUR to USD right now</span>
+            <span class="comparison-bad">Stale data. Hallucination risk.</span>
+            <span class="comparison-bad">Install fx-mcp separately</span>
+            <span class="comparison-good"><code>public_api_currency_exchange</code> &#8594; live</span>
+          </div>
+          <div class="comparison-row">
+            <span>Total install time</span>
+            <span class="comparison-bad">N/A &mdash; always slow</span>
+            <span class="comparison-bad">41 installs, 41 configs</span>
+            <span class="comparison-good"><code>npx -y public-api-toolkit</code>. Done.</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="install" class="content-section section-reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Get started in 60 seconds</p>
+          <h2>One install. Every client.</h2>
+          <p>
+            No API keys needed for most tools &mdash; just run and go.
+            Premium providers unlock with environment variables.
+          </p>
+        </div>
+
+        <div class="install-tabs" id="tabs">
+          <button class="tab-btn active" onclick="switchTab('npm')">npm</button>
+          <button class="tab-btn" onclick="switchTab('claude')">Claude Code</button>
+          <button class="tab-btn" onclick="switchTab('codex')">Codex</button>
+          <button class="tab-btn" onclick="switchTab('cursor')">Cursor</button>
+          <button class="tab-btn" onclick="switchTab('gemini')">Gemini CLI</button>
+        </div>
+        <div class="tab-panel active" id="tab-npm">
+          <div class="code-panel">
+            <div class="code-panel-header">
+              <span>Quick install</span>
+              <button class="copy-button" type="button" data-copy-target="install-npm">Copy</button>
+            </div>
+            <pre><code id="install-npm">npx -y public-api-toolkit</code></pre>
             <p class="code-note">
               Then add the same command to your MCP client config and use
-              grouped tools like `public_api_weather`, `public_api_wikipedia`,
-              and `public_api_currency_exchange`.
+              grouped tools like <code>public_api_weather</code>,
+              <code>public_api_wikipedia</code>, and
+              <code>public_api_currency_exchange</code>.
             </p>
           </div>
-        </section>
-
-        <section class="content-section section-reveal">
-          <div class="section-heading">
-            <p class="eyebrow">Use cases</p>
-            <h2>Helpful when the answer already exists as structured data.</h2>
-            <p>
-              Public API Toolkit works best when the job is deterministic
-              retrieval, not open-ended research. It gives agents a maintained
-              path to live factual data without turning the whole workflow into
-              search-and-scrape glue.
-            </p>
+        </div>
+        <div class="tab-panel" id="tab-claude">
+          <div class="code-panel">
+            <div class="code-panel-header">
+              <span>Claude Code</span>
+            </div>
+            <pre><code>claude mcp add-json public-api-toolkit '{ \
+  "command": "npx", \
+  "args": ["-y", "public-api-toolkit"] \
+}'</code></pre>
+            <p class="code-note">Then verify with <code>claude mcp list</code>.</p>
           </div>
-
-          <div class="use-case-grid">
-            <article class="use-case-card">
-              <h3>AI coding tools</h3>
-              <p>
-                Use package lookups, open data, weather, geo, UUIDs, and public
-                facts without leaving the editor or teaching every agent a new
-                connector.
-              </p>
-            </article>
-            <article class="use-case-card">
-              <h3>Research assistants</h3>
-              <p>
-                Pull Wikipedia summaries, country data, open civic records, and
-                reference information before the model synthesizes the answer.
-              </p>
-            </article>
-            <article class="use-case-card">
-              <h3>Customer-facing AI products</h3>
-              <p>
-                Reach for structured weather, holidays, geocoding, dictionary,
-                and transport data instead of scraping brittle websites in the
-                middle of user flows.
-              </p>
-            </article>
-            <article class="use-case-card">
-              <h3>MCP power users</h3>
-              <p>
-                Install one maintained server for a broad set of common public
-                lookups instead of stitching together a dozen separate tools.
-              </p>
-            </article>
+        </div>
+        <div class="tab-panel" id="tab-codex">
+          <div class="code-panel">
+            <div class="code-panel-header">
+              <span>Codex</span>
+            </div>
+            <pre><code># ~/.codex/config.toml
+[mcp_servers.public-api-toolkit]
+command = "npx"
+args = ["-y", "public-api-toolkit"]</code></pre>
           </div>
-        </section>
-
-        <section id="clients" class="content-section section-reveal">
-          <div class="section-heading">
-            <p class="eyebrow">Client support</p>
-            <h2>Built for the MCP tools people already use.</h2>
-            <p>
-              Public API Toolkit is designed to feel at home in the current MCP
-              ecosystem, not as a special-case demo. Use the install guides for
-              the client you already have.
-            </p>
+        </div>
+        <div class="tab-panel" id="tab-cursor">
+          <div class="code-panel">
+            <div class="code-panel-header">
+              <span>Cursor</span>
+            </div>
+            <pre><code>// .cursor/mcp.json
+{
+  "mcpServers": {
+    "public-api-toolkit": {
+      "command": "npx",
+      "args": ["-y", "public-api-toolkit"]
+    }
+  }
+}</code></pre>
           </div>
-
-          <div class="client-grid">
-            <a class="client-card" href="https://github.com/nikhilreddy3888/public-api-toolkit/blob/main/docs/installation/codex.md">
-              <strong>Codex</strong>
-              <span>Direct stdio MCP server</span>
-            </a>
-            <a class="client-card" href="https://github.com/nikhilreddy3888/public-api-toolkit/blob/main/docs/installation/claude-code.md">
-              <strong>Claude Code</strong>
-              <span>Local MCP setup</span>
-            </a>
-            <a class="client-card" href="https://github.com/nikhilreddy3888/public-api-toolkit/blob/main/docs/installation/cursor.md">
-              <strong>Cursor</strong>
-              <span>`mcp.json` flow</span>
-            </a>
-            <a class="client-card" href="https://github.com/nikhilreddy3888/public-api-toolkit/blob/main/docs/installation/gemini-cli.md">
-              <strong>Gemini CLI</strong>
-              <span>Local settings or extension</span>
-            </a>
-            <a class="client-card" href="https://github.com/nikhilreddy3888/public-api-toolkit/blob/main/docs/installation/opencode.md">
-              <strong>OpenCode</strong>
-              <span>Local MCP config</span>
-            </a>
-            <a class="client-card" href="https://github.com/nikhilreddy3888/public-api-toolkit/blob/main/docs/installation/generic-mcp-clients.md">
-              <strong>Generic MCP</strong>
-              <span>Same command shape, different host</span>
-            </a>
+        </div>
+        <div class="tab-panel" id="tab-gemini">
+          <div class="code-panel">
+            <div class="code-panel-header">
+              <span>Gemini CLI</span>
+            </div>
+            <pre><code>gemini extensions install \
+  https://github.com/nikhilreddy3888/public-api-toolkit</code></pre>
           </div>
-        </section>
+        </div>
 
-        <section id="install" class="cta-section section-reveal">
-          <div>
-            <p class="eyebrow">Get started</p>
-            <h2>Use one MCP server for structured public data across your agent stack.</h2>
-            <p>
-              Start with npm, read the client-specific install docs, and point
-              your agent at a tool surface built for factual retrieval instead
-              of search noise.
-            </p>
+        <p class="more-clients">
+          Also works with
+          <a href="https://github.com/nikhilreddy3888/public-api-toolkit/blob/main/docs/installation/opencode.md">OpenCode</a> &middot;
+          <a href="https://github.com/nikhilreddy3888/public-api-toolkit/blob/main/docs/installation/github-copilot-cli.md">Copilot CLI</a> &middot;
+          <a href="https://github.com/nikhilreddy3888/public-api-toolkit/blob/main/docs/installation/openclaw.md">OpenClaw</a> &middot;
+          <a href="https://github.com/nikhilreddy3888/public-api-toolkit/blob/main/docs/installation/chatgpt-mcp.md">ChatGPT / remote MCP</a> &middot;
+          <a href="https://github.com/nikhilreddy3888/public-api-toolkit/blob/main/docs/installation/generic-mcp-clients.md">Any MCP client</a>
+        </p>
+      </section>
+
+      <section id="faq" class="content-section section-reveal">
+        <div class="section-heading">
+          <p class="eyebrow">FAQ</p>
+          <h2>Common questions.</h2>
+        </div>
+
+        <div class="faq-list">
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">
+              Do I need API keys for all 41 tools?
+              <span class="faq-arrow">+</span>
+            </div>
+            <div class="faq-a">
+              No. Most tools work without any API keys &mdash; they use free-tier public APIs
+              that don't require authentication. Optional premium providers (Finnhub, Alpha Vantage,
+              TMDB, etc.) are unlocked via environment variables like <code>PUBLIC_APIS_FINNHUB</code>,
+              but the core toolkit works out of the box with zero configuration.
+            </div>
           </div>
-          <div class="cta-actions">
-            <a class="button button-accent" href="https://www.npmjs.com/package/public-api-toolkit">
-              npm package
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">
+              How is this different from just letting the agent use web search?
+              <span class="faq-arrow">+</span>
+            </div>
+            <div class="faq-a">
+              Web search returns noisy HTML that costs 500&ndash;2000+ tokens per lookup.
+              Structured API calls return clean JSON in &lt;300ms using 50&ndash;100 tokens.
+              For deterministic factual questions (what's BTC at, is today a holiday, weather in Seoul),
+              structured lookups are faster, cheaper, and more accurate.
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">
+              Isn't this just the public-apis list wrapped in MCP?
+              <span class="faq-arrow">+</span>
+            </div>
+            <div class="faq-a">
+              It's inspired by the same ecosystem but fundamentally different in purpose.
+              <strong>public-apis</strong> is a curated list of APIs &mdash; a reference document.
+              <strong>Public API Toolkit</strong> is a running MCP server that makes those APIs
+              callable by AI agents as structured tools. It handles the HTTP layer, normalizes
+              responses, manages timeouts and fallbacks, and exposes everything through a single
+              consistent tool surface. No scraping, no glue code, no per-API setup.
+              (Huge thanks to the <a href="https://github.com/public-apis/public-apis" target="_blank">public-apis</a> project
+              for curating the ecosystem that made this possible.)
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">
+              What if an upstream API goes down?
+              <span class="faq-arrow">+</span>
+            </div>
+            <div class="faq-a">
+              The toolkit has 15-second timeouts, graceful fallback behavior for degraded
+              providers, and a <a href="https://github.com/nikhilreddy3888/public-api-toolkit/blob/main/STATUS.md">STATUS.md</a>
+              documenting known-good vs. fragile upstreams. Most tool groups have multiple
+              provider fallbacks, so a single API outage typically doesn't break the whole tool.
+            </div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">
+              Can I contribute new APIs or fix broken ones?
+              <span class="faq-arrow">+</span>
+            </div>
+            <div class="faq-a">
+              Yes &mdash; contributions are welcome. <a href="https://github.com/nikhilreddy3888/public-api-toolkit/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a>
+              has everything you need. Adding a tool takes about 20&ndash;30 minutes
+              following a consistent pattern. This project exists because contributors
+              keep adding safe, useful, free APIs that reduce the need for wasteful web scraping.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section credits-section section-reveal">
+        <div class="section-heading">
+          <p class="eyebrow">Acknowledgments</p>
+          <h2>Built on the ecosystem that made it possible.</h2>
+          <p>
+            Public API Toolkit would not exist without
+            <a href="https://github.com/public-apis/public-apis" target="_blank"><strong>public-apis/public-apis</strong></a>
+            &mdash; the incredible community-curated list of free APIs that inspired and guided
+            which upstreams to include. If this toolkit saves you tokens, go star that repository too.
+          </p>
+          <p style="margin-top:1rem;">
+            Built by contributors who believe AI agents should
+            <strong>call APIs, not scrape web pages</strong>.
+            Every new tool means less compute wasted on noise, less energy burned on avoidable
+            requests, and more signal for the things that matter.
+            <a href="https://github.com/nikhilreddy3888/public-api-toolkit/blob/main/CONTRIBUTING.md">Add yours &rarr;</a>
+          </p>
+        </div>
+      </section>
+
+      <section class="content-section cta-section section-reveal">
+        <div>
+          <p class="eyebrow">Get started</p>
+          <h2>Stop scraping. <span class="accent">Start calling.</span></h2>
+          <p>
+            One MCP server for structured public data across your entire agent stack.
+            Give your agents the data they need without the token waste.
+          </p>
+          <div class="hero-actions">
+            <a
+              class="button button-accent"
+              href="https://github.com/nikhilreddy3888/public-api-toolkit"
+            >
+              &#9733; Star on GitHub
             </a>
-            <a class="button button-ghost" href="https://github.com/nikhilreddy3888/public-api-toolkit">
-              GitHub repo
+            <a class="button button-ghost" href="https://www.npmjs.com/package/public-api-toolkit">
+              View on npm
             </a>
             <a class="button button-ghost" href="https://github.com/nikhilreddy3888/public-api-toolkit/blob/main/docs/getting-started.md">
               Read the docs
             </a>
           </div>
-        </section>
-      </main>
-
-      <footer class="site-footer">
-        <p>Public API Toolkit. Structured public data for AI agents.</p>
-        <div>
-          <a href="https://github.com/nikhilreddy3888/public-api-toolkit">GitHub</a>
-          <a href="https://www.npmjs.com/package/public-api-toolkit">npm</a>
-          <a href="https://github.com/nikhilreddy3888/public-api-toolkit/blob/main/docs/getting-started.md">Docs</a>
         </div>
-      </footer>
-    </div>
+        <div class="hero-visual cta-visual" aria-label="Public API Toolkit logo">
+          <div class="visual-halo"></div>
+          <img
+            src="./assets/logo.png"
+            alt="Public API Toolkit logo"
+            class="hero-logo"
+          />
+        </div>
+      </section>
+    </main>
 
-    <script src="./script.js"></script>
-  </body>
+    <footer class="site-footer">
+      <p>Public API Toolkit &middot; v1.0.3 &middot; MIT</p>
+      <div>
+        <a href="https://github.com/nikhilreddy3888/public-api-toolkit">GitHub</a>
+        <a href="https://www.npmjs.com/package/public-api-toolkit">npm</a>
+        <a href="https://github.com/nikhilreddy3888/public-api-toolkit/blob/main/docs/getting-started.md">Docs</a>
+        <a href="https://github.com/nikhilreddy3888/public-api-toolkit/blob/main/CONTRIBUTING.md">Contribute</a>
+        <a href="https://github.com/public-apis/public-apis">Inspired by public-apis</a>
+      </div>
+    </footer>
+  </div>
+
+  <script src="./script.js"></script>
+</body>
 </html>

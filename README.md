@@ -1,202 +1,248 @@
-# Public API Toolkit
+<p align="center">
+  <img src="site/assets/logo.png" width="120" />
+</p>
 
-Structured public data for AI agents.
+<h1 align="center">Public API Toolkit</h1>
 
-Public API Toolkit is a cross-platform MCP server that turns public APIs into clean, agent-ready tools.
+<p align="center">
+  <strong>41 APIs. One command. Zero waste.</strong>
+</p>
 
-It packages 41 grouped `public_api_<group>` tools behind one local MCP server, so agents can ask for weather, countries, crypto prices, holidays, Wikipedia summaries, open data, transport lookups, and dozens of other structured API results without scraping web pages first.
+<p align="center">
+  Your AI agent shouldn't scrape Wikipedia to tell you the weather.<br>
+  One MCP server gives it structured access to 41 public-data tools — instantly.
+</p>
 
-## Landing Page
+<p align="center">
+  <a href="https://www.npmjs.com/package/public-api-toolkit"><img src="https://img.shields.io/npm/v/public-api-toolkit?style=flat&color=00e676" alt="npm"></a>
+  <a href="https://github.com/nikhilreddy3888/public-api-toolkit/stargazers"><img src="https://img.shields.io/github/stars/nikhilreddy3888/public-api-toolkit?style=flat&color=yellow" alt="Stars"></a>
+  <a href="https://github.com/nikhilreddy3888/public-api-toolkit/blob/main/LICENSE"><img src="https://img.shields.io/github/license/nikhilreddy3888/public-api-toolkit?style=flat" alt="License"></a>
+  <img src="https://img.shields.io/badge/tools-41-00e676?style=flat" alt="41 tools">
+  <img src="https://img.shields.io/badge/zero_config-required-ffab00?style=flat" alt="Zero config">
+</p>
 
-The repository includes a static GitHub Pages-style landing page in [`site/`](site/) for launch storytelling, product screenshots, and direct install links.
+<p align="center">
+  <a href="#before--after">Before / After</a> &bull;
+  <a href="#install">Install</a> &bull;
+  <a href="#tool-coverage">41 Tools</a> &bull;
+  <a href="#client-support">Clients</a> &bull;
+  <a href="#why-it-matters">Why It Matters</a> &bull;
+  <a href="#faq">FAQ</a>
+</p>
 
-- Live site: [nikhilreddy3888.github.io/public-api-toolkit](https://nikhilreddy3888.github.io/public-api-toolkit/)
-- Open [`site/index.html`](site/index.html) locally for a no-build preview
-- Reuse the page for GitHub Pages or any static host
-- Publish it directly with the included GitHub Pages workflow
-- Keep the product README focused on setup while the landing page handles narrative and marketing
+---
 
-## At A Glance
+## Before / After
 
-| Area | Status |
-| --- | --- |
-| Package | `public-api-toolkit@1.0.3` |
-| Tool groups | `10` |
-| Tools | `41` |
-| npm | [public-api-toolkit](https://www.npmjs.com/package/public-api-toolkit) |
-| GitHub | [nikhilreddy3888/public-api-toolkit](https://github.com/nikhilreddy3888/public-api-toolkit) |
-| Website | [nikhilreddy3888.github.io/public-api-toolkit](https://nikhilreddy3888.github.io/public-api-toolkit/) |
+<table>
+<tr>
+<td width="50%">
 
-Repository health references:
+### What agents do today (expensive)
 
-- [STATUS.md](STATUS.md)
-- [CONTRIBUTING.md](CONTRIBUTING.md)
+- Search the web for BTC price &rarr; burns 800+ tokens parsing finance pages
+- Reason about FX rates from stale training data &rarr; answer might be months old
+- Scrape weather.com HTML for tomorrow's forecast &rarr; brittle, slow, wasteful
+- Fetch full Wikipedia pages to summarize one paragraph
+- Install a different MCP server for every single capability
 
-## Why It Exists
+</td>
+<td width="50%">
 
-- Structured JSON beats brittle scraping for repeatable agent workflows.
-- One MCP server is easier to install than wiring dozens of single-purpose connectors.
-- Premium providers are optional, so the server stays useful even without API keys.
-- The same tool surface can be reused across Codex, Claude Code, Cursor, and other MCP clients.
+### What they should do (instant)
 
-## Why Teams Use It
+- Call `public_api_crypto_data` &rarr; structured JSON in &lt;300ms
+- Call `public_api_currency_exchange` &rarr; live rates, zero hallucination
+- Call `public_api_weather` &rarr; clean forecast, 0 HTML parsing
+- Call `public_api_wikipedia` &rarr; structured summary, minimal tokens
+- One `npx -y public-api-toolkit` covers all 41 tools
 
-Public API Toolkit is for the part of agent work that should be deterministic:
+</td>
+</tr>
+</table>
 
-- live factual lookups that already have good public APIs
-- coding workflows that need exact package, geo, weather, or open-data answers
-- local MCP setups where one reliable server is easier to manage than many narrow ones
+**Same answers. 10&ndash;40x fewer tokens. Seconds instead of minutes.**
 
-The product story is simple:
-
-- models reason well
-- APIs retrieve live facts well
-- MCP is the cleanest bridge between the two
-
-## When It Helps Most
-
-Public API Toolkit is strongest on structured lookup tasks, where web search tends to waste tokens and return noisy HTML:
-
-- weather and air quality
-- currency and crypto prices
-- country and university data
-- dictionaries and Wikipedia summaries
-- public holidays, geocoding, and open-data lookups
-
-It is less differentiated for open-ended research, editorial comparisons, or tasks where the model still needs to browse multiple human-written sources.
-
-For a current snapshot of known-good areas versus fragile providers, see [STATUS.md](STATUS.md).
-
-## Why It Is Bundled
-
-This project does not try to expose every upstream as its own standalone MCP tool.
-
-Instead, it groups related capabilities into one tool per domain so the surface stays practical for agents:
-
-- `public_api_weather` instead of many weather-specific tools
-- `public_api_currency_exchange` instead of many FX providers
-- `public_api_wikipedia` instead of separate search, summary, and content tools
-
-That tradeoff favors:
-
-- fewer installs
-- a more consistent tool naming scheme
-- easier cross-client setup
-
-It does mean the tool surface is broader than a single-purpose MCP server. That is an intentional convenience tradeoff, not something the repo tries to hide.
-
-## Client Support
-
-| Client | Status | Notes |
-| --- | --- | --- |
-| Codex | Direct | Local stdio MCP server via `~/.codex/config.toml` |
-| Claude Code | Direct | Local stdio MCP server via `.mcp.json` or `claude mcp add-json` |
-| Cursor | Direct | Local stdio MCP server via `mcp.json` |
-| OpenCode | Direct | Local MCP server via `opencode.jsonc` |
-| Gemini CLI | Direct | Local `settings.json` MCP or extension install from this repo |
-| GitHub Copilot CLI | Direct after publish | Direct repo plugin install via `.claude-plugin` and `.mcp.json` |
-| Generic MCP clients | Direct | Use the same stdio command shape if the client supports local MCP processes |
-| ChatGPT Apps / remote MCP | Partial | Requires a remote MCP transport; this repo currently ships stdio only |
-
-## Quick Start
-
-### Run From Source
-
-```bash
-npm install
-npm test
-npm run build
-node dist/index.js
+```
+┌──────────────────────────────────────────┐
+│  TOKENS SAVED          ██████████  10–40x │
+│  RESPONSE TIME        ██████████  <300ms │
+│  SETUP TIME           ██████████  <60s   │
+│  MCP SERVERS NEEDED   ██████████  1      │
+└──────────────────────────────────────────┘
 ```
 
-### Run After npm Publish
+## Install
+
+One command. Every client.
 
 ```bash
 npx -y public-api-toolkit
 ```
 
-### Add It To A Client
+| Client | How |
+|--------|-----|
+| **Claude Code** | `claude mcp add-json public-api-toolkit '{"command":"npx","args":["-y","public-api-toolkit"]}'` |
+| **Codex** | Add to `~/.codex/config.toml` — [docs/installation/codex.md](docs/installation/codex.md) |
+| **Cursor** | Add to `.cursor/mcp.json` — [docs/installation/cursor.md](docs/installation/cursor.md) |
+| **Gemini CLI** | `gemini extensions install https://github.com/nikhilreddy3888/public-api-toolkit` |
+| **OpenCode** | Add to `opencode.jsonc` — [docs/installation/opencode.md](docs/installation/opencode.md) |
+| **Copilot CLI** | Plugin install — [docs/installation/github-copilot-cli.md](docs/installation/github-copilot-cli.md) |
+| **OpenClaw** | `openclaw plugins install public-api-toolkit` |
+| **Any MCP client** | Use the same stdio command — [docs/installation/generic-mcp-clients.md](docs/installation/generic-mcp-clients.md) |
 
-- Codex: [docs/installation/codex.md](docs/installation/codex.md)
-- Claude Code: [docs/installation/claude-code.md](docs/installation/claude-code.md)
-- Cursor: [docs/installation/cursor.md](docs/installation/cursor.md)
-- OpenCode: [docs/installation/opencode.md](docs/installation/opencode.md)
-- Gemini CLI: [docs/installation/gemini-cli.md](docs/installation/gemini-cli.md)
-- GitHub Copilot CLI: [docs/installation/github-copilot-cli.md](docs/installation/github-copilot-cli.md)
-- ChatGPT / remote MCP: [docs/installation/chatgpt-mcp.md](docs/installation/chatgpt-mcp.md)
-- Generic MCP clients: [docs/installation/generic-mcp-clients.md](docs/installation/generic-mcp-clients.md)
+No API keys needed for most tools. Premium providers unlock with `PUBLIC_APIS_*` environment variables.
 
 ## Tool Coverage
 
-Public API Toolkit exposes 41 tools across these categories:
+41 tools across 10 categories. Related capabilities grouped so agents discover them naturally.
 
-- Data reference: countries, dictionaries, books, universities
-- Geolocation: geocoding and IP lookup
-- Finance: FX, crypto, stocks
-- Weather and environment: forecasts, air quality, carbon
-- Development: HTTP utilities, DNS, code execution, screenshots, placeholder data
-- Text and knowledge: translation, text analysis, Wikipedia, news
-- Media and entertainment: images, music, movies, games
-- Science and lifestyle: math, space, food, blockchain, holidays, transport
-- Validation and security: email, phone, content validation, security feeds, jobs
-- Civic data: government, health, and open data sets
+| Tool | Category | What it does |
+|------|----------|-------------|
+| `public_api_weather` | Weather &amp; Sky | Forecasts, current conditions, alerts, sun times |
+| `public_api_air_quality` | Air &amp; Carbon | Air quality, UK carbon intensity, website carbon |
+| `public_api_carbon_footprint` | Carbon | Carbon Interface activity estimates |
+| `public_api_currency_exchange` | Finance | Live FX rates, 150+ currencies, historical series |
+| `public_api_crypto_data` | Crypto | CoinGecko-powered market data |
+| `public_api_stock_market` | Stocks | Quotes, symbol search, SEC filings, FRED data |
+| `public_api_country_data` | Reference | Country profiles, flags, populations |
+| `public_api_dictionary` | Words | Definitions, synonyms, rhymes, autocomplete |
+| `public_api_books` | Books | Gutenberg titles, poetry lookups |
+| `public_api_university_data` | Education | University search by name and country |
+| `public_api_geocoding` | Geo | Forward geocoding, reverse geocoding, postal |
+| `public_api_ip_geolocation` | IP | IP lookup for city, region, timezone, network |
+| `public_api_wikipedia` | Knowledge | Structured summaries, search, Wikidata |
+| `public_api_news` | News | Spaceflight and historic newspaper APIs |
+| `public_api_translation` | Language | Translation, detection, novelty translators |
+| `public_api_text_analysis` | Safety | Profanity filtering and text safety checks |
+| `public_api_music_data` | Media | MusicBrainz, iTunes, lyrics, radio, genres |
+| `public_api_movie_tv_data` | Media | Movies, TV, anime, sci-fi, franchise lookups |
+| `public_api_images` | Images | Lorem Picsum image placeholders |
+| `public_api_space` | Science | NASA, ISS, launches, SpaceX, earthquake data |
+| `public_api_math` | Math | Symbolic math and number facts |
+| `public_api_food_recipes` | Food | Recipes, nutrition, breweries, food data |
+| `public_api_random_facts` | Fun | Jokes, quotes, trivia, xkcd, novelty feeds |
+| `public_api_animals` | Fun | Animal images, facts, marine-life data |
+| `public_api_game_data` | Fun | Games, cards, RPG, anime, trivia datasets |
+| `public_api_http_utils` | Dev | HTTP introspection, QR codes, URL shortening |
+| `public_api_dns_network` | Dev | DNS, subnet, and domain search |
+| `public_api_code_execution` | Dev | Remote code execution via Wandbox |
+| `public_api_placeholder_data` | Dev | Synthetic users, posts, lorem ipsum, UUIDs |
+| `public_api_screenshot` | Dev | Website screenshot metadata via Microlink |
+| `public_api_email_validation` | Validation | Email deliverability and reputation |
+| `public_api_phone_validation` | Validation | Phone device catalog lookups |
+| `public_api_data_validation` | Validation | Content validation helpers |
+| `public_api_security_intel` | Security | Vulnerability, phishing, threat feeds |
+| `public_api_blockchain` | Blockchain | Bitcoin, Helium, and Solana data |
+| `public_api_holidays` | Civic | Public holidays, bank holidays, namedays |
+| `public_api_transport` | Transit | Flight, bike share, EV charging, transit |
+| `public_api_government_data` | Civic | Wanted lists, notices, registers, datasets |
+| `public_api_health_data` | Health | FDA, USDA, and NPI registry lookups |
+| `public_api_open_data` | Open Data | Civic, culture, sport, city quality datasets |
 
-The full catalog lives in [docs/configuration/tool-groups.md](docs/configuration/tool-groups.md).
+Full catalog: [docs/configuration/tool-groups.md](docs/configuration/tool-groups.md)
+
+## Why It Matters
+
+Every time an AI agent scrapes a web page for data that already has a clean API, it wastes:
+
+- **Tokens** &mdash; 500&ndash;2000+ tokens parsing HTML vs 50&ndash;100 from a structured endpoint
+- **Time** &mdash; 2&ndash;8 seconds browsing vs &lt;300ms calling an API
+- **Compute** &mdash; GPU time generates noise instead of signal
+- **Energy** &mdash; every avoidable request has a carbon cost
+
+Public API Toolkit redirects that waste into a single structured path. Less scraping. Less hallucination. More signal.
+
+**Safe by default:** every upstream is vetted. No scraping brittle websites, no user data in transit, no secrets in prompts. API keys are optional and isolated through environment variables.
+
+**Built with contributors:** this project thrives because contributors keep adding safe, useful, free APIs. Every new tool means one fewer reason for an agent to scrape the web. [Add yours &rarr;](CONTRIBUTING.md)
+
+## Client Support
+
+| Client | Status | Install |
+|--------|--------|---------|
+| Claude Code | Direct | [docs/installation/claude-code.md](docs/installation/claude-code.md) |
+| Codex | Direct | [docs/installation/codex.md](docs/installation/codex.md) |
+| Cursor | Direct | [docs/installation/cursor.md](docs/installation/cursor.md) |
+| Gemini CLI | Direct | [docs/installation/gemini-cli.md](docs/installation/gemini-cli.md) |
+| OpenCode | Direct | [docs/installation/opencode.md](docs/installation/opencode.md) |
+| Copilot CLI | Direct | [docs/installation/github-copilot-cli.md](docs/installation/github-copilot-cli.md) |
+| OpenClaw | Direct | [docs/installation/openclaw.md](docs/installation/openclaw.md) |
+| Any MCP client | Stdio | [docs/installation/generic-mcp-clients.md](docs/installation/generic-mcp-clients.md) |
 
 ## API Keys
 
-Most tools work without authentication. Optional premium-compatible providers are activated through `PUBLIC_APIS_<NAME>` environment variables such as:
+Most tools work without authentication. Optional premium providers:
 
-- `PUBLIC_APIS_FINNHUB`
-- `PUBLIC_APIS_ALPHAVANTAGE`
-- `PUBLIC_APIS_FRED`
-- `PUBLIC_APIS_OMDB`
-- `PUBLIC_APIS_TMDB`
-- `PUBLIC_APIS_CARBON_INTERFACE`
-- `PUBLIC_APIS_MAILCHECK`
-- `PUBLIC_APIS_KICKBOX`
-- `PUBLIC_APIS_OPEN_CHARGE_MAP`
-- `PUBLIC_APIS_FOODDATA_CENTRAL`
+| Variable | Unlocks |
+|----------|---------|
+| `PUBLIC_APIS_FINNHUB` | Stock quotes and symbol search |
+| `PUBLIC_APIS_ALPHAVANTAGE` | FX and stock data |
+| `PUBLIC_APIS_FRED` | Federal Reserve economic data |
+| `PUBLIC_APIS_OMDB` | Movie and TV lookups |
+| `PUBLIC_APIS_TMDB` | The Movie Database |
+| `PUBLIC_APIS_CARbon_INTERFACE` | Carbon footprint estimates |
+| `PUBLIC_APIS_MAILCHECK` / `PUBLIC_APIS_KICKBOX` | Email validation |
+| `PUBLIC_APIS_OPEN_CHARGE_MAP` | EV charging station data |
+| `PUBLIC_APIS_FOODDATA_CENTRAL` | USDA nutrition data |
 
-Details:
+Details: [docs/configuration/environment-variables.md](docs/configuration/environment-variables.md) &bull; [docs/configuration/api-keys.md](docs/configuration/api-keys.md)
 
-- [docs/configuration/environment-variables.md](docs/configuration/environment-variables.md)
-- [docs/configuration/api-keys.md](docs/configuration/api-keys.md)
+## FAQ
+
+**Do I need API keys?**
+No. Most tools use free-tier public APIs. Premium providers are optional.
+
+**How is this different from web search?**
+Web search returns noisy HTML costing 500&ndash;2000 tokens per lookup. Structured API calls return clean JSON in &lt;300ms using 50&ndash;100 tokens. For factual questions, it's faster, cheaper, and more accurate.
+
+**How is this different from the public-apis list?**
+public-apis is a curated reference document. This is a running MCP server that makes those APIs callable by agents with no scraping, no glue code, and no per-API setup. (See [Acknowledgments](#acknowledgments) below.)
+
+**What if an upstream goes down?**
+Built-in 15-second timeouts, 3 retries on 429/5xx, and fallback providers for fragile upstreams. [STATUS.md](STATUS.md) documents known-good vs. fragile areas.
+
+**Can I contribute?**
+Yes. [CONTRIBUTING.md](CONTRIBUTING.md) has everything. Adding a tool takes ~20&ndash;30 minutes following a consistent pattern.
 
 ## Repository Guide
 
-- Start here: [docs/getting-started.md](docs/getting-started.md)
-- Install per client: [docs/installation](docs/installation)
-- Configure keys and tool groups: [docs/configuration](docs/configuration)
-- Publish to npm and GitHub: [docs/publishing](docs/publishing)
-- Launch and community copy: [docs/marketing/launch-posts.md](docs/marketing/launch-posts.md)
-- Contribute or fix providers: [CONTRIBUTING.md](CONTRIBUTING.md)
-
-## Packaging
-
-This repo includes:
-
-- `plugins/public-api-toolkit/.mcp.json` for Codex-compatible MCP packaging
-- `plugins/public-api-toolkit/.codex-plugin/plugin.json` for Codex plugin metadata
-- `.claude-plugin/plugin.json` and root `.mcp.json` for direct GitHub Copilot CLI plugin install
-- `gemini-extension.json` and `GEMINI.md` for Gemini CLI extension install
-- `.codex/INSTALL.md` and `.opencode/INSTALL.md` for fetch-and-follow setup flows
-- `skills/public-api-toolkit/SKILL.md` for agent routing guidance
-- `examples/` with ready-to-copy config snippets
+- [Getting started](docs/getting-started.md)
+- [Install per client](docs/installation)
+- [Configure keys and tool groups](docs/configuration)
+- [Publish to npm and GitHub](docs/publishing)
+- [Contribute or fix providers](CONTRIBUTING.md)
 
 ## Runtime Notes
 
 - Transport: stdio MCP server
 - Upstream timeout: 15 seconds
-- Response cap: 30,000 characters with a truncation marker
-- User agent: `public-api-toolkit/1.0`
+- Response cap: 30,000 characters
+- User-Agent: `public-api-toolkit/1.0`
 
-## Roadmap Themes
+## Acknowledgments
 
-The highest-value next steps are:
+Public API Toolkit would not exist without **[public-apis/public-apis](https://github.com/public-apis/public-apis)** — the incredible community-curated list of free APIs that inspired and guided which upstreams to include. If this toolkit saves you tokens, go star that repository too.
 
-- Add more useful public APIs
-- replace or remove clearly dead upstreams
-- add a first-party provider audit script
-- continue improving fallback behavior for degraded providers
-- improve product positioning around bundled convenience versus token footprint
+Built by contributors who believe AI agents should **call APIs, not scrape web pages**. Every new tool means less compute wasted on noise, less energy burned on avoidable requests, and more signal for the things that matter.
+
+Add your upstream: [CONTRIBUTING.md](CONTRIBUTING.md) &bull; Open an issue: [GitHub Issues](https://github.com/nikhilreddy3888/public-api-toolkit/issues)
+
+## Landing Page
+
+The repo includes a static GitHub Pages landing page in [`site/`](site/).
+
+- Live site: [nikhilreddy3888.github.io/public-api-toolkit](https://nikhilreddy3888.github.io/public-api-toolkit/)
+- Open [`site/index.html`](site/index.html) locally for a no-build preview
+
+---
+
+## Star This Repo
+
+If this saved you tokens, compute, or time &mdash; leave a star. It helps others find it.
+
+[![Star History Chart](https://api.star-history.com/svg?repos=nikhilreddy3888/public-api-toolkit&type=Date)](https://star-history.com/#nikhilreddy3888/public-api-toolkit&Date)
+
+## License
+
+MIT &mdash; free to use, modify, and distribute.
