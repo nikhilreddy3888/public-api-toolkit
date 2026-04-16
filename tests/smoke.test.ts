@@ -169,15 +169,28 @@ test("packaging assets use the renamed public-api-toolkit identity", async () =>
 });
 
 test("runtime identity strings match the public product name", async () => {
-  const [serverSource, indexSource, apiFetchSource] = await Promise.all([
+  const [
+    serverSource,
+    indexSource,
+    apiFetchSource,
+    developmentGroupSource,
+    mediaGroupSource,
+  ] = await Promise.all([
     readFile(new URL("../src/server/createServer.ts", import.meta.url), "utf8"),
     readFile(new URL("../src/index.ts", import.meta.url), "utf8"),
     readFile(new URL("../src/lib/apiFetch.ts", import.meta.url), "utf8"),
+    readFile(new URL("../src/groups/development.ts", import.meta.url), "utf8"),
+    readFile(
+      new URL("../src/groups/mediaEntertainment.ts", import.meta.url),
+      "utf8",
+    ),
   ]);
 
   assert.match(serverSource, /name:\s*"public-api-toolkit"/);
   assert.match(indexSource, /Failed to start public-api-toolkit\./);
   assert.match(apiFetchSource, /public-api-toolkit\/1\.0/);
+  assert.doesNotMatch(developmentGroupSource, /public-apis-mcp/);
+  assert.doesNotMatch(mediaGroupSource, /public-apis-mcp/);
 });
 
 test("launch docs exist for supported client setup flows", async () => {
@@ -185,6 +198,12 @@ test("launch docs exist for supported client setup flows", async () => {
     readFile(new URL("../README.md", import.meta.url), "utf8"),
     readFile(new URL("../CONTRIBUTING.md", import.meta.url), "utf8"),
     readFile(new URL("../STATUS.md", import.meta.url), "utf8"),
+    readFile(new URL("../.github/ISSUE_TEMPLATE.md", import.meta.url), "utf8"),
+    readFile(
+      new URL("../.github/PULL_REQUEST_TEMPLATE.md", import.meta.url),
+      "utf8",
+    ),
+    readFile(new URL("../.github/workflows/ci.yml", import.meta.url), "utf8"),
     readFile(new URL("../docs/marketing/launch-posts.md", import.meta.url), "utf8"),
     readFile(new URL("../docs/getting-started.md", import.meta.url), "utf8"),
     readFile(new URL("../docs/installation/codex.md", import.meta.url), "utf8"),
@@ -233,6 +252,9 @@ test("launch docs exist for supported client setup flows", async () => {
     readme,
     contributingDoc,
     statusDoc,
+    issueTemplate,
+    prTemplate,
+    ciWorkflow,
     marketingDoc,
     gettingStarted,
     codexDoc,
@@ -261,6 +283,9 @@ test("launch docs exist for supported client setup flows", async () => {
   assert.match(contributingDoc, /Added or updated tests first/i);
   assert.match(statusDoc, /Total tools:\*\*\s*41/i);
   assert.match(statusDoc, /Recently Fixed/i);
+  assert.match(issueTemplate, /Public API Toolkit/);
+  assert.match(prTemplate, /npm test/);
+  assert.match(ciWorkflow, /npm ci/);
   assert.match(marketingDoc, /Product Hunt/i);
   assert.match(marketingDoc, /r\/ClaudeAI/i);
   assert.match(readme, /41 grouped `public_api_<group>` tools/i);

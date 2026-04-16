@@ -1,6 +1,6 @@
 {
   "name": "public-api-toolkit",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Structured public data for AI agents through one cross-platform MCP server.",
   "type": "module",
   "main": "dist/index.js",

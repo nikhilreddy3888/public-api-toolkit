@@ -32,7 +32,7 @@ export const mediaEntertainmentGroups = [
         }),
         seeded: async () => ({
           url: `https://picsum.photos/seed/${encodeURIComponent(
-            readString(input, "seed", "public-apis-mcp"),
+            readString(input, "seed", "public-api-toolkit"),
           )}/${readNumber(input, "width", 800)}/${readNumber(input, "height", 600)}`,
         }),
         info: async () =>

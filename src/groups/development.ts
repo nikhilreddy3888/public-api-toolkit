@@ -214,14 +214,14 @@ export const developmentGroups = [
           ),
         robot_avatar: async () => ({
           url: `https://robohash.org/${encodeURIComponent(
-            readString(input, "seed", "public-apis-mcp"),
+            readString(input, "seed", "public-api-toolkit"),
           )}.png`,
         }),
         dicebear_avatar: async () => ({
           url: withQuery(
             "https://api.dicebear.com/9.x/identicon/svg",
             {
-              seed: readString(input, "seed", "public-apis-mcp"),
+              seed: readString(input, "seed", "public-api-toolkit"),
             },
           ).toString(),
         }),
