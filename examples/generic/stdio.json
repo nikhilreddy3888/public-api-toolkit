@@ -1,4 +1,4 @@
 {
-  "command": "node",
-  "args": ["dist/index.js"]
+  "command": "npx",
+  "args": ["-y", "public-api-toolkit"]
 }

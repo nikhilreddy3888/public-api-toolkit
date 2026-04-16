@@ -82,8 +82,8 @@ test("packaging assets use the renamed public-api-toolkit identity", async () =>
     "-y",
     "public-api-toolkit",
   ]);
-  assert.equal(generic.command, "node");
-  assert.deepEqual(generic.args, ["dist/index.js"]);
+  assert.equal(generic.command, "npx");
+  assert.deepEqual(generic.args, ["-y", "public-api-toolkit"]);
 });
 
 test("runtime identity strings match the public product name", async () => {
