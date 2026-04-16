@@ -8,6 +8,10 @@ test("package scripts and source entrypoints exist", async () => {
   ) as {
     name: string;
     description: string;
+    author?: string;
+    homepage?: string;
+    bugs?: { url?: string };
+    repository?: { type?: string; url?: string };
     bin: Record<string, string>;
     scripts: Record<string, string>;
     keywords: string[];
@@ -24,10 +28,24 @@ test("package scripts and source entrypoints exist", async () => {
     pkg.description,
     "A cross-platform MCP server that turns public APIs into clean, agent-ready tools.",
   );
+  assert.equal(pkg.author, "Nikhil Reddy");
   assert.equal(lock.name, "public-api-toolkit");
   assert.equal(pkg.bin["public-api-toolkit"], "dist/index.js");
   assert.equal(pkg.scripts.build, "tsc -p tsconfig.json");
   assert.equal(pkg.scripts.test, "tsx --test tests/*.test.ts");
+  assert.equal(
+    pkg.homepage,
+    "https://github.com/nikhilreddy3888/public-api-toolkit#readme",
+  );
+  assert.equal(
+    pkg.bugs?.url,
+    "https://github.com/nikhilreddy3888/public-api-toolkit/issues",
+  );
+  assert.equal(pkg.repository?.type, "git");
+  assert.equal(
+    pkg.repository?.url,
+    "https://github.com/nikhilreddy3888/public-api-toolkit.git",
+  );
   assert.match(pkg.engines?.node ?? "", />=18/);
   assert.ok(pkg.keywords.includes("codex"));
   assert.ok(pkg.keywords.includes("claude-code"));

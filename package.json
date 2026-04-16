@@ -32,6 +32,15 @@
   "engines": {
     "node": ">=18"
   },
+  "author": "Nikhil Reddy",
+  "homepage": "https://github.com/nikhilreddy3888/public-api-toolkit#readme",
+  "bugs": {
+    "url": "https://github.com/nikhilreddy3888/public-api-toolkit/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nikhilreddy3888/public-api-toolkit.git"
+  },
   "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.11.0"
