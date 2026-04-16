@@ -10,6 +10,7 @@ It packages 41 grouped `public_api_<group>` tools behind one local MCP server, s
 
 The repository includes a static GitHub Pages-style landing page in [`site/`](site/) for launch storytelling, product screenshots, and direct install links.
 
+- Live site: [nikhilreddy3888.github.io/public-api-toolkit](https://nikhilreddy3888.github.io/public-api-toolkit/)
 - Open [`site/index.html`](site/index.html) locally for a no-build preview
 - Reuse the page for GitHub Pages or any static host
 - Publish it directly with the included GitHub Pages workflow
@@ -19,11 +20,12 @@ The repository includes a static GitHub Pages-style landing page in [`site/`](si
 
 | Area | Status |
 | --- | --- |
-| Package | `public-api-toolkit@1.0.1` |
+| Package | `public-api-toolkit@1.0.3` |
 | Tool groups | `10` |
 | Tools | `41` |
 | npm | [public-api-toolkit](https://www.npmjs.com/package/public-api-toolkit) |
 | GitHub | [nikhilreddy3888/public-api-toolkit](https://github.com/nikhilreddy3888/public-api-toolkit) |
+| Website | [nikhilreddy3888.github.io/public-api-toolkit](https://nikhilreddy3888.github.io/public-api-toolkit/) |
 
 Repository health references:
 

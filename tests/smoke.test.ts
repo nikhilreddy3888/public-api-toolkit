@@ -35,7 +35,7 @@ test("package scripts and source entrypoints exist", async () => {
   assert.equal(pkg.scripts.test, "tsx --test tests/*.test.ts");
   assert.equal(
     pkg.homepage,
-    "https://github.com/nikhilreddy3888/public-api-toolkit#readme",
+    "https://nikhilreddy3888.github.io/public-api-toolkit/",
   );
   assert.equal(
     pkg.bugs?.url,
@@ -325,4 +325,5 @@ test("static landing page assets and copy exist", async () => {
   assert.match(siteJs, /DOMContentLoaded|copy/i);
   assert.ok(logo.byteLength > 0);
   assert.match(readme, /landing page|GitHub Pages|site\//i);
+  assert.match(readme, /nikhilreddy3888\.github\.io\/public-api-toolkit/i);
 });
