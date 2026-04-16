@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "public-api-toolkit": {
+      "command": "npx",
+      "args": ["-y", "public-api-toolkit"]
+    }
+  }
+}

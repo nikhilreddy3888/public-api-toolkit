@@ -1,0 +1,8 @@
+{
+  "name": "public-api-toolkit",
+  "version": "1.0.0",
+  "description": "Public API Toolkit is a TypeScript MCP server for structured public API lookups.",
+  "mcp": {
+    "config": ".mcp.json"
+  }
+}

@@ -1,8 +1,0 @@
-{
-  "name": "public-apis-mcp",
-  "version": "1.0.0",
-  "description": "Expose grouped public APIs as MCP tools for local AI assistants.",
-  "mcp": {
-    "config": ".mcp.json"
-  }
-}
