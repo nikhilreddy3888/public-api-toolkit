@@ -1,5 +1,7 @@
 # Public API Toolkit
 
+Structured public data for AI agents.
+
 Public API Toolkit is a cross-platform MCP server that turns public APIs into clean, agent-ready tools.
 
 It packages 41 grouped `public_api_<group>` tools behind one local MCP server, so agents can ask for weather, countries, crypto prices, holidays, Wikipedia summaries, open data, transport lookups, and dozens of other structured API results without scraping web pages first.
@@ -26,6 +28,20 @@ Repository health references:
 - Premium providers are optional, so the server stays useful even without API keys.
 - The same tool surface can be reused across Codex, Claude Code, Cursor, and other MCP clients.
 
+## Why Teams Use It
+
+Public API Toolkit is for the part of agent work that should be deterministic:
+
+- live factual lookups that already have good public APIs
+- coding workflows that need exact package, geo, weather, or open-data answers
+- local MCP setups where one reliable server is easier to manage than many narrow ones
+
+The product story is simple:
+
+- models reason well
+- APIs retrieve live facts well
+- MCP is the cleanest bridge between the two
+
 ## When It Helps Most
 
 Public API Toolkit is strongest on structured lookup tasks, where web search tends to waste tokens and return noisy HTML:
@@ -39,6 +55,24 @@ Public API Toolkit is strongest on structured lookup tasks, where web search ten
 It is less differentiated for open-ended research, editorial comparisons, or tasks where the model still needs to browse multiple human-written sources.
 
 For a current snapshot of known-good areas versus fragile providers, see [STATUS.md](STATUS.md).
+
+## Why It Is Bundled
+
+This project does not try to expose every upstream as its own standalone MCP tool.
+
+Instead, it groups related capabilities into one tool per domain so the surface stays practical for agents:
+
+- `public_api_weather` instead of many weather-specific tools
+- `public_api_currency_exchange` instead of many FX providers
+- `public_api_wikipedia` instead of separate search, summary, and content tools
+
+That tradeoff favors:
+
+- fewer installs
+- a more consistent tool naming scheme
+- easier cross-client setup
+
+It does mean the tool surface is broader than a single-purpose MCP server. That is an intentional convenience tradeoff, not something the repo tries to hide.
 
 ## Client Support
 
@@ -124,6 +158,7 @@ Details:
 - Install per client: [docs/installation](docs/installation)
 - Configure keys and tool groups: [docs/configuration](docs/configuration)
 - Publish to npm and GitHub: [docs/publishing](docs/publishing)
+- Launch and community copy: [docs/marketing/launch-posts.md](docs/marketing/launch-posts.md)
 - Contribute or fix providers: [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## Packaging

@@ -26,7 +26,7 @@ test("package scripts and source entrypoints exist", async () => {
   assert.equal(pkg.name, "public-api-toolkit");
   assert.equal(
     pkg.description,
-    "A cross-platform MCP server that turns public APIs into clean, agent-ready tools.",
+    "Structured public data for AI agents through one cross-platform MCP server.",
   );
   assert.equal(pkg.author, "Nikhil Reddy");
   assert.equal(lock.name, "public-api-toolkit");
@@ -50,6 +50,9 @@ test("package scripts and source entrypoints exist", async () => {
   assert.ok(pkg.keywords.includes("codex"));
   assert.ok(pkg.keywords.includes("claude-code"));
   assert.ok(pkg.keywords.includes("cursor"));
+  assert.ok(pkg.keywords.includes("mcp-server"));
+  assert.ok(pkg.keywords.includes("ai-agents"));
+  assert.ok(pkg.keywords.includes("gemini-cli"));
 });
 
 test("packaging assets use the renamed public-api-toolkit identity", async () => {
@@ -182,6 +185,7 @@ test("launch docs exist for supported client setup flows", async () => {
     readFile(new URL("../README.md", import.meta.url), "utf8"),
     readFile(new URL("../CONTRIBUTING.md", import.meta.url), "utf8"),
     readFile(new URL("../STATUS.md", import.meta.url), "utf8"),
+    readFile(new URL("../docs/marketing/launch-posts.md", import.meta.url), "utf8"),
     readFile(new URL("../docs/getting-started.md", import.meta.url), "utf8"),
     readFile(new URL("../docs/installation/codex.md", import.meta.url), "utf8"),
     readFile(
@@ -229,6 +233,7 @@ test("launch docs exist for supported client setup flows", async () => {
     readme,
     contributingDoc,
     statusDoc,
+    marketingDoc,
     gettingStarted,
     codexDoc,
     claudeDoc,
@@ -247,13 +252,17 @@ test("launch docs exist for supported client setup flows", async () => {
 
   assert.match(
     readme,
-    /cross-platform MCP server that turns public APIs into clean, agent-ready tools/i,
+    /Structured public data for AI agents\./i,
   );
   assert.match(readme, /STATUS\.md/);
+  assert.match(readme, /Why Teams Use It/i);
+  assert.match(readme, /Why It Is Bundled/i);
   assert.match(contributingDoc, /Contributing to Public API Toolkit/);
   assert.match(contributingDoc, /Added or updated tests first/i);
   assert.match(statusDoc, /Total tools:\*\*\s*41/i);
   assert.match(statusDoc, /Recently Fixed/i);
+  assert.match(marketingDoc, /Product Hunt/i);
+  assert.match(marketingDoc, /r\/ClaudeAI/i);
   assert.match(readme, /41 grouped `public_api_<group>` tools/i);
   assert.match(gettingStarted, /That should print `41`\./);
   assert.match(codexDoc, /~\/\.codex\/config\.toml/);

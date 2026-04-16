@@ -1,7 +1,7 @@
 {
   "name": "public-api-toolkit",
   "version": "1.0.1",
-  "description": "A cross-platform MCP server that turns public APIs into clean, agent-ready tools.",
+  "description": "Structured public data for AI agents through one cross-platform MCP server.",
   "type": "module",
   "main": "dist/index.js",
   "files": [
@@ -20,12 +20,19 @@
   },
   "keywords": [
     "mcp",
+    "mcp-server",
     "public-api-toolkit",
     "public-api",
     "public-apis",
+    "structured-data",
+    "public-data",
+    "ai-agents",
+    "claude",
     "codex",
     "claude-code",
     "cursor",
+    "gemini-cli",
+    "opencode",
     "typescript",
     "model-context-protocol"
   ],
