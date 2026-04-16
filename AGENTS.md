@@ -8,7 +8,7 @@ npm run build     # compile TypeScript (tsc -p tsconfig.json)
 npm run dev       # run from source (tsx src/index.ts)
 ```
 
-CI runs: `npm ci && npm test && npm run build` (no separate lint or typecheck step).
+CI runs: `npm ci && npm run build && npm test` (build must precede test because the Gemini packaging test requires `dist/index.js`).
 
 ## Test runner
 
