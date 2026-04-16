@@ -1,0 +1,31 @@
+{
+  "name": "public-api-toolkit",
+  "version": "1.0.0",
+  "description": "Public API Toolkit is a TypeScript MCP server wrapping grouped public APIs for AI assistants.",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "public-api-toolkit": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsx src/index.ts",
+    "start": "node dist/index.js",
+    "test": "tsx --test tests/*.test.ts"
+  },
+  "keywords": [
+    "mcp",
+    "public-apis",
+    "typescript",
+    "model-context-protocol"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.11.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.3",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3"
+  }
+}
