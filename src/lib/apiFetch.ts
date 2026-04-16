@@ -2,7 +2,7 @@ import { UpstreamError } from "./errors.js";
 
 export type FetchLike = typeof fetch;
 
-const USER_AGENT = "public-apis-mcp/1.0";
+const USER_AGENT = "public-api-toolkit/1.0";
 const DEFAULT_TIMEOUT_MS = 15_000;
 
 export async function normalizeFetchResult(

@@ -29,7 +29,7 @@ function toTextResult(value: unknown, isError = false) {
 export function createServer() {
   const server = new Server(
     {
-      name: "public-apis-mcp",
+      name: "public-api-toolkit",
       version: "1.0.0",
     },
     {
