@@ -15,6 +15,8 @@
   },
   "keywords": [
     "mcp",
+    "public-api-toolkit",
+    "public-api",
     "public-apis",
     "typescript",
     "model-context-protocol"

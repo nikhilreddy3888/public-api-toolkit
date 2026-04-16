@@ -1,7 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readFile, readdir } from "node:fs/promises";
-import { join } from "node:path";
 
 test("package scripts and source entrypoints exist", async () => {
   const pkg = JSON.parse(
@@ -25,19 +24,27 @@ test("package scripts and source entrypoints exist", async () => {
 });
 
 test("plugin config points at the built dist entrypoint", async () => {
-  const pluginDirs = await readdir(new URL("../plugins", import.meta.url), {
-    withFileTypes: true,
-  });
+  const pluginsRoot = new URL("../plugins/", import.meta.url);
+  const pluginDirs = await readdir(pluginsRoot, { withFileTypes: true });
   const pluginDir = pluginDirs.find((entry) => entry.isDirectory());
 
   assert.ok(pluginDir, "expected at least one plugin directory");
 
-  const raw = await readFile(
-    new URL(`../plugins/${join(pluginDir.name, ".mcp.json")}`, import.meta.url),
-    "utf8",
-  );
+  const raw = await readFile(new URL(`${pluginDir.name}/.mcp.json`, pluginsRoot), "utf8");
   const plugin = JSON.parse(raw) as { command: string; args: string[] };
 
   assert.equal(plugin.command, "node");
   assert.deepEqual(plugin.args, ["dist/index.js"]);
+});
+
+test("runtime identity strings match the public product name", async () => {
+  const [serverSource, indexSource, apiFetchSource] = await Promise.all([
+    readFile(new URL("../src/server/createServer.ts", import.meta.url), "utf8"),
+    readFile(new URL("../src/index.ts", import.meta.url), "utf8"),
+    readFile(new URL("../src/lib/apiFetch.ts", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(serverSource, /name:\s*"public-api-toolkit"/);
+  assert.match(indexSource, /Failed to start public-api-toolkit\./);
+  assert.match(apiFetchSource, /public-api-toolkit\/1\.0/);
 });
