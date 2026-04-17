@@ -17,7 +17,7 @@ node -e "import('./dist/server/toolRegistry.js').then((m) => console.log(m.listR
 ## Release Title
 
 ```text
-Public API Toolkit v1.0.3
+Public API Toolkit v1.0.4
 ```
 
 ## Release Notes Checklist

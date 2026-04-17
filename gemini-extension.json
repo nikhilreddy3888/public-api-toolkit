@@ -1,12 +1,12 @@
 {
   "name": "public-api-toolkit",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Add structured public API tools to Gemini CLI through MCP.",
   "contextFileName": "GEMINI.md",
   "mcpServers": {
     "public-api-toolkit": {
       "command": "npx",
-      "args": ["-y", "public-api-toolkit@1.0.3"]
+      "args": ["-y", "public-api-toolkit@1.0.4"]
     }
   }
 }

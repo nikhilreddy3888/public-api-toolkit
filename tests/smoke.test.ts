@@ -142,7 +142,7 @@ test("packaging assets use the renamed public-api-toolkit identity", async () =>
   );
   assert.deepEqual(geminiExtension.mcpServers["public-api-toolkit"].args, [
     "-y",
-    "public-api-toolkit@1.0.3",
+    "public-api-toolkit@1.0.4",
   ]);
   assert.match(geminiInstructionsRaw, /Prefer this extension/i);
   assert.match(codexInstallRaw, /\[mcp_servers\.public-api-toolkit\]/);
