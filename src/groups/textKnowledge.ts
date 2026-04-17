@@ -11,14 +11,13 @@ import { integerProp, objectSchema, stringProp } from "../lib/schema.js";
 export const textKnowledgeGroups = [
   createToolGroup({
     key: "translation",
-    description: "LibreTranslate and FunTranslations endpoints.",
+    description: "LibreTranslate translation and language detection.",
     inputSchema: objectSchema(
-      ["translate", "detect", "languages", "fun"],
+      ["translate", "detect", "languages"],
       {
         text: stringProp("Text to analyze or translate."),
         source: stringProp("Source language code.", { default: "auto" }),
         target: stringProp("Target language code.", { default: "en" }),
-        style: stringProp("FunTranslations style, such as yoda or pirate."),
       },
     ),
     execute: (input, ctx) =>
@@ -43,40 +42,6 @@ export const textKnowledgeGroups = [
             }),
           }),
         languages: async () => ctx.fetchJson("https://libretranslate.com/languages"),
-        fun: async () => {
-          const style = readString(input, "style", "yoda");
-          return ctx.fetchJson(
-            withQuery(`https://api.funtranslations.com/translate/${style}.json`, {
-              text: readString(input, "text"),
-            }),
-          );
-        },
-      }),
-  }),
-  createToolGroup({
-    key: "text_analysis",
-    description: "Profanity checking and censorship via PurgoMalum.",
-    inputSchema: objectSchema(
-      ["contains_profanity", "censor"],
-      {
-        text: stringProp("Text to validate."),
-      },
-      ["text"],
-    ),
-    execute: (input, ctx) =>
-      runActionMap("text_analysis", input, ctx, {
-        contains_profanity: async () =>
-          ctx.fetchJson(
-            withQuery("https://www.purgomalum.com/service/containsprofanity", {
-              text: readString(input, "text"),
-            }),
-          ),
-        censor: async () =>
-          ctx.fetchJson(
-            withQuery("https://www.purgomalum.com/service/json", {
-              text: readString(input, "text"),
-            }),
-          ),
       }),
   }),
   createToolGroup({
@@ -129,9 +94,9 @@ export const textKnowledgeGroups = [
   }),
   createToolGroup({
     key: "news",
-    description: "Spaceflight News and Chronicling America.",
+    description: "Spaceflight News API.",
     inputSchema: objectSchema(
-      ["spaceflight", "chronicling"],
+      ["spaceflight"],
       {
         query: stringProp("Search term."),
         limit: integerProp("Maximum number of results.", { default: 5 }),
@@ -144,13 +109,6 @@ export const textKnowledgeGroups = [
             withQuery("https://api.spaceflightnewsapi.net/v4/articles/", {
               search: readString(input, "query"),
               limit: readNumber(input, "limit", 5),
-            }),
-          ),
-        chronicling: async () =>
-          ctx.fetchJson(
-            withQuery("https://chroniclingamerica.loc.gov/search/titles/results/", {
-              terms: readString(input, "query"),
-              format: "json",
             }),
           ),
       }),

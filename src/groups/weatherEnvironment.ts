@@ -75,10 +75,12 @@ export const weatherEnvironmentGroups = [
           ),
         sun_times: async () =>
           ctx.fetchJson(
-            withQuery("https://api.sunrise-sunset.org/json", {
-              lat: readNumber(input, "lat"),
-              lng: readNumber(input, "lon"),
-              formatted: 0,
+            withQuery("https://api.open-meteo.com/v1/forecast", {
+              latitude: readNumber(input, "lat"),
+              longitude: readNumber(input, "lon"),
+              daily: "sunrise,sunset,daylight_duration",
+              timezone: readString(input, "timezone", "auto"),
+              forecast_days: 1,
             }),
           ),
       }),
@@ -87,11 +89,10 @@ export const weatherEnvironmentGroups = [
     key: "air_quality",
     description: "Air quality and carbon intensity.",
     inputSchema: objectSchema(
-      ["current", "hourly", "uk_carbon_intensity", "website_carbon"],
+      ["current", "hourly", "uk_carbon_intensity", "uk_carbon_forecast"],
       {
         lat: numberProp("Latitude."),
         lon: numberProp("Longitude."),
-        url: stringProp("Website URL."),
       },
     ),
     execute: (input, ctx) =>
@@ -114,12 +115,8 @@ export const weatherEnvironmentGroups = [
           ),
         uk_carbon_intensity: async () =>
           ctx.fetchJson("https://api.carbonintensity.org.uk/intensity"),
-        website_carbon: async () =>
-          ctx.fetchJson(
-            withQuery("https://api.websitecarbon.com/site", {
-              url: readString(input, "url"),
-            }),
-          ),
+        uk_carbon_forecast: async () =>
+          ctx.fetchJson("https://api.carbonintensity.org.uk/intensity/24h"),
       }),
   }),
   createToolGroup({

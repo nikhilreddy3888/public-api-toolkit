@@ -2,6 +2,7 @@ import { access, readFile } from "node:fs/promises";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
+import { createTarEnv } from "./tarEnv.mjs";
 
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(scriptDir, "..");
@@ -53,6 +54,7 @@ async function main() {
     {
       cwd: rootDir,
       encoding: "utf8",
+      env: createTarEnv(),
     },
   );
 

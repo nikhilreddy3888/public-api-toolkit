@@ -127,9 +127,9 @@ export const dataReferenceGroups = [
   }),
   createToolGroup({
     key: "books",
-    description: "Open Library, Gutendex, and PoetryDB queries.",
+    description: "Open Library and Gutendex book lookups.",
     inputSchema: objectSchema(
-      ["search", "by_isbn", "by_author", "gutenberg", "poetry"],
+      ["search", "by_isbn", "by_author", "gutenberg"],
       {
         query: queryProp,
         limit: limitProp,
@@ -164,13 +164,6 @@ export const dataReferenceGroups = [
               search: readString(input, "query"),
             }),
           ),
-        poetry: async () => {
-          const query = readString(input, "query");
-          requireFields({ query }, ["query"]);
-          return ctx.fetchJson(
-            `https://poetrydb.org/author,title/${encodeURIComponent(query)}`,
-          );
-        },
       }),
   }),
   createToolGroup({

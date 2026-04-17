@@ -6,9 +6,9 @@
 
 - [ ] `npm test`
 - [ ] `npm run build`
-- [ ] manual provider check if relevant
+- [ ] manual check if relevant
 
 ## Notes
 
-- provider swaps, fallbacks, or API key implications
-- docs changes or user-facing behavior changes
+- provider changes, fallbacks, or API key implications
+- docs or user-facing behavior changes

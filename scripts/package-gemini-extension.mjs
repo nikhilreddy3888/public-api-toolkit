@@ -2,6 +2,7 @@ import { access, cp, mkdir, readFile, rm } from "node:fs/promises";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
+import { createTarEnv } from "./tarEnv.mjs";
 
 const scriptDir = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.resolve(scriptDir, "..");
@@ -70,6 +71,7 @@ async function main() {
     {
       cwd: stagingDir,
       stdio: "inherit",
+      env: createTarEnv(),
     },
   );
 }

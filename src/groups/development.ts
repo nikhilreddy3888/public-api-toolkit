@@ -8,22 +8,25 @@ import {
 } from "../lib/tool.js";
 import { arrayProp, integerProp, objectSchema, stringProp } from "../lib/schema.js";
 
-const WANDBOX_COMPILERS: Record<string, string> = {
-  python: "cpython-3.10.2",
-  javascript: "nodejs-18.17.1",
-  js: "nodejs-18.17.1",
-  c: "gcc-head",
-  cpp: "gcc-head",
-  ruby: "ruby-3.2.2",
-  go: "go-1.22",
-  rust: "rust-1.78.0",
-  java: "openjdk-jdk-17.0.1",
-  php: "php-8.3.7",
-  perl: "perl-5.38.2",
-  bash: "bash",
-  lua: "lua-5.4.6",
-  haskell: "ghc-9.2.8",
-  swift: "swift-5.10",
+const JUDGE0_COMPILERS: Record<string, number> = {
+  python: 92,
+  python3: 92,
+  javascript: 93,
+  js: 93,
+  typescript: 94,
+  ts: 94,
+  c: 50,
+  cpp: 54,
+  ruby: 72,
+  go: 95,
+  rust: 73,
+  java: 91,
+  php: 68,
+  perl: 85,
+  bash: 46,
+  lua: 64,
+  haskell: 61,
+  swift: 83,
 };
 
 export const developmentGroups = [
@@ -31,11 +34,11 @@ export const developmentGroups = [
     key: "http_utils",
     description: "HTTP and URL helper endpoints.",
     inputSchema: objectSchema(
-      ["my_ip", "headers", "user_agent", "qr_code", "shorten_url", "epoch", "http2_check"],
+      ["my_ip", "headers", "user_agent", "qr_code", "epoch", "time"],
       {
         text: stringProp("Text to encode as QR."),
-        url: stringProp("URL for shortening or protocol checks."),
         size: stringProp("QR image size.", { default: "256x256" }),
+        timezone: stringProp("IANA timezone (e.g. America/New_York)."),
       },
     ),
     execute: (input, ctx) =>
@@ -49,61 +52,49 @@ export const developmentGroups = [
             size: readString(input, "size", "256x256"),
           }).toString(),
         }),
-        shorten_url: async () =>
-          ctx.fetchJson("https://cleanuri.com/api/v1/shorten", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
-            body: new URLSearchParams({
-              url: readString(input, "url"),
-            }).toString(),
-          }),
         epoch: async () => ctx.fetchText("https://icanhazepoch.com/"),
-        http2_check: async () =>
-          ctx.fetchJson(
-            withQuery("https://http2.pro/api/v1", {
-              url: readString(input, "url"),
-            }),
-          ),
+        time: async () => {
+          const tz = readString(input, "timezone", "").trim();
+          const path = tz
+            ? `/api/time/current/zone?timeZone=${encodeURIComponent(tz)}`
+            : "/api/time/current/ip";
+          return ctx.fetchJson(`https://timeapi.io${path}`);
+        },
       }),
   }),
   createToolGroup({
     key: "dns_network",
-    description: "DNS, subnet, and domain search APIs.",
+    description: "DNS lookup and reverse DNS APIs.",
     inputSchema: objectSchema(
-      ["dns", "subnet", "domain_search"],
+      ["dns", "reverse_dns"],
       {
         domain: stringProp("Domain name."),
-        cidr: stringProp("CIDR range."),
-        query: stringProp("Domain search term."),
+        ip: stringProp("IP address for reverse DNS lookup."),
       },
     ),
     execute: (input, ctx) =>
       runActionMap("dns_network", input, ctx, {
         dns: async () =>
           ctx.fetchJson(
-            `https://networkcalc.com/api/dns/lookup/${encodeURIComponent(
-              readString(input, "domain"),
-            )}`,
-          ),
-        subnet: async () =>
-          ctx.fetchJson(
-            `https://networkcalc.com/api/ip/subnet/${encodeURIComponent(
-              readString(input, "cidr"),
-            )}`,
-          ),
-        domain_search: async () =>
-          ctx.fetchJson(
-            withQuery("https://api.domainsdb.info/v1/domains/search", {
-              domain: readString(input, "query"),
+            withQuery("https://dns.cloudflare.com/dns-query", {
+              name: readString(input, "domain"),
+              type: "A",
             }),
+            { headers: { Accept: "application/dns-json" } },
+          ),
+        reverse_dns: async () =>
+          ctx.fetchJson(
+            withQuery("https://dns.cloudflare.com/dns-query", {
+              name: readString(input, "ip"),
+              type: "PTR",
+            }),
+            { headers: { Accept: "application/dns-json" } },
           ),
       }),
   }),
   createToolGroup({
     key: "code_execution",
-    description: "Compile and run source code via Wandbox.",
+    description: "Compile and run source code via Judge0.",
     inputSchema: objectSchema(
       ["run"],
       {
@@ -121,29 +112,48 @@ export const developmentGroups = [
       runActionMap("code_execution", input, ctx, {
         run: async () => {
           const language = readString(input, "language").toLowerCase();
-          const compiler = WANDBOX_COMPILERS[language];
-          if (!compiler) {
+          const languageId = JUDGE0_COMPILERS[language];
+          if (!languageId) {
             return {
               error: `Unsupported language '${language}'.`,
-              supported_languages: Object.keys(WANDBOX_COMPILERS),
+              supported_languages: Object.keys(JUDGE0_COMPILERS),
             };
           }
 
-          return ctx.fetchJson("https://wandbox.org/api/compile.json", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
+          const submitResult = await ctx.fetchJson(
+            "https://ce.judge0.com/submissions?base64_encoded=false&wait=false",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                source_code: readString(input, "code"),
+                language_id: languageId,
+                stdin: readString(input, "stdin"),
+              }),
             },
-            body: JSON.stringify({
-              compiler,
-              code: readString(input, "code"),
-              stdin: readString(input, "stdin"),
-              options: "warning,gnu++17",
-              compiler_option_raw: "",
-              runtime_option_raw: "",
-              save: false,
-            }),
-          });
+          ) as Record<string, unknown>;
+
+          const token = submitResult["token"];
+          if (!token) {
+            return { error: "Failed to submit code to Judge0.", detail: submitResult };
+          }
+
+          await new Promise((resolve) => setTimeout(resolve, 3000));
+
+          const result = await ctx.fetchJson(
+            `https://ce.judge0.com/submissions/${encodeURIComponent(String(token))}?base64_encoded=false`,
+          ) as Record<string, unknown>;
+
+          const status = (result["status"] as Record<string, unknown>) ?? {};
+          return {
+            status: status["description"] ?? "Unknown",
+            stdout: result["stdout"] ?? "",
+            stderr: result["stderr"] ?? "",
+            compile_output: result["compile_output"] ?? "",
+            exit_code: result["exit_code"],
+            time: result["time"],
+            memory: result["memory"],
+          };
         },
       }),
   }),
@@ -225,31 +235,16 @@ export const developmentGroups = [
             },
           ).toString(),
         }),
-        lorem: async () =>
-          ctx.fetchText("https://loripsum.net/api/3/short/plaintext"),
-      }),
-  }),
-  createToolGroup({
-    key: "screenshot",
-    description: "Microlink screenshot metadata and preview URLs.",
-    inputSchema: objectSchema(
-      ["capture"],
-      {
-        url: stringProp("Public website URL."),
-      },
-      ["url"],
-    ),
-    execute: (input, ctx) =>
-      runActionMap("screenshot", input, ctx, {
-        capture: async () =>
-          ctx.fetchJson(
-            withQuery("https://api.microlink.io/", {
-              url: readString(input, "url"),
-              screenshot: true,
-              meta: false,
-              embed: "screenshot.url",
+        lorem: async () => {
+          const result = await ctx.fetchJson(
+            withQuery("https://dummyjson.com/posts", {
+              limit: readNumber(input, "limit", 3),
             }),
-          ),
+          ) as Record<string, unknown>;
+          const posts = Array.isArray(result["posts"]) ? result["posts"] : [];
+          const bodies = posts.map((p: Record<string, unknown>) => p["body"]).filter(Boolean);
+          return bodies.length > 0 ? bodies.join("\n\n") : "No lorem ipsum text available.";
+        },
       }),
   }),
 ] as const;

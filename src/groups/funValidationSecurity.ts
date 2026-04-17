@@ -1,11 +1,12 @@
 import {
   createToolGroup,
   missingKeyMessage,
+  readNumber,
   readString,
   runActionMap,
   withQuery,
 } from "../lib/tool.js";
-import { objectSchema, stringProp } from "../lib/schema.js";
+import { integerProp, objectSchema, stringProp } from "../lib/schema.js";
 
 export const funValidationSecurityGroups = [
   createToolGroup({
@@ -22,12 +23,13 @@ export const funValidationSecurityGroups = [
         "trivia",
         "xkcd",
         "kanye",
-        "stoic",
-        "corporate_bs",
-        "geek_joke",
+        "affirmation",
+        "today_in_history",
       ],
       {
         number: stringProp("Optional xkcd comic number."),
+        month: integerProp("Month number for today-in-history.", { default: 1 }),
+        day: integerProp("Day number for today-in-history.", { default: 1 }),
       },
     ),
     execute: (input, ctx) =>
@@ -57,16 +59,16 @@ export const funValidationSecurityGroups = [
               : "https://xkcd.com/info.0.json",
           ),
         kanye: async () => ctx.fetchJson("https://api.kanye.rest/"),
-        stoic: async () => ctx.fetchJson("https://stoic.tekloon.net/stoic-quote"),
-        corporate_bs: async () =>
-          ctx.fetchText("https://corporatebs-generator.sameerkumar.website"),
-        geek_joke: async () =>
-          ctx.fetchJson("https://geek-jokes.sameerkumar.website/api?format=json"),
+        affirmation: async () => ctx.fetchJson("https://www.affirmations.dev/"),
+        today_in_history: async () =>
+          ctx.fetchJson(
+            `https://en.wikipedia.org/api/rest_v1/feed/onthisday/all/${readNumber(input, "month", new Date().getMonth() + 1)}/${readNumber(input, "day", new Date().getDate())}`,
+          ),
       }),
   }),
   createToolGroup({
     key: "animals",
-    description: "Animal facts, media, and wildlife lookups.",
+    description: "Animal facts, breeds, media, and wildlife lookups.",
     inputSchema: objectSchema(
       [
         "cat_fact",
@@ -76,13 +78,13 @@ export const funValidationSecurityGroups = [
         "http_cat",
         "http_dog",
         "cat_image",
-        "meow_fact",
-        "zoo_animals",
+        "dog_breed",
+        "cat_breed",
         "fish_watch",
       ],
       {
         code: stringProp("HTTP status code for HTTP Cat/Dog."),
-        query: stringProp("Zoo animal search term."),
+        query: stringProp("Animal breed search term."),
       },
     ),
     execute: (input, ctx) =>
@@ -99,13 +101,10 @@ export const funValidationSecurityGroups = [
           url: `https://http.dog/${encodeURIComponent(readString(input, "code", "200"))}.jpg`,
         }),
         cat_image: async () => ctx.fetchJson("https://cataas.com/cat?json=true"),
-        meow_fact: async () => ctx.fetchJson("https://meowfacts.herokuapp.com/"),
-        zoo_animals: async () =>
-          ctx.fetchJson(
-            withQuery("https://zoo-animal-api.herokuapp.com/animals/rand/10", {
-              q: readString(input, "query"),
-            }),
-          ),
+        dog_breed: async () =>
+          ctx.fetchJson("https://dog.ceo/api/breeds/list/all"),
+        cat_breed: async () =>
+          ctx.fetchJson("https://catfact.ninja/breeds"),
         fish_watch: async () =>
           ctx.fetchJson(
             withQuery("https://www.fishwatch.gov/api/species", {
@@ -118,7 +117,7 @@ export const funValidationSecurityGroups = [
     key: "email_validation",
     description: "Email reputation and deliverability helpers.",
     inputSchema: objectSchema(
-      ["disify", "eva", "mailcheck", "kickbox"],
+      ["disify", "mailcheck", "kickbox"],
       {
         email: stringProp("Email address to validate."),
       },
@@ -131,12 +130,6 @@ export const funValidationSecurityGroups = [
             `https://www.disify.com/api/email/${encodeURIComponent(
               readString(input, "email"),
             )}`,
-          ),
-        eva: async () =>
-          ctx.fetchJson(
-            withQuery("https://api.eva.pingutil.com/email", {
-              email: readString(input, "email"),
-            }),
           ),
         mailcheck: async () => {
           const key = ctx.getEnv("MAILCHECK");
@@ -171,29 +164,33 @@ export const funValidationSecurityGroups = [
       }),
   }),
   createToolGroup({
-    key: "phone_validation",
-    description: "Device brand and model lookups via Mobile Specs.",
+    key: "name_insights",
+    description: "Gender, age, and nationality predictions from names.",
     inputSchema: objectSchema(
-      ["brands", "brand_devices", "device_search"],
+      ["genderize", "agify", "nationalize"],
       {
-        brand: stringProp("Brand slug."),
-        query: stringProp("Device search query."),
+        name: stringProp("Name to analyze."),
       },
+      ["name"],
     ),
     execute: (input, ctx) =>
-      runActionMap("phone_validation", input, ctx, {
-        brands: async () =>
-          ctx.fetchJson("https://api-mobilespecs.azharimm.dev/v2/brands"),
-        brand_devices: async () =>
+      runActionMap("name_insights", input, ctx, {
+        genderize: async () =>
           ctx.fetchJson(
-            `https://api-mobilespecs.azharimm.dev/v2/brands/${encodeURIComponent(
-              readString(input, "brand"),
-            )}`,
+            withQuery("https://api.genderize.io", {
+              name: readString(input, "name"),
+            }),
           ),
-        device_search: async () =>
+        agify: async () =>
           ctx.fetchJson(
-            withQuery("https://api-mobilespecs.azharimm.dev/v2/search", {
-              query: readString(input, "query"),
+            withQuery("https://api.agify.io", {
+              name: readString(input, "name"),
+            }),
+          ),
+        nationalize: async () =>
+          ctx.fetchJson(
+            withQuery("https://api.nationalize.io", {
+              name: readString(input, "name"),
             }),
           ),
       }),
@@ -228,10 +225,11 @@ export const funValidationSecurityGroups = [
     key: "security_intel",
     description: "Threat feeds, vulnerability search, and public safety data.",
     inputSchema: objectSchema(
-      ["nvd", "urlhaus", "emailrep", "phishstats", "uk_police"],
+      ["nvd", "shodan_internetdb", "emailrep", "uk_police"],
       {
         query: stringProp("Search query, CVE id, or URL."),
         email: stringProp("Email address."),
+        ip: stringProp("IP address for Shodan InternetDB lookup."),
         lat: stringProp("Latitude."),
         lon: stringProp("Longitude."),
       },
@@ -244,22 +242,16 @@ export const funValidationSecurityGroups = [
               keywordSearch: readString(input, "query"),
             }),
           ),
-        urlhaus: async () =>
-          ctx.fetchJson("https://urlhaus-api.abuse.ch/v1/url/", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
-            body: new URLSearchParams({
-              url: readString(input, "query"),
-            }).toString(),
-          }),
+        shodan_internetdb: async () =>
+          ctx.fetchJson(
+            `https://internetdb.shodan.io/${encodeURIComponent(
+              readString(input, "ip"),
+            )}`,
+          ),
         emailrep: async () =>
           ctx.fetchJson(
             `https://emailrep.io/${encodeURIComponent(readString(input, "email"))}`,
           ),
-        phishstats: async () =>
-          ctx.fetchJson("https://phishstats.info:2096/api/phishing?_sort=-date"),
         uk_police: async () =>
           ctx.fetchJson(
             withQuery("https://data.police.uk/api/crimes-street/all-crime", {

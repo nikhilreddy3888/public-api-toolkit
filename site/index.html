@@ -228,7 +228,7 @@
 
       <section id="tools" class="content-section section-reveal">
         <div class="section-heading">
-          <p class="eyebrow">41 tools &middot; 10 categories</p>
+          <p class="eyebrow">41 tools &middot; 12 categories</p>
           <h2>Stop scraping. Start calling.</h2>
           <p>
             Related capabilities are grouped into domain tools. One tool per domain &mdash;
@@ -241,13 +241,13 @@
             <span class="tool-icon">&#127781;&#65039;</span>
             <span class="tool-name">public_api_weather</span>
             <span class="tool-label">Weather &amp; Sky</span>
-            <span class="tool-desc">Forecasts, current conditions, alerts, sun times</span>
+            <span class="tool-desc">Forecasts, current conditions, alerts, sun times via Open-Meteo</span>
           </div>
           <div class="tool-card">
             <span class="tool-icon">&#127988;</span>
             <span class="tool-name">public_api_air_quality</span>
             <span class="tool-label">Air &amp; Carbon</span>
-            <span class="tool-desc">Air quality, UK carbon intensity, website carbon</span>
+            <span class="tool-desc">Air quality, UK carbon intensity, UK carbon forecast</span>
           </div>
           <div class="tool-card">
             <span class="tool-icon">&#128176;</span>
@@ -295,37 +295,37 @@
             <span class="tool-icon">&#127926;</span>
             <span class="tool-name">public_api_music_data</span>
             <span class="tool-label">Music</span>
-            <span class="tool-desc">MusicBrainz, iTunes, lyrics, radio, genre helpers</span>
+            <span class="tool-desc">MusicBrainz, iTunes, artist detail, radio, genre helpers</span>
           </div>
           <div class="tool-card">
             <span class="tool-icon">&#127916;</span>
             <span class="tool-name">public_api_movie_tv_data</span>
             <span class="tool-label">Movies &amp; TV</span>
-            <span class="tool-desc">Movies, TV, anime, sci-fi, franchise lookups</span>
+            <span class="tool-desc">Movies, TV, anime, TV schedule, franchise lookups</span>
           </div>
           <div class="tool-card">
             <span class="tool-icon">&#128640;</span>
             <span class="tool-name">public_api_space</span>
             <span class="tool-label">Space &amp; Earth</span>
-            <span class="tool-desc">NASA, ISS, launches, SpaceX, earthquake data</span>
+            <span class="tool-desc">NASA, ISS position tracking, Mars rover photos, SpaceX, earthquake data</span>
           </div>
           <div class="tool-card">
             <span class="tool-icon">&#127881;</span>
             <span class="tool-name">public_api_holidays</span>
             <span class="tool-label">Holidays</span>
-            <span class="tool-desc">Public holidays, bank holidays, namedays</span>
+            <span class="tool-desc">Public holidays and UK bank holidays</span>
           </div>
           <div class="tool-card">
             <span class="tool-icon">&#128652;</span>
             <span class="tool-name">public_api_transport</span>
             <span class="tool-label">Transport</span>
-            <span class="tool-desc">Flight, bike share, EV charging, transit</span>
+            <span class="tool-desc">Flight tracking, bike share networks, EV charging data</span>
           </div>
           <div class="tool-card">
             <span class="tool-icon">&#128274;</span>
             <span class="tool-name">public_api_security_intel</span>
             <span class="tool-label">Security Intel</span>
-            <span class="tool-desc">Vulnerability, phishing, and threat feeds</span>
+            <span class="tool-desc">Vulnerability, Shodan InternetDB, and threat feeds</span>
           </div>
           <div class="tool-card">
             <span class="tool-icon">&#127793;</span>
@@ -337,7 +337,7 @@
             <span class="tool-icon">&#128187;</span>
             <span class="tool-name">public_api_http_utils</span>
             <span class="tool-label">HTTP Utilities</span>
-            <span class="tool-desc">HTTP introspection, QR codes, URL shortening</span>
+            <span class="tool-desc">HTTP introspection, QR codes, epoch, IP utilities</span>
           </div>
           <div class="tool-card">
             <span class="tool-icon">&#128202;</span>
@@ -349,13 +349,25 @@
             <span class="tool-icon">&#127757;</span>
             <span class="tool-name">public_api_open_data</span>
             <span class="tool-label">Open Data</span>
-            <span class="tool-desc">Civic, culture, sport, city quality datasets</span>
+            <span class="tool-desc">F1 sessions, NBA scores, EPL standings, US Census, civic datasets</span>
+          </div>
+          <div class="tool-card">
+            <span class="tool-icon">&#128187;</span>
+            <span class="tool-name">public_api_dev_tools</span>
+            <span class="tool-label">Developer Tools</span>
+            <span class="tool-desc">npm registry, GitHub search, CDNJS libraries</span>
+          </div>
+          <div class="tool-card">
+            <span class="tool-icon">&#128240;</span>
+            <span class="tool-name">public_api_tech_news</span>
+            <span class="tool-label">Tech News</span>
+            <span class="tool-desc">HackerNews top stories, Dev.to articles</span>
           </div>
           <div class="tool-card tool-card-more">
             <span class="tool-icon">+</span>
-            <span class="tool-name">...and 22 more</span>
+            <span class="tool-name">...and 19 more</span>
             <span class="tool-label">See all 41 tools</span>
-            <span class="tool-desc">Books, universities, translation, math, blockchain, email validation, government data, and more</span>
+            <span class="tool-desc">Books, universities, name insights, random facts, animals, game data, blockchain &amp; mempool, code execution, and more</span>
           </div>
         </div>
       </section>
@@ -468,11 +480,11 @@
         </div>
 
         <div class="install-tabs" id="tabs">
-          <button class="tab-btn active" onclick="switchTab('npm')">npm</button>
-          <button class="tab-btn" onclick="switchTab('claude')">Claude Code</button>
-          <button class="tab-btn" onclick="switchTab('codex')">Codex</button>
-          <button class="tab-btn" onclick="switchTab('cursor')">Cursor</button>
-          <button class="tab-btn" onclick="switchTab('gemini')">Gemini CLI</button>
+          <button class="tab-btn active" onclick="switchTab('npm', this)">npm</button>
+          <button class="tab-btn" onclick="switchTab('claude', this)">Claude Code</button>
+          <button class="tab-btn" onclick="switchTab('codex', this)">Codex</button>
+          <button class="tab-btn" onclick="switchTab('cursor', this)">Cursor</button>
+          <button class="tab-btn" onclick="switchTab('gemini', this)">Gemini CLI</button>
         </div>
         <div class="tab-panel active" id="tab-npm">
           <div class="code-panel">
@@ -601,12 +613,11 @@ args = ["-y", "public-api-toolkit"]</code></pre>
               <span class="faq-arrow">+</span>
             </div>
             <div class="faq-a">
-              The toolkit has 15-second timeouts, graceful fallback behavior for degraded
-              providers, and a <a href="https://github.com/nikhilreddy3888/public-api-toolkit/blob/main/STATUS.md">STATUS.md</a>
-              documenting known-good vs. fragile upstreams. Most tool groups have multiple
-              provider fallbacks, so a single API outage typically doesn't break the whole tool.
-            </div>
-          </div>
+                  The toolkit has 15-second timeouts and graceful fallback behavior for degraded
+                  providers. Some tool groups include fallback behavior, so an upstream problem
+                  does not always mean a dead-end request.
+                </div>
+              </div>
           <div class="faq-item">
             <div class="faq-q" onclick="toggleFaq(this)">
               Can I contribute new APIs or fix broken ones?
@@ -660,7 +671,7 @@ args = ["-y", "public-api-toolkit"]</code></pre>
             <a class="button button-ghost" href="https://www.npmjs.com/package/public-api-toolkit">
               View on npm
             </a>
-            <a class="button button-ghost" href="https://github.com/nikhilreddy3888/public-api-toolkit/blob/main/docs/getting-started.md">
+            <a class="button button-ghost" href="https://github.com/nikhilreddy3888/public-api-toolkit#readme">
               Read the docs
             </a>
           </div>
@@ -681,7 +692,7 @@ args = ["-y", "public-api-toolkit"]</code></pre>
       <div>
         <a href="https://github.com/nikhilreddy3888/public-api-toolkit">GitHub</a>
         <a href="https://www.npmjs.com/package/public-api-toolkit">npm</a>
-        <a href="https://github.com/nikhilreddy3888/public-api-toolkit/blob/main/docs/getting-started.md">Docs</a>
+        <a href="https://github.com/nikhilreddy3888/public-api-toolkit#readme">Docs</a>
         <a href="https://github.com/nikhilreddy3888/public-api-toolkit/blob/main/CONTRIBUTING.md">Contribute</a>
         <a href="https://github.com/public-apis/public-apis">Inspired by public-apis</a>
       </div>

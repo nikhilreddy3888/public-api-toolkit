@@ -35,10 +35,10 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-function switchTab(name) {
+function switchTab(name, button) {
   document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
   document.querySelectorAll(".tab-panel").forEach(p => p.classList.remove("active"));
-  if (event && event.target) event.target.classList.add("active");
+  if (button instanceof HTMLButtonElement) button.classList.add("active");
   const panel = document.getElementById("tab-" + name);
   if (panel) panel.classList.add("active");
 }

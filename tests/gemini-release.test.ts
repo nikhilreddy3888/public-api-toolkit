@@ -102,3 +102,36 @@ test("Gemini release packaging creates a root-level archive", async () => {
     cwd: new URL("..", import.meta.url),
   });
 });
+
+test("Gemini packaging scripts sanitize tar locale warnings", async () => {
+  const cwd = new URL("..", import.meta.url);
+  const releaseDir = new URL("../release", import.meta.url);
+  const noisyLocaleEnv = {
+    ...process.env,
+    LANG: "C.UTF-8",
+    LC_ALL: "C.UTF-8",
+    LC_CTYPE: "C.UTF-8",
+  };
+
+  await rm(releaseDir, { recursive: true, force: true });
+
+  const packageRun = await execFile("node", ["scripts/package-gemini-extension.mjs"], {
+    cwd,
+    env: noisyLocaleEnv,
+  });
+
+  assert.doesNotMatch(
+    packageRun.stderr ?? "",
+    /Failed to set default locale/i,
+  );
+
+  const verifyRun = await execFile("node", ["scripts/verify-gemini-release.mjs"], {
+    cwd,
+    env: noisyLocaleEnv,
+  });
+
+  assert.doesNotMatch(
+    verifyRun.stderr ?? "",
+    /Failed to set default locale/i,
+  );
+});

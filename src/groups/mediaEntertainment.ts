@@ -43,9 +43,9 @@ export const mediaEntertainmentGroups = [
   }),
   createToolGroup({
     key: "music_data",
-    description: "MusicBrainz, iTunes, Lyrics.ovh, Radio Browser, and genre helpers.",
+    description: "MusicBrainz, iTunes, artist detail, Radio Browser, and genre helpers.",
     inputSchema: objectSchema(
-      ["search", "artist", "release", "lyrics", "radio", "genre"],
+      ["search", "artist", "release", "artist_detail", "radio", "genre"],
       {
         query: stringProp("Artist, title, album, station, or genre query."),
         artist: stringProp("Artist name."),
@@ -78,12 +78,22 @@ export const mediaEntertainmentGroups = [
               limit: readNumber(input, "limit", 10),
             }),
           ),
-        lyrics: async () =>
-          ctx.fetchJson(
-            `https://api.lyrics.ovh/v1/${encodeURIComponent(
-              readString(input, "artist"),
-            )}/${encodeURIComponent(readString(input, "title"))}`,
-          ),
+        artist_detail: async () => {
+          const artist = readString(input, "artist");
+          const title = readString(input, "title");
+          if (artist && title) {
+            return ctx.fetchJson(
+              withQuery("https://www.theaudiodb.com/api/v1/json/2/search.php", {
+                s: artist,
+              }),
+            );
+          }
+          return ctx.fetchJson(
+            withQuery("https://www.theaudiodb.com/api/v1/json/2/search.php", {
+              s: readString(input, "query"),
+            }),
+          );
+        },
         radio: async () =>
           ctx.fetchJson(
             withQuery("https://de1.api.radio-browser.info/json/stations/search", {
@@ -99,7 +109,7 @@ export const mediaEntertainmentGroups = [
     key: "movie_tv_data",
     description: "TV, movie, anime, and fandom APIs.",
     inputSchema: objectSchema(
-      ["tvmaze", "omdb", "tmdb", "swapi", "stapi", "rick_and_morty", "anime", "ghibli"],
+      ["tvmaze", "omdb", "tmdb", "swapi", "tvmaze_schedule", "rick_and_morty", "anime", "disney"],
       {
         query: stringProp("Search query or title."),
       },
@@ -142,16 +152,13 @@ export const mediaEntertainmentGroups = [
               search: readString(input, "query"),
             }),
           ),
-        stapi: async () =>
-          ctx.fetchJson("https://stapi.co/api/v1/rest/series/search", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              title: readString(input, "query"),
-              pageNumber: 0,
-              pageSize: 10,
+        tvmaze_schedule: async () =>
+          ctx.fetchJson(
+            withQuery("https://api.tvmaze.com/schedule", {
+              country: "US",
+              date: new Date().toISOString().split("T")[0],
             }),
-          }),
+          ),
         rick_and_morty: async () =>
           ctx.fetchJson(
             withQuery("https://rickandmortyapi.com/api/character/", {
@@ -164,8 +171,12 @@ export const mediaEntertainmentGroups = [
               q: readString(input, "query"),
             }),
           ),
-        ghibli: async () =>
-          ctx.fetchJson("https://ghibliapi.vercel.app/films"),
+        disney: async () =>
+          ctx.fetchJson(
+            withQuery("https://api.disneyapi.dev/character", {
+              name: readString(input, "query"),
+            }),
+          ),
       }),
   }),
   createToolGroup({
@@ -175,17 +186,13 @@ export const mediaEntertainmentGroups = [
       [
         "pokemon",
         "deals",
-        "free_to_game",
         "dnd",
         "mtg",
         "yugioh",
         "chess",
-        "hyrule",
+        "chess_puzzle",
         "genshin",
-        "ffxiv",
         "gamerpower",
-        "amiibo",
-        "jservice",
       ],
       {
         query: stringProp("Search term or slug."),
@@ -205,8 +212,6 @@ export const mediaEntertainmentGroups = [
               title: readString(input, "query"),
             }),
           ),
-        free_to_game: async () =>
-          ctx.fetchJson("https://www.freetogame.com/api/games"),
         dnd: async () =>
           ctx.fetchJson(
             `https://www.dnd5eapi.co/api/${encodeURIComponent(
@@ -231,34 +236,16 @@ export const mediaEntertainmentGroups = [
               readString(input, "query", "hikaru"),
             )}`,
           ),
-        hyrule: async () =>
-          ctx.fetchJson(
-            withQuery("https://botw-compendium.herokuapp.com/api/v3/compendium/entry", {
-              name: readString(input, "query", "master sword"),
-            }),
-          ),
+        chess_puzzle: async () =>
+          ctx.fetchJson("https://lichess.org/api/puzzle/daily"),
         genshin: async () =>
           ctx.fetchJson(
             `https://genshin.jmp.blue/characters/${encodeURIComponent(
               readString(input, "query", "amber"),
             )}`,
           ),
-        ffxiv: async () =>
-          ctx.fetchJson(
-            withQuery("https://xivapi.com/search", {
-              string: readString(input, "query"),
-            }),
-          ),
         gamerpower: async () =>
           ctx.fetchJson("https://www.gamerpower.com/api/giveaways"),
-        amiibo: async () =>
-          ctx.fetchJson(
-            withQuery("https://www.amiiboapi.com/api/amiibo/", {
-              name: readString(input, "query"),
-            }),
-          ),
-        jservice: async () =>
-          ctx.fetchJson("https://jservice.io/api/random"),
       }),
   }),
 ] as const;

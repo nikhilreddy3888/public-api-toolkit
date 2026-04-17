@@ -35,6 +35,7 @@ export const geoLocationGroups = [
               format: "jsonv2",
               limit: 5,
             }),
+            { headers: { "User-Agent": "public-api-toolkit/1.0" } },
           );
         },
         reverse: async () =>
@@ -44,6 +45,7 @@ export const geoLocationGroups = [
               lon: readNumber(input, "lon"),
               format: "jsonv2",
             }),
+            { headers: { "User-Agent": "public-api-toolkit/1.0" } },
           ),
         postal_code: async () => {
           const postalCode = readString(input, "postal_code");

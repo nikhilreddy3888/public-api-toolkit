@@ -28,7 +28,7 @@ src/server/createServer.ts  MCP request handler, wires tool calls
 src/server/toolRegistry.ts  lists tools from group definitions
 src/catalog/groups.ts      tool group key→description map (source of truth for group names)
 src/catalog/toolGroups.ts  imports all groups, builds lookup map
-src/groups/*.ts             tool group implementations (10 files, one per category)
+src/groups/*.ts             tool group implementations (12 files, one per category)
 src/lib/tool.ts             createToolGroup, runActionMap, readString/readNumber/withQuery/missingKeyMessage
 src/lib/schema.ts           objectSchema, stringProp, integerProp, etc.
 src/lib/apiFetch.ts         shared fetch with 15s timeout, 3 retries on 429/5xx
@@ -56,7 +56,7 @@ Every tool follows the same pattern: `createToolGroup({ key, description, inputS
 2. Add/update the description in `src/catalog/groups.ts`.
 3. Add tests in `tests/` that inject fake `fetchJson`/`fetchText`/`getEnv` via the `ToolExecutionContext` — no live HTTP in tests.
 4. Run `npm test && npm run build`.
-5. Update `STATUS.md` and `README.md` if provider health or user-facing behavior changed.
+5. Update `README.md` and any affected install or configuration docs if behavior changed.
 
 ## Smoke tests reference
 

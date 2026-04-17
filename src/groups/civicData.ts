@@ -13,7 +13,7 @@ export const civicDataGroups = [
     key: "government_data",
     description: "Government, law, and public safety data feeds.",
     inputSchema: objectSchema(
-      ["fbi_wanted", "interpol_red_notices", "federal_register", "data_usa"],
+      ["fbi_wanted", "interpol_red_notices", "federal_register", "us_census"],
       {
         query: stringProp("Search term."),
       },
@@ -25,6 +25,7 @@ export const civicDataGroups = [
             withQuery("https://api.fbi.gov/wanted/v1/list", {
               title: readString(input, "query"),
             }),
+            { headers: { "User-Agent": "public-api-toolkit/1.0" } },
           ),
         interpol_red_notices: async () =>
           ctx.fetchJson(
@@ -38,12 +39,13 @@ export const civicDataGroups = [
               "conditions[term]": readString(input, "query"),
             }),
           ),
-        data_usa: async () =>
+        us_census: async () =>
           ctx.fetchJson(
-            withQuery("https://datausa.io/api/searchLegacy/", {
-              limit: 10,
-              qs: readString(input, "query"),
+            withQuery("https://api.census.gov/data/2019/pep/charage", {
+              get: "NAME,POP",
+              for: "state:*",
             }),
+            { headers: { "User-Agent": "public-api-toolkit/1.0" } },
           ),
       }),
   }),
@@ -112,10 +114,10 @@ export const civicDataGroups = [
         "city_search",
         "artic_artworks",
         "met_search",
-        "emoji_random",
-        "f1_current",
-        "nba_games",
-        "football_standings",
+        "archive_search",
+        "f1_sessions",
+        "nba_scores",
+        "epl_standings",
         "nhl_standings",
       ],
       {
@@ -172,18 +174,27 @@ export const civicDataGroups = [
               },
             ),
           ),
-        emoji_random: async () =>
-          ctx.fetchJson("https://emojihub.yurace.pro/api/random"),
-        f1_current: async () => ctx.fetchJson("https://ergast.com/api/f1/current.json"),
-        nba_games: async () =>
+        archive_search: async () =>
           ctx.fetchJson(
-            withQuery("https://www.balldontlie.io/api/v1/games", {
-              "seasons[]": readNumber(input, "year", 2026),
+            withQuery("https://archive.org/advancedsearch.php", {
+              q: readString(input, "query"),
+              output: "json",
+              rows: "10",
             }),
           ),
-        football_standings: async () =>
+        f1_sessions: async () =>
           ctx.fetchJson(
-            "https://api-football-standings.azharimm.dev/leagues/eng.1/standings",
+            withQuery("https://api.openf1.org/v1/sessions", {
+              year: readNumber(input, "year", 2025),
+            }),
+          ),
+        nba_scores: async () =>
+          ctx.fetchJson(
+            "https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard",
+          ),
+        epl_standings: async () =>
+          ctx.fetchJson(
+            "https://www.thesportsdb.com/api/v1/json/3/lookuptable.php?l=4328&s=2024-2025",
           ),
         nhl_standings: async () =>
           ctx.fetchJson("https://api-web.nhle.com/v1/standings/now"),

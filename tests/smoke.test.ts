@@ -14,7 +14,6 @@ test("package scripts and source entrypoints exist", async () => {
     description: string;
     author?: string;
     homepage?: string;
-    bugs?: { url?: string };
     repository?: { type?: string; url?: string };
     bin: Record<string, string>;
     scripts: Record<string, string>;
@@ -40,10 +39,6 @@ test("package scripts and source entrypoints exist", async () => {
   assert.equal(
     pkg.homepage,
     "https://nikhilreddy3888.github.io/public-api-toolkit/",
-  );
-  assert.equal(
-    pkg.bugs?.url,
-    "https://github.com/nikhilreddy3888/public-api-toolkit/issues",
   );
   assert.equal(pkg.repository?.type, "git");
   assert.equal(
@@ -197,19 +192,17 @@ test("runtime identity strings match the public product name", async () => {
   assert.doesNotMatch(mediaGroupSource, /public-apis-mcp/);
 });
 
-test("launch docs exist for supported client setup flows", async () => {
+test("core docs exist for supported setup and release flows", async () => {
   const files = await Promise.all([
     readFile(new URL("../README.md", import.meta.url), "utf8"),
+    readFile(new URL("../AGENTS.md", import.meta.url), "utf8"),
     readFile(new URL("../CONTRIBUTING.md", import.meta.url), "utf8"),
-    readFile(new URL("../STATUS.md", import.meta.url), "utf8"),
-    readFile(new URL("../.github/ISSUE_TEMPLATE.md", import.meta.url), "utf8"),
+    readFile(new URL("../PRIVACY.md", import.meta.url), "utf8"),
     readFile(
       new URL("../.github/PULL_REQUEST_TEMPLATE.md", import.meta.url),
       "utf8",
     ),
     readFile(new URL("../.github/workflows/ci.yml", import.meta.url), "utf8"),
-    readFile(new URL("../docs/marketing/launch-posts.md", import.meta.url), "utf8"),
-    readFile(new URL("../docs/getting-started.md", import.meta.url), "utf8"),
     readFile(new URL("../docs/installation/codex.md", import.meta.url), "utf8"),
     readFile(
       new URL("../docs/installation/claude-code.md", import.meta.url),
@@ -248,7 +241,6 @@ test("launch docs exist for supported client setup flows", async () => {
       new URL("../docs/configuration/tool-groups.md", import.meta.url),
       "utf8",
     ),
-    readFile(new URL("../docs/configuration/api-keys.md", import.meta.url), "utf8"),
     readFile(new URL("../docs/publishing/npm.md", import.meta.url), "utf8"),
     readFile(
       new URL("../docs/publishing/github-release.md", import.meta.url),
@@ -258,13 +250,11 @@ test("launch docs exist for supported client setup flows", async () => {
 
   const [
     readme,
+    agentsDoc,
     contributingDoc,
-    statusDoc,
-    issueTemplate,
+    privacyDoc,
     prTemplate,
     ciWorkflow,
-    marketingDoc,
-    gettingStarted,
     codexDoc,
     claudeDoc,
     cursorDoc,
@@ -276,44 +266,66 @@ test("launch docs exist for supported client setup flows", async () => {
     genericDoc,
     envDoc,
     groupDoc,
-    apiKeysDoc,
     npmDoc,
     githubDoc,
   ] = files;
 
-  assert.match(
+  const combinedDocs = [
     readme,
-    /41 APIs.*One command/i,
-  );
-  assert.match(readme, /STATUS\.md/);
-  assert.match(readme, /Why It Matters/i);
+    agentsDoc,
+    contributingDoc,
+    privacyDoc,
+    codexDoc,
+    claudeDoc,
+    cursorDoc,
+    opencodeDoc,
+    geminiDoc,
+    copilotDoc,
+    openclawDoc,
+    chatgptDoc,
+    genericDoc,
+    envDoc,
+    groupDoc,
+    npmDoc,
+    githubDoc,
+  ].join("\n");
+
+  assert.match(readme, /41 tools\.\s*one command/i);
+  assert.match(readme, /Structured public data for AI agents/i);
+  assert.match(readme, /PUBLIC_APIS_CARBON_INTERFACE/);
+  assert.doesNotMatch(readme, /PUBLIC_APIS_CARbon_INTERFACE/);
+  assert.match(readme, /public_api_job_search/);
+  assert.match(readme, /docs\/configuration\/tool-groups\.md/);
+  assert.match(agentsDoc, /npm test/);
+  assert.doesNotMatch(agentsDoc, /STATUS\.md/);
   assert.match(contributingDoc, /Contributing to Public API Toolkit/);
-  assert.match(contributingDoc, /Added or updated tests first/i);
-  assert.match(statusDoc, /Total tools:\*\*\s*41/i);
-  assert.match(statusDoc, /Recently Fixed/i);
-  assert.match(issueTemplate, /Public API Toolkit/);
+  assert.match(contributingDoc, /Add Or Update A Tool/i);
+  assert.doesNotMatch(contributingDoc, /STATUS\.md|getting-started/i);
+  assert.match(privacyDoc, /does not operate a hosted backend/i);
   assert.match(prTemplate, /npm test/);
   assert.match(ciWorkflow, /npm ci/);
-  assert.match(marketingDoc, /Product Hunt/i);
-  assert.match(marketingDoc, /r\/ClaudeAI/i);
-  assert.match(readme, /41 tools across 10 categories/i);
-  assert.match(gettingStarted, /That should print `41`\./);
+  assert.match(readme, /41 tools across 12 grouped tool families/i);
   assert.match(codexDoc, /~\/\.codex\/config\.toml/);
   assert.match(claudeDoc, /claude mcp add-json/);
   assert.match(cursorDoc, /mcp\.json/);
   assert.match(opencodeDoc, /opencode\.jsonc/);
-  assert.match(geminiDoc, /gemini extensions install/);
-  assert.match(copilotDoc, /copilot plugin install/);
+  assert.match(
+    geminiDoc,
+    /gemini extensions install https:\/\/github\.com\/nikhilreddy3888\/public-api-toolkit/,
+  );
+  assert.match(copilotDoc, /copilot plugin install nikhilreddy3888\/public-api-toolkit/);
   assert.match(openclawDoc, /openclaw plugins install public-api-toolkit/);
   assert.match(openclawDoc, /openclaw gateway restart/);
   assert.match(chatgptDoc, /requires a remote MCP transport/i);
   assert.match(genericDoc, /"command": "npx"/);
   assert.match(envDoc, /PUBLIC_APIS_FRED/);
   assert.match(groupDoc, /public_api_weather/);
-  assert.match(apiKeysDoc, /PUBLIC_APIS_OMDB/);
+  assert.equal((groupDoc.match(/`public_api_data_validation`/g) ?? []).length, 1);
   assert.match(npmDoc, /npm publish --access public/);
-  assert.match(githubDoc, /Public API Toolkit v1\.0\.0/);
+  assert.match(githubDoc, /Public API Toolkit v1\./);
   assert.match(readme, /OpenClaw/);
+  assert.doesNotMatch(combinedDocs, /<owner>|<your-org>/);
+  assert.doesNotMatch(combinedDocs, /STATUS\.md|docs\/getting-started\.md|launch-posts/i);
 });
 
 test("npm pack includes OpenClaw bundle assets", async () => {
@@ -347,11 +359,15 @@ test("static landing page assets and copy exist", async () => {
     siteHtml,
     /41 APIs.*One Command/i,
   );
+  assert.doesNotMatch(siteHtml, /Most tool groups have multiple provider fallbacks/i);
+  assert.match(siteHtml, /Some tool groups include fallback\s+behavior/i);
   assert.match(siteHtml, /AI is solving easy problems the hard way\./i);
   assert.match(siteHtml, /Stop scraping.*Start calling/i);
   assert.match(siteHtml, /assets\/logo\.png/i);
   assert.match(siteCss, /grid|radial-gradient|linear-gradient/i);
   assert.match(siteJs, /DOMContentLoaded|copy/i);
+  assert.match(siteJs, /function switchTab\(name, button\)/);
+  assert.doesNotMatch(siteJs, /if \(event && event\.target\)/);
   assert.ok(logo.byteLength > 0);
   assert.match(readme, /landing page|GitHub Pages|site\//i);
   assert.match(readme, /nikhilreddy3888\.github\.io\/public-api-toolkit/i);

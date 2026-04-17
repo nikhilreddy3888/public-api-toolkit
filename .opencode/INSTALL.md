@@ -1,6 +1,6 @@
 # Public API Toolkit For OpenCode
 
-Add Public API Toolkit as a local MCP server in your `opencode.jsonc` config.
+Add Public API Toolkit to `opencode.jsonc`:
 
 ```jsonc
 {
@@ -15,7 +15,7 @@ Add Public API Toolkit as a local MCP server in your `opencode.jsonc` config.
 }
 ```
 
-If you are testing from a local clone instead of npm:
+For a local clone:
 
 ```jsonc
 {
@@ -30,7 +30,7 @@ If you are testing from a local clone instead of npm:
 }
 ```
 
-Then restart OpenCode and try:
+Restart OpenCode, then try:
 
 ```text
 Use public-api-toolkit to get the current weather for Toronto.

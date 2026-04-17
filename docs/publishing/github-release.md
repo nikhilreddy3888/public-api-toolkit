@@ -1,12 +1,10 @@
 # GitHub Release
 
-The GitHub release should feel like a product launch, not just a source snapshot.
-
 ## Before You Tag
 
 1. Run the full local verification flow.
-2. Confirm the README and installation guides reflect the current release.
-3. Make sure the release notes match what is actually shipped.
+2. Confirm the README and install guides match the release.
+3. Make sure the notes reflect the shipped tool surface.
 
 Suggested verification:
 
@@ -16,38 +14,21 @@ npm run build
 node -e "import('./dist/server/toolRegistry.js').then((m) => console.log(m.listRegisteredTools().length))"
 ```
 
-## Suggested Release Title
+## Release Title
 
 ```text
-Public API Toolkit v1.0.0
+Public API Toolkit v1.0.3
 ```
 
-## Suggested Release Notes Structure
+## Release Notes Checklist
 
-### Highlights
+- state that this is a local stdio MCP server
+- call out any new or changed `public_api_<group>` tools
+- mention any provider or API-key changes
+- note that ChatGPT still requires a remote MCP transport
 
-- Public API Toolkit launches as a standalone MCP server
-- 41 grouped `public_api_<group>` tools behind one stdio runtime
-- direct local setup guides for Codex, Claude Code, Cursor, and generic MCP clients
+## Assets
 
-### What It Is
-
-Public API Toolkit is a cross-platform MCP server that turns public APIs into clean, agent-ready tools.
-
-### Included In This Release
-
-- the modular TypeScript MCP server
-- Codex-compatible plugin packaging
-- ready-to-copy client examples
-- installation and configuration docs
-
-### Notes
-
-- local stdio MCP is the primary transport in this release
-- ChatGPT and other remote-only MCP surfaces need a remote transport layer
-
-## Assets To Attach
-
-- source tarball from GitHub
-- optional npm tarball produced by `npm pack`
-- screenshots or short GIFs only if they match the actual product and docs
+- GitHub source tarball
+- optional npm tarball from `npm pack`
+- screenshots only if they match the current product and docs

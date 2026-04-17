@@ -47,9 +47,6 @@
   },
   "author": "Nikhil Reddy",
   "homepage": "https://nikhilreddy3888.github.io/public-api-toolkit/",
-  "bugs": {
-    "url": "https://github.com/nikhilreddy3888/public-api-toolkit/issues"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/nikhilreddy3888/public-api-toolkit.git"

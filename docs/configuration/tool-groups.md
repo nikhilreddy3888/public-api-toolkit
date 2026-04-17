@@ -1,12 +1,12 @@
 # Tool Groups
 
-Public API Toolkit exposes 41 MCP tools. Each tool name follows the same pattern:
+Public API Toolkit exposes 41 MCP tools. Every tool name follows the same pattern:
 
 ```text
 public_api_<group>
 ```
 
-Every tool accepts an `action` plus any group-specific fields required by that action.
+Every tool accepts an `action` plus any fields required by that action.
 
 ## Data Reference
 
@@ -14,10 +14,10 @@ Every tool accepts an `action` plus any group-specific fields required by that a
 | --- | --- |
 | `public_api_country_data` | Country profiles from REST Countries |
 | `public_api_dictionary` | Definitions, synonyms, antonyms, rhymes, and autocomplete |
-| `public_api_books` | Books, Gutenberg titles, and poetry lookups |
+| `public_api_books` | Open Library and Gutendex book lookups |
 | `public_api_university_data` | University search by name and country |
 
-## Geolocation
+## Geo Location
 
 | Tool | Description |
 | --- | --- |
@@ -37,71 +37,74 @@ Every tool accepts an `action` plus any group-specific fields required by that a
 | Tool | Description |
 | --- | --- |
 | `public_api_weather` | Forecasts, current conditions, alerts, and sun times |
-| `public_api_air_quality` | Air quality, UK carbon intensity, and website carbon data |
-| `public_api_carbon_footprint` | Carbon Interface activity estimates |
+| `public_api_air_quality` | Air quality and UK carbon intensity data |
+| `public_api_carbon_footprint` | Carbon Interface estimates for activities |
 
 ## Development
 
 | Tool | Description |
 | --- | --- |
-| `public_api_http_utils` | HTTP introspection, QR codes, URL shortening, and protocol checks |
-| `public_api_dns_network` | DNS, subnet, and domain search utilities |
-| `public_api_code_execution` | Remote code execution via Wandbox |
+| `public_api_http_utils` | HTTP introspection, QR codes, epoch, timezone, and IP utilities |
+| `public_api_dns_network` | DNS lookup and reverse DNS via Cloudflare |
+| `public_api_code_execution` | Remote code execution via Judge0 |
 | `public_api_placeholder_data` | Synthetic users, posts, lorem ipsum, avatars, and UUIDs |
-| `public_api_screenshot` | Website screenshot metadata via Microlink |
+
+## Dev Tools
+
+| Tool | Description |
+| --- | --- |
+| `public_api_dev_tools` | npm registry, GitHub, and CDNJS developer lookups |
+
+## Tech News
+
+| Tool | Description |
+| --- | --- |
+| `public_api_tech_news` | HackerNews, Dev.to, and tech headlines |
 
 ## Text And Knowledge
 
 | Tool | Description |
 | --- | --- |
-| `public_api_translation` | Translation, language detection, and novelty translators |
-| `public_api_text_analysis` | Profanity filtering and text safety checks |
+| `public_api_translation` | Translation and language detection via LibreTranslate |
 | `public_api_wikipedia` | Wikipedia and Wikidata search helpers |
-| `public_api_news` | Spaceflight and historic newspaper APIs |
+| `public_api_news` | Spaceflight News API |
 
 ## Media And Entertainment
 
 | Tool | Description |
 | --- | --- |
 | `public_api_images` | Lorem Picsum image placeholders |
-| `public_api_music_data` | MusicBrainz, iTunes, lyrics, radio, and genre helpers |
-| `public_api_movie_tv_data` | Movies, TV, anime, sci-fi, and franchise lookups |
-| `public_api_game_data` | Games, cards, RPG, anime, and trivia datasets |
+| `public_api_music_data` | MusicBrainz, iTunes, artist detail, radio, and genre helpers |
+| `public_api_movie_tv_data` | Movies, TV, anime, schedules, and franchise lookups |
+| `public_api_game_data` | Games, cards, RPG, chess puzzles, and trivia datasets |
 
 ## Science And Lifestyle
 
 | Tool | Description |
 | --- | --- |
 | `public_api_math` | Symbolic math and number facts |
-| `public_api_space` | NASA, ISS, launches, SpaceX, and earthquake data |
-| `public_api_food_recipes` | Food, drinks, breweries, beer, and fruit data |
-| `public_api_blockchain` | Bitcoin, Helium, and Solana data |
-| `public_api_holidays` | Public holidays, bank holidays, and namedays |
-| `public_api_transport` | Flight, bike share, EV charging, and transit endpoints |
+| `public_api_space` | NASA, ISS tracking, Mars photos, SpaceX, and earthquake data |
+| `public_api_food_recipes` | Food, drinks, breweries, and fruit data |
+| `public_api_blockchain` | Bitcoin, mempool statistics, and Solana data |
+| `public_api_holidays` | Public holidays and UK bank holidays |
+| `public_api_transport` | Flight tracking, bike share networks, and EV charging data |
 
 ## Validation And Security
 
 | Tool | Description |
 | --- | --- |
 | `public_api_random_facts` | Jokes, quotes, trivia, xkcd, and novelty text feeds |
-| `public_api_animals` | Animal images, facts, and marine-life data |
+| `public_api_animals` | Animal facts, breeds, images, and wildlife data |
 | `public_api_email_validation` | Email deliverability and reputation helpers |
-| `public_api_phone_validation` | Phone device catalog lookups |
-| `public_api_data_validation` | Content validation helpers |
-| `public_api_security_intel` | Vulnerability, phishing, and police or open threat feeds |
-| `public_api_job_search` | Job board search results |
+| `public_api_name_insights` | Gender, age, and nationality predictions from names |
+| `public_api_data_validation` | Profanity filtering and content checks |
+| `public_api_security_intel` | Vulnerability, Shodan InternetDB, and police or open threat feeds |
+| `public_api_job_search` | Arbeitnow job board search |
 
 ## Civic Data
 
 | Tool | Description |
 | --- | --- |
-| `public_api_government_data` | Wanted lists, notices, registers, and civic datasets |
+| `public_api_government_data` | Wanted lists, notices, registers, and Census Bureau data |
 | `public_api_health_data` | FDA, USDA, and NPI registry lookups |
-| `public_api_open_data` | Open civic, culture, sport, and city quality datasets |
-
-## Example Prompts
-
-- `Use public_api_weather to get the current weather for Toronto.`
-- `Use public_api_stock_market to look up the quote for AAPL.`
-- `Use public_api_wikipedia to summarize Model Context Protocol.`
-- `Use public_api_transport to find transit locations for Berlin.`
+| `public_api_open_data` | Open civic, culture, sport, and archive datasets |
