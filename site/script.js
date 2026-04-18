@@ -1,49 +1,22 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const sections = document.querySelectorAll(".section-reveal");
-
-  sections.forEach((section, index) => {
-    window.setTimeout(() => {
-      section.classList.add("is-visible");
-    }, 70 * index);
-  });
-
-  document.querySelectorAll("[data-copy-target]").forEach((copyButton) => {
-    if (!(copyButton instanceof HTMLButtonElement)) return;
-
-    copyButton.addEventListener("click", async () => {
-      const targetId = copyButton.getAttribute("data-copy-target");
-
-      if (!targetId) return;
-
-      const source = document.getElementById(targetId);
-
-      if (!source) return;
-
-      const previousLabel = copyButton.textContent;
-
-      try {
-        await navigator.clipboard.writeText(source.textContent ?? "");
-        copyButton.textContent = "Copied";
-      } catch {
-        copyButton.textContent = "Copy failed";
-      }
-
-      window.setTimeout(() => {
-        copyButton.textContent = previousLabel;
-      }, 1400);
-    });
-  });
-});
-
-function switchTab(name, button) {
-  document.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
-  document.querySelectorAll(".tab-panel").forEach(p => p.classList.remove("active"));
-  if (button instanceof HTMLButtonElement) button.classList.add("active");
-  const panel = document.getElementById("tab-" + name);
-  if (panel) panel.classList.add("active");
+function switchTab(tabId, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + tabId).classList.add('active');
+  btn.classList.add('active');
 }
 
 function toggleFaq(el) {
   const item = el.parentElement;
-  item.classList.toggle("open");
+  item.classList.toggle('active');
 }
+
+document.querySelectorAll('.copy-button').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const targetId = btn.getAttribute('data-copy-target');
+    const text = document.getElementById(targetId).innerText;
+    navigator.clipboard.writeText(text);
+    const originalText = btn.innerText;
+    btn.innerText = 'Copied!';
+    setTimeout(() => btn.innerText = originalText, 2000);
+  });
+});

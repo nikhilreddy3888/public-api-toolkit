@@ -1,63 +1,46 @@
 {
   "name": "public-api-toolkit",
-  "version": "1.0.4",
-  "description": "Structured public data for AI agents through one cross-platform MCP server.",
-  "type": "module",
-  "main": "dist/index.js",
+  "version": "2.0.0",
+  "description": "43 agent-ready skills for real-time public data. Free. No keys. Token-efficient.",
   "files": [
-    "dist",
-    ".claude-plugin",
-    ".mcp.json",
     "skills",
+    ".claude-plugin",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "CLAUDE.md",
+    "GEMINI.md",
+    "OPENCLAW.md",
+    "openclaw.plugin.json"
   ],
-  "bin": {
-    "public-api-toolkit": "dist/index.js"
-  },
-  "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "dev": "tsx src/index.ts",
-    "package:gemini": "node scripts/package-gemini-extension.mjs",
-    "start": "node dist/index.js",
-    "verify:gemini-release": "node scripts/verify-gemini-release.mjs",
-    "test": "tsx --test tests/*.test.ts"
-  },
   "keywords": [
-    "mcp",
-    "mcp-server",
-    "public-api-toolkit",
-    "public-api",
-    "public-apis",
-    "structured-data",
-    "public-data",
-    "ai-agents",
-    "claude",
-    "codex",
-    "claude-code",
-    "cursor",
-    "openclaw",
     "gemini-cli",
-    "opencode",
-    "typescript",
-    "model-context-protocol"
+    "claude-code",
+    "agent-skills",
+    "public-apis",
+    "toolkit"
   ],
-  "engines": {
-    "node": ">=18"
-  },
-  "author": "Nikhil Reddy",
-  "homepage": "https://nikhilreddy3888.github.io/public-api-toolkit/",
+  "homepage": "https://github.com/nikhilreddy3888/public-api-toolkit",
   "repository": {
     "type": "git",
-    "url": "https://github.com/nikhilreddy3888/public-api-toolkit.git"
+    "url": "git+https://github.com/nikhilreddy3888/public-api-toolkit.git"
   },
+  "author": "Nikhil Reddy",
   "license": "MIT",
-  "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.11.0"
+  "publishConfig": {
+    "access": "public"
   },
-  "devDependencies": {
-    "@types/node": "^22.15.3",
-    "tsx": "^4.19.4",
-    "typescript": "^5.8.3"
+  "gemini": {
+    "type": "skill-pack",
+    "skills": [
+      "weather", "crypto", "currency", "wikipedia", "geocoding",
+      "ip_geolocation", "country_data", "dictionary", "books", "translation",
+      "news", "images", "movie_tv_data", "food_recipes", "math", "space",
+      "holidays", "transport", "random_facts", "animals", "name_insights",
+      "security_intel", "job_search", "air_quality", "http_utils", "dns_network",
+      "dev_tools", "tech_news", "travel", "market_brief", "compare",
+      "email_validation", "url_check", "mac_vendor", "anime", "pokemon",
+      "horoscope", "science_facts", "entertainment", "mock_data",
+      "avatar_generator", "profanity_filter", "coding_contests"
+    ]
   }
 }

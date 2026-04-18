@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Public API Toolkit — 41 APIs. One Command.</title>
+<title>Public API Toolkit — 43 APIs. One Command.</title>
 <meta
   name="description"
-  content="Stop wasting tokens on things free APIs can answer instantly. One MCP server gives your AI agent structured access to weather, crypto, Wikipedia, maps, holidays, and 36 more APIs."
+  content="Stop wasting tokens on things free APIs can answer instantly. One MCP server gives your AI agent structured access to weather, crypto, Wikipedia, maps, holidays, and 39 more APIs."
 />
 <script>
   document.documentElement.classList.add("js");
@@ -49,10 +49,10 @@
       <section class="hero section-reveal">
         <div class="hero-copy">
           <p class="eyebrow">MCP server &middot; v1.0.4 &middot; MIT &middot; Zero config</p>
-          <h1><span class="accent">41 APIs.</span> One command. <span class="accent">Zero waste.</span></h1>
+          <h1><span class="accent">43 APIs.</span> One command. <span class="accent">Zero waste.</span></h1>
           <p class="hero-text">
             Your AI agent shouldn't scrape Wikipedia to tell you the weather.
-            <strong>One MCP server. 41 structured tools. Instant data.</strong>
+            <strong>One MCP server. 43 structured tools. Instant data.</strong>
           </p>
 
           <div class="install-line section-reveal">
@@ -91,7 +91,7 @@
             </article>
             <article>
               <strong>1 command</strong>
-              <span>replaces 41 separate MCP installs and configurations</span>
+              <span>replaces 43 separate MCP installs and configurations</span>
             </article>
           </div>
         </div>
@@ -139,7 +139,7 @@
               <li>Call <code>public_api_currency_exchange</code> &mdash; live rates, zero hallucination</li>
               <li>Call <code>public_api_weather</code> &mdash; clean forecast, 0 HTML parsing</li>
               <li>Call <code>public_api_wikipedia</code> &mdash; structured summary, minimal tokens</li>
-              <li>One <code>npx -y public-api-toolkit</code> covers all 41 tools</li>
+              <li>One <code>npx -y public-api-toolkit</code> covers all 43 tools</li>
             </ul>
           </div>
         </div>
@@ -228,7 +228,7 @@
 
       <section id="tools" class="content-section section-reveal">
         <div class="section-heading">
-          <p class="eyebrow">41 tools &middot; 12 categories</p>
+          <p class="eyebrow">43 tools &middot; 12 categories</p>
           <h2>Stop scraping. Start calling.</h2>
           <p>
             Related capabilities are grouped into domain tools. One tool per domain &mdash;
@@ -365,9 +365,9 @@
           </div>
           <div class="tool-card tool-card-more">
             <span class="tool-icon">+</span>
-            <span class="tool-name">...and 19 more</span>
-            <span class="tool-label">See all 41 tools</span>
-            <span class="tool-desc">Books, universities, name insights, random facts, animals, game data, blockchain &amp; mempool, code execution, and more</span>
+            <span class="tool-name">...and 22 more</span>
+            <span class="tool-label">See all 43 tools</span>
+            <span class="tool-desc">Books, universities, name insights, random facts, animals, game data, blockchain &amp; mempool, code execution, mock data, avatars, and more</span>
           </div>
         </div>
       </section>
@@ -422,7 +422,7 @@
       <section id="compare" class="content-section section-reveal">
         <div class="section-heading">
           <p class="eyebrow">Why this beats alternatives</p>
-          <h2>One server beats 41 separate installs.</h2>
+          <h2>One server beats 43 separate installs.</h2>
           <p>
             Every other approach requires you to find, install, configure, and maintain
             a separate connector for each capability. Public API Toolkit bundles them all.
@@ -463,7 +463,7 @@
           <div class="comparison-row">
             <span>Total install time</span>
             <span class="comparison-bad">N/A &mdash; always slow</span>
-            <span class="comparison-bad">41 installs, 41 configs</span>
+            <span class="comparison-bad">43 installs, 43 configs</span>
             <span class="comparison-good"><code>npx -y public-api-toolkit</code>. Done.</span>
           </div>
         </div>
@@ -480,73 +480,37 @@
         </div>
 
         <div class="install-tabs" id="tabs">
-          <button class="tab-btn active" onclick="switchTab('npm', this)">npm</button>
+          <button class="tab-btn active" onclick="switchTab('gemini', this)">Gemini CLI</button>
           <button class="tab-btn" onclick="switchTab('claude', this)">Claude Code</button>
+          <button class="tab-btn" onclick="switchTab('openclaw', this)">OpenClaw</button>
           <button class="tab-btn" onclick="switchTab('codex', this)">Codex</button>
           <button class="tab-btn" onclick="switchTab('cursor', this)">Cursor</button>
-          <button class="tab-btn" onclick="switchTab('gemini', this)">Gemini CLI</button>
         </div>
-        <div class="tab-panel active" id="tab-npm">
+        <div class="tab-panel active" id="tab-gemini">
           <div class="code-panel">
             <div class="code-panel-header">
-              <span>Quick install</span>
-              <button class="copy-button" type="button" data-copy-target="install-npm">Copy</button>
+              <span>Gemini CLI</span>
+              <button class="copy-button" type="button" data-copy-target="install-gemini">Copy</button>
             </div>
-            <pre><code id="install-npm">npx -y public-api-toolkit</code></pre>
-            <p class="code-note">
-              Then add the same command to your MCP client config and use
-              grouped tools like <code>public_api_weather</code>,
-              <code>public_api_wikipedia</code>, and
-              <code>public_api_currency_exchange</code>.
-            </p>
+            <pre><code id="install-gemini">gemini extensions install https://github.com/nikhilreddy3888/public-api-toolkit</code></pre>
           </div>
         </div>
         <div class="tab-panel" id="tab-claude">
           <div class="code-panel">
             <div class="code-panel-header">
               <span>Claude Code</span>
+              <button class="copy-button" type="button" data-copy-target="install-claude">Copy</button>
             </div>
-            <pre><code>claude mcp add-json public-api-toolkit '{ \
-  "command": "npx", \
-  "args": ["-y", "public-api-toolkit"] \
-}'</code></pre>
-            <p class="code-note">Then verify with <code>claude mcp list</code>.</p>
+            <pre><code id="install-claude">claude plugin marketplace add nikhilreddy3888/public-api-toolkit</code></pre>
           </div>
         </div>
-        <div class="tab-panel" id="tab-codex">
+        <div class="tab-panel" id="tab-openclaw">
           <div class="code-panel">
             <div class="code-panel-header">
-              <span>Codex</span>
+              <span>OpenClaw</span>
+              <button class="copy-button" type="button" data-copy-target="install-openclaw">Copy</button>
             </div>
-            <pre><code># ~/.codex/config.toml
-[mcp_servers.public-api-toolkit]
-command = "npx"
-args = ["-y", "public-api-toolkit"]</code></pre>
-          </div>
-        </div>
-        <div class="tab-panel" id="tab-cursor">
-          <div class="code-panel">
-            <div class="code-panel-header">
-              <span>Cursor</span>
-            </div>
-            <pre><code>// .cursor/mcp.json
-{
-  "mcpServers": {
-    "public-api-toolkit": {
-      "command": "npx",
-      "args": ["-y", "public-api-toolkit"]
-    }
-  }
-}</code></pre>
-          </div>
-        </div>
-        <div class="tab-panel" id="tab-gemini">
-          <div class="code-panel">
-            <div class="code-panel-header">
-              <span>Gemini CLI</span>
-            </div>
-            <pre><code>gemini extensions install \
-  https://github.com/nikhilreddy3888/public-api-toolkit</code></pre>
+            <pre><code id="install-openclaw">openclaw plugins install https://github.com/nikhilreddy3888/public-api-toolkit</code></pre>
           </div>
         </div>
 
@@ -569,7 +533,7 @@ args = ["-y", "public-api-toolkit"]</code></pre>
         <div class="faq-list">
           <div class="faq-item">
             <div class="faq-q" onclick="toggleFaq(this)">
-              Do I need API keys for all 41 tools?
+              Do I need API keys for all 43 tools?
               <span class="faq-arrow">+</span>
             </div>
             <div class="faq-a">

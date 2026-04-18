@@ -1,0 +1,14 @@
+{
+  "name": "public-api-toolkit",
+  "version": "2.0.0",
+  "description": "43 real-time data skills for OpenClaw. Free. No keys.",
+  "author": "Nikhil Reddy",
+  "homepage": "https://github.com/nikhilreddy3888/public-api-toolkit",
+  "type": "skill-bundle",
+  "skills_directory": "skills/",
+  "compatibility": {
+    "openclaw": ">=1.0.0",
+    "claude": "supported",
+    "gemini": "supported"
+  }
+}

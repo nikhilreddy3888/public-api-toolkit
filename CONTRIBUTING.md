@@ -1,90 +1,74 @@
 # Contributing to Public API Toolkit
 
-Public API Toolkit is a TypeScript MCP server that turns public APIs into grouped, agent-ready tools. The best contributions improve tool coverage, repair upstream drift, or tighten reliability and documentation.
+Public API Toolkit is a collection of **agent-ready skills**. Instead of a complex server, each skill is defined by a simple `SKILL.md` file that tells the agent how to call an API directly.
 
-## Development Setup
-
-```bash
-git clone https://github.com/nikhilreddy3888/public-api-toolkit.git
-cd public-api-toolkit
-npm ci
-npm run build
-npm test
-```
+The best contributions improve tool coverage, fix broken API endpoints, or tighten documentation.
 
 ## Repository Map
 
 ```text
-src/
-  catalog/   tool names and descriptions
-  groups/    tool group implementations
-  lib/       shared fetch, schema, env, and response helpers
-  server/    MCP server wiring
-tests/       unit and smoke coverage
-docs/        install, config, and publishing guides
-examples/    client configuration examples
-plugins/     local plugin metadata
-skills/      routing guidance for compatible clients
+skills/
+  weather/
+    SKILL.md    <-- Definition, API links, and examples
+  crypto/
+    SKILL.md
+site/
+  index.html    <-- Marketing landing page
+  styles.css
+GEMINI.md       <-- Gemini CLI specific context
+CLAUDE.md       <-- Claude Code specific context
 ```
 
-## Add Or Update A Tool
+## Add A New Skill
 
-1. Pick the right file in `src/groups/`.
-2. Add or update the tool with the existing `createToolGroup(...)` and `runActionMap(...)` pattern.
-3. Update the description in `src/catalog/groups.ts`.
-4. Add or update tests in `tests/`.
-5. Update `README.md` or the affected docs if user-facing behavior changed.
-6. Run `npm test` and `npm run build`.
+1. Create a new folder in `skills/` (e.g., `skills/my_new_tool/`).
+2. Create a `SKILL.md` file inside that folder.
+3. Follow the standard format:
+   - **Frontmatter**: Name and description.
+   - **APIs**: List the endpoints.
+   - **Example**: Provide JSON inputs the agent should use.
 
-Example pattern:
+### `SKILL.md` Example Template:
 
-```ts
-createToolGroup({
-  key: "new_tool",
-  description: "What this tool does.",
-  inputSchema: objectSchema(["lookup"], {
-    query: stringProp("Search query."),
-  }),
-  execute: (input, ctx) =>
-    runActionMap("new_tool", input, ctx, {
-      lookup: async () =>
-        ctx.fetchJson(
-          withQuery("https://api.example.com/search", {
-            query: readString(input, "query"),
-          }),
-        ),
-    }),
-});
+```markdown
+---
+name: my_tool
+description: >
+  Short description of what it does.
+  Use when user asks about X, Y, Z.
+---
+
+Tool details. Free. No key needed.
+
+## API
+
+- Action: `https://api.example.com/data?query={query}`
+
+## Example
+
+```json
+{"query": "search term"}
 ```
+```
+
+## Update Documentation
+
+After adding a skill:
+1. Add it to the list in `README.md`.
+2. Add it to the skills table in `GEMINI.md` and `CLAUDE.md`.
+3. Add it to `.claude-plugin/plugin.json`.
 
 ## Fix A Broken Provider
 
-Public APIs drift. Keep the repair as small and durable as possible.
+Public APIs drift. Keep the repair as small as possible.
 
-1. Reproduce the failure with a direct request.
-2. Prefer fixing the endpoint before adding a fallback.
-3. If the provider now requires auth, return `missingKeyMessage(...)` instead of throwing.
-4. Update the docs when setup requirements or output expectations change.
-
-Good fixes:
-
-- use the shared fetch helpers
-- keep outputs structured and compact
-- add fallbacks only when the primary provider is fragile
-- cover the failure mode in tests
-
-Avoid:
-
-- large client-side filtering when a query endpoint exists
-- silent contract changes without tests
-- checked-in secrets or hardcoded tokens
+1. Find the `SKILL.md` file for the broken tool.
+2. Verify the new endpoint URL.
+3. Update the URL and the example if the schema changed.
 
 ## Pull Request Checklist
 
-- [ ] Added or updated tests first
-- [ ] `npm test` passes
-- [ ] `npm run build` passes
-- [ ] Updated docs if behavior changed
-- [ ] Kept the change focused
-
-The pull request template in [`.github/PULL_REQUEST_TEMPLATE.md`](.github/PULL_REQUEST_TEMPLATE.md) matches this workflow.
+- [ ] Folder created in `skills/`
+- [ ] `SKILL.md` follows standard format
+- [ ] Updated `README.md`, `GEMINI.md`, and `CLAUDE.md`
+- [ ] Added to `.claude-plugin/plugin.json`

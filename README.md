@@ -1,110 +1,100 @@
 # Public API Toolkit
 
-41 tools. One command.
+**why use many API when few skill do trick**
 
-Structured public data for AI agents through one cross-platform MCP server.
+43 agent skills. One install. Zero config. No keys.
 
-Public API Toolkit is a local stdio MCP server that exposes 41 `public_api_*` tools for weather, markets, reference data, Wikipedia, transport, developer lookups, and open datasets. It is designed for factual requests that are better served by stable APIs than by broad web search.
-
-## Quick Start
-
-```bash
-npx -y public-api-toolkit
-```
-
-Most tools work without API keys. Premium-compatible providers use `PUBLIC_APIS_*` environment variables.
+Weather, crypto, currency, Wikipedia +39 more. Free. Token-efficient.
 
 ## Install
 
-| Client | Setup |
-| --- | --- |
-| Claude Code | [docs/installation/claude-code.md](docs/installation/claude-code.md) |
-| Codex | [docs/installation/codex.md](docs/installation/codex.md) |
-| Cursor | [docs/installation/cursor.md](docs/installation/cursor.md) |
-| Gemini CLI | [docs/installation/gemini-cli.md](docs/installation/gemini-cli.md) |
-| OpenCode | [docs/installation/opencode.md](docs/installation/opencode.md) |
-| GitHub Copilot CLI | [docs/installation/github-copilot-cli.md](docs/installation/github-copilot-cli.md) |
-| OpenClaw | [docs/installation/openclaw.md](docs/installation/openclaw.md) |
-| Generic MCP clients | [docs/installation/generic-mcp-clients.md](docs/installation/generic-mcp-clients.md) |
-| ChatGPT and remote MCP | [docs/installation/chatgpt-mcp.md](docs/installation/chatgpt-mcp.md) |
-
-## What You Get
-
-- 41 tools across 12 grouped tool families
-- one local MCP server with a consistent action-based shape
-- shared timeout and retry behavior for upstream calls
-- readable setup messages when optional keys are missing
-- response truncation to protect client context windows
-
-## Tool Families
-
-| Family | Example tools |
-| --- | --- |
-| Data reference | `public_api_country_data`, `public_api_dictionary`, `public_api_books`, `public_api_university_data` |
-| Geo location | `public_api_geocoding`, `public_api_ip_geolocation` |
-| Finance | `public_api_currency_exchange`, `public_api_crypto_data`, `public_api_stock_market` |
-| Weather and environment | `public_api_weather`, `public_api_air_quality`, `public_api_carbon_footprint` |
-| Development | `public_api_http_utils`, `public_api_dns_network`, `public_api_code_execution`, `public_api_placeholder_data` |
-| Dev tools | `public_api_dev_tools` |
-| Tech news | `public_api_tech_news` |
-| Text and knowledge | `public_api_translation`, `public_api_wikipedia`, `public_api_news` |
-| Media and entertainment | `public_api_images`, `public_api_music_data`, `public_api_movie_tv_data`, `public_api_game_data` |
-| Science and lifestyle | `public_api_math`, `public_api_space`, `public_api_food_recipes`, `public_api_blockchain`, `public_api_holidays`, `public_api_transport` |
-| Validation and security | `public_api_random_facts`, `public_api_animals`, `public_api_email_validation`, `public_api_name_insights`, `public_api_data_validation`, `public_api_security_intel`, `public_api_job_search` |
-| Civic data | `public_api_government_data`, `public_api_health_data`, `public_api_open_data` |
-
-Full tool catalog: [docs/configuration/tool-groups.md](docs/configuration/tool-groups.md)
-
-## Optional API Keys
-
-These keys unlock providers that need registration or higher quotas:
-
-| Variable | Use |
-| --- | --- |
-| `PUBLIC_APIS_FINNHUB` / `PUBLIC_APIS_ALPHAVANTAGE` | Stock quotes and symbol search |
-| `PUBLIC_APIS_FRED` | Federal Reserve data |
-| `PUBLIC_APIS_OMDB` / `PUBLIC_APIS_TMDB` | Movie and TV lookups |
-| `PUBLIC_APIS_CARBON_INTERFACE` | Carbon estimates |
-| `PUBLIC_APIS_MAILCHECK` / `PUBLIC_APIS_KICKBOX` | Email validation |
-| `PUBLIC_APIS_OPEN_CHARGE_MAP` | EV charging data |
-| `PUBLIC_APIS_FOODDATA_CENTRAL` | USDA nutrition data |
-
-Configuration guide: [docs/configuration/environment-variables.md](docs/configuration/environment-variables.md)
-
-## Development
-
+### Gemini CLI
 ```bash
-npm ci
-npm run build
-npm test
+gemini extensions install https://github.com/nikhilreddy3888/public-api-toolkit
 ```
 
-The server is implemented in TypeScript, uses the Node test runner, and exposes tools over stdio MCP. Contribution guidance lives in [CONTRIBUTING.md](CONTRIBUTING.md).
+### Claude Code
+```bash
+claude plugin marketplace add nikhilreddy3888/public-api-toolkit
+```
 
-## Runtime Notes
+### OpenClaw
+```bash
+openclaw plugins install https://github.com/nikhilreddy3888/public-api-toolkit
+```
 
-- Response cap: 30,000 characters
-- User-Agent: `public-api-toolkit/1.0`
+### Codex
+```bash
+codex install-skill https://github.com/nikhilreddy3888/public-api-toolkit
+```
 
-## Repository Guide
+### Copilot CLI
+```bash
+copilot extensions install nikhilreddy3888/public-api-toolkit
+```
 
-- Install docs: [docs/installation](docs/installation)
-- Configuration docs: [docs/configuration](docs/configuration)
-- Publishing docs: [docs/publishing](docs/publishing)
-- Contributor guide: [CONTRIBUTING.md](CONTRIBUTING.md)
-- Privacy policy: [PRIVACY.md](PRIVACY.md)
-- Landing page: [GitHub Pages](https://nikhilreddy3888.github.io/public-api-toolkit/) in [`site/`](site/)
+## Skills (43)
 
-## FAQ
+| # | Skill | Use |
+|---|-------|-----|
+| 1 | weather | forecasts, current weather |
+| 2 | crypto | BTC, ETH prices |
+| 3 | currency | FX rates, conversions |
+| 4 | wikipedia | topic summaries |
+| 5 | geocoding | address → coordinates |
+| 6 | ip_geolocation | IP → location |
+| 7 | country_data | country profiles |
+| 8 | dictionary | word definitions |
+| 9 | books | book search |
+| 10 | translation | text translation |
+| 11 | news | space/science news |
+| 12 | images | placeholder images |
+| 13 | movie_tv_data | TV/movies |
+| 14 | food_recipes | recipes, meals |
+| 15 | math | calculations |
+| 16 | space | ISS, NASA images |
+| 17 | holidays | public holidays |
+| 18 | transport | flights, bikes |
+| 19 | random_facts | jokes, quotes |
+| 20 | animals | animal facts |
+| 21 | name_insights | name analysis |
+| 22 | security_intel | CVE, vulnerabilities |
+| 23 | job_search | job listings |
+| 24 | air_quality | AQI data |
+| 25 | http_utils | HTTP tools |
+| 26 | dns_network | DNS lookup |
+| 27 | dev_tools | npm, GitHub |
+| 28 | tech_news | HackerNews |
+| 29 | travel | trip planner |
+| 30 | market_brief | market snapshot |
+| 31 | compare | compare two things |
+| 32 | email_validation | email check |
+| 33 | url_check | URL scan |
+| 34 | mac_vendor | device vendor |
+| 35 | anime | quotes, facts, Ghibli |
+| 36 | pokemon | stats, types, moves |
+| 37 | horoscope | daily astrological info |
+| 38 | science_facts | math/science trivia |
+| 39 | entertainment | Star Wars, Rick & Morty |
+| 40 | mock_data | users, posts, products |
+| 41 | avatar_generator | pixel art, robots |
+| 42 | profanity_filter | censor bad words |
+| 43 | coding_contests | LeetCode, Codeforces |
 
-### Do I need API keys?
+## Why
 
-No. Most tools use public endpoints without authentication. Optional keys unlock premium or quota-limited providers.
+| Before | After |
+|--------|-------|
+| Web search → scrape → parse | API → JSON |
+| 500-2000 tokens | 50-100 tokens |
+| minutes | <300ms |
 
-### When should I use this instead of web search?
+**Same data. 10-40x fewer tokens.**
 
-Use it when the request is naturally structured: weather, exchange rates, Wikipedia summaries, geocoding, holidays, public records, transport, or similar factual lookups.
+## Contributing
 
-### Does it work in ChatGPT directly?
+Add new skills by following the [Contributing Guide](CONTRIBUTING.md).
 
-Not in the current release. The project ships a local stdio server, so ChatGPT support requires a remote MCP transport in front of it. See [docs/installation/chatgpt-mcp.md](docs/installation/chatgpt-mcp.md).
+## License
+
+MIT

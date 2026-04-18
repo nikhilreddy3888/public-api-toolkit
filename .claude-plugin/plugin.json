@@ -1,18 +1,19 @@
 {
-  "name": "public-api-toolkit",
-  "version": "1.0.3",
-  "description": "A cross-platform MCP server that turns public APIs into clean, agent-ready tools.",
+  "name": "public-api-skills",
+  "description": "Real-time data skills. Weather, crypto, currency, Wikipedia +39 more. Free. No keys.",
   "author": {
     "name": "Nikhil Reddy"
   },
-  "homepage": "https://nikhilreddy3888.github.io/public-api-toolkit/",
-  "repository": "https://github.com/nikhilreddy3888/public-api-toolkit",
-  "license": "MIT",
-  "keywords": [
-    "mcp",
-    "public-api",
-    "public-data",
-    "ai-agents"
-  ],
-  "mcpServers": "./.mcp.json"
+  "homepage": "https://github.com/nikhilreddy3888/public-api-toolkit",
+  "skills": [
+    "weather", "crypto", "currency", "wikipedia", "geocoding",
+    "ip_geolocation", "country_data", "dictionary", "books", "translation",
+    "news", "images", "movie_tv_data", "food_recipes", "math", "space",
+    "holidays", "transport", "random_facts", "animals", "name_insights",
+    "security_intel", "job_search", "air_quality", "http_utils", "dns_network",
+    "dev_tools", "tech_news", "travel", "market_brief", "compare",
+    "email_validation", "url_check", "mac_vendor", "anime", "pokemon",
+    "horoscope", "science_facts", "entertainment", "mock_data",
+    "avatar_generator", "profanity_filter", "coding_contests"
+  ]
 }
