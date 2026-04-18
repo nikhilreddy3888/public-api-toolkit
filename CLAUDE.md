@@ -18,7 +18,7 @@ Use the Skill tool to invoke any skill when needed:
 - crypto: "Bitcoin price"
 - currency: "Convert 100 USD to EUR"
 - ip_geolocation: "Where is this IP from: 8.8.8.8"
-- email_validation: "Is contact@company.io valid?"
+- mock_data: "Give me some dummy user profiles for testing"
 
 ## Skills (43)
 
@@ -30,19 +30,13 @@ Use the Skill tool to invoke any skill when needed:
 | wikipedia | topic summaries |
 | geocoding | address → coordinates |
 | ip_geolocation | IP → location |
-| country_data | country info |
+| country_data | country profiles |
 | dictionary | word definitions |
-| email_validation | email verification |
-| url_check | URL security scan |
-| mac_vendor | device vendor |
 | anime | quotes, facts, Ghibli |
 | pokemon | stats, types, moves |
-| horoscope | daily astrological info |
-| science_facts | math/science trivia |
 | entertainment | Star Wars, Rick & Morty |
 | mock_data | users, posts, products |
 | avatar_generator | pixel art, robots |
-| profanity_filter | censor bad words |
 | coding_contests | LeetCode, Codeforces |
 
 ## Composition Skills

@@ -8,24 +8,19 @@
 
 ## Install (All Providers)
 
-### Claude Code
-```bash
-claude plugin marketplace add nikhilreddy3888/public-api-toolkit
-```
-
 ### Gemini CLI
 ```bash
 gemini extensions install https://github.com/nikhilreddy3888/public-api-toolkit
 ```
 
-### Codex
+### Claude Code
 ```bash
-codex install-skill https://github.com/nikhilreddy3888/public-api-toolkit
+claude plugin marketplace add nikhilreddy3888/public-api-toolkit
 ```
 
-### Copilot CLI
+### OpenClaw
 ```bash
-copilot extensions install nikhilreddy3888/public-api-toolkit
+openclaw plugins install https://github.com/nikhilreddy3888/public-api-toolkit
 ```
 
 ## Skills (43)
@@ -40,7 +35,7 @@ Use skill when user needs real-time data:
 | wikipedia | topic summaries |
 | geocoding | address → coordinates |
 | ip_geolocation | IP → location |
-| country_data | country info |
+| country_data | country profiles |
 | dictionary | word definitions |
 | news | space/science news |
 | translation | text translation |
@@ -49,12 +44,9 @@ Use skill when user needs real-time data:
 | holidays | public holidays |
 | dev_tools | npm, GitHub data |
 | security_intel | CVE lookups |
-| travel | trip planner |
+| travel | multi-step trip planner |
 | market_brief | crypto + FX snapshot |
 | compare | compare two things |
-| email_validation | email verification |
-| url_check | URL security scan |
-| mac_vendor | device vendor lookup |
 | anime | quotes, facts, Ghibli |
 | pokemon | stats, types, moves |
 | horoscope | daily astrological info |
@@ -67,6 +59,6 @@ Use skill when user needs real-time data:
 
 ## Don't
 
-- Don't add MCP
-- Don't add complex build
-- Don't add unnecessary deps
+- Don't add MCP server code
+- Don't add complex build steps
+- Don't add unnecessary dependencies

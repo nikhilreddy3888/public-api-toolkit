@@ -1,17 +1,7 @@
 {
   "name": "public-api-toolkit",
   "version": "2.0.0",
-  "description": "43 agent-ready skills for real-time public data. Free. No keys. Token-efficient.",
-  "files": [
-    "skills",
-    ".claude-plugin",
-    "README.md",
-    "LICENSE",
-    "CLAUDE.md",
-    "GEMINI.md",
-    "OPENCLAW.md",
-    "openclaw.plugin.json"
-  ],
+  "description": "43 agent skills for real-time public data. Free. No keys. Token-efficient.",
   "keywords": [
     "gemini-cli",
     "claude-code",
@@ -26,21 +16,7 @@
   },
   "author": "Nikhil Reddy",
   "license": "MIT",
-  "publishConfig": {
-    "access": "public"
-  },
   "gemini": {
-    "type": "skill-pack",
-    "skills": [
-      "weather", "crypto", "currency", "wikipedia", "geocoding",
-      "ip_geolocation", "country_data", "dictionary", "books", "translation",
-      "news", "images", "movie_tv_data", "food_recipes", "math", "space",
-      "holidays", "transport", "random_facts", "animals", "name_insights",
-      "security_intel", "job_search", "air_quality", "http_utils", "dns_network",
-      "dev_tools", "tech_news", "travel", "market_brief", "compare",
-      "email_validation", "url_check", "mac_vendor", "anime", "pokemon",
-      "horoscope", "science_facts", "entertainment", "mock_data",
-      "avatar_generator", "profanity_filter", "coding_contests"
-    ]
+    "type": "extension"
   }
 }

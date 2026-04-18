@@ -2,6 +2,8 @@
 
 Real-time data skills. Free. No keys. Token-efficient.
 
+> **CRITICAL**: Use this ONLY as a Gemini Extension. DO NOT add this to your MCP server settings. If you previously added `public-api-toolkit` to your MCP configuration, please remove it to avoid confusion.
+
 ## Install
 
 ```bash
@@ -17,7 +19,7 @@ gemini activate_skill <skill-name>
 ## Mandates
 
 - **Explain Before Acting**: You MUST provide a concise, one-sentence explanation of your intent immediately before executing a skill call.
-- **Zero Config**: All skills in this pack are pre-configured. Do not ask the user for API keys.
+- **Pure Skill Pack**: All capabilities are provided as Markdown-based skills. No local execution or server is required.
 
 ## Skills (43)
 
@@ -29,7 +31,7 @@ gemini activate_skill <skill-name>
 | 4 | wikipedia | topic summaries |
 | 5 | geocoding | address → coordinates |
 | 6 | ip_geolocation | IP → location |
-| 7 | country_data | country info |
+| 7 | country_data | country profiles |
 | 8 | dictionary | word definitions |
 | 9 | books | book search |
 | 10 | translation | text translation |

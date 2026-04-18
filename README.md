@@ -6,6 +6,16 @@
 
 Weather, crypto, currency, Wikipedia +39 more. Free. Token-efficient.
 
+## Why use this?
+
+| Before | After |
+|--------|-------|
+| Web search → scrape → parse | API → JSON |
+| 500-2000 tokens | 50-100 tokens |
+| minutes | <300ms |
+
+**10-40x fewer tokens. Replaces expensive web searches with structured data.**
+
 ## Install
 
 ### Gemini CLI
@@ -28,72 +38,37 @@ openclaw plugins install https://github.com/nikhilreddy3888/public-api-toolkit
 codex install-skill https://github.com/nikhilreddy3888/public-api-toolkit
 ```
 
-### Copilot CLI
-```bash
-copilot extensions install nikhilreddy3888/public-api-toolkit
-```
-
 ## Skills (43)
 
-| # | Skill | Use |
-|---|-------|-----|
-| 1 | weather | forecasts, current weather |
-| 2 | crypto | BTC, ETH prices |
-| 3 | currency | FX rates, conversions |
-| 4 | wikipedia | topic summaries |
-| 5 | geocoding | address → coordinates |
-| 6 | ip_geolocation | IP → location |
-| 7 | country_data | country profiles |
-| 8 | dictionary | word definitions |
-| 9 | books | book search |
-| 10 | translation | text translation |
-| 11 | news | space/science news |
-| 12 | images | placeholder images |
-| 13 | movie_tv_data | TV/movies |
-| 14 | food_recipes | recipes, meals |
-| 15 | math | calculations |
-| 16 | space | ISS, NASA images |
-| 17 | holidays | public holidays |
-| 18 | transport | flights, bikes |
-| 19 | random_facts | jokes, quotes |
-| 20 | animals | animal facts |
-| 21 | name_insights | name analysis |
-| 22 | security_intel | CVE, vulnerabilities |
-| 23 | job_search | job listings |
-| 24 | air_quality | AQI data |
-| 25 | http_utils | HTTP tools |
-| 26 | dns_network | DNS lookup |
-| 27 | dev_tools | npm, GitHub |
-| 28 | tech_news | HackerNews |
-| 29 | travel | trip planner |
-| 30 | market_brief | market snapshot |
-| 31 | compare | compare two things |
-| 32 | email_validation | email check |
-| 33 | url_check | URL scan |
-| 34 | mac_vendor | device vendor |
-| 35 | anime | quotes, facts, Ghibli |
-| 36 | pokemon | stats, types, moves |
-| 37 | horoscope | daily astrological info |
-| 38 | science_facts | math/science trivia |
-| 39 | entertainment | Star Wars, Rick & Morty |
-| 40 | mock_data | users, posts, products |
-| 41 | avatar_generator | pixel art, robots |
-| 42 | profanity_filter | censor bad words |
-| 43 | coding_contests | LeetCode, Codeforces |
+Weather, Crypto, Currency, Wikipedia, Geocoding, IP Geolocation, Country Data, Dictionary, Books, Translation, News, Movie/TV, Food/Recipes, Math, Space, Holidays, Transport, Random Facts, Animals, Name Insights, Security Intel, Job Search, Air Quality, HTTP Utils, DNS, Dev Tools, Tech News, Travel, Market Brief, Compare, Email Validation, URL Scan, MAC Vendor, Anime, Pokemon, Horoscope, Science Facts, Entertainment, Mock Data, Avatars, Profanity Filter, Coding Contests.
 
-## Why
+---
 
-| Before | After |
-|--------|-------|
-| Web search → scrape → parse | API → JSON |
-| 500-2000 tokens | 50-100 tokens |
-| minutes | <300ms |
+# Contributing to Public API Toolkit
 
-**Same data. 10-40x fewer tokens.**
+Public API Toolkit is a collection of **agent-ready skills**. Instead of a complex server, each skill is defined by a simple `SKILL.md` file that tells the agent how to call an API directly.
 
-## Contributing
+## Repository Map
 
-Add new skills by following the [Contributing Guide](CONTRIBUTING.md).
+```text
+skills/
+  weather/
+    SKILL.md    <-- Definition, API links, and examples
+  crypto/
+    SKILL.md
+site/
+  index.html    <-- Marketing landing page
+  styles.css
+GEMINI.md       <-- Gemini CLI specific context
+CLAUDE.md       <-- Claude Code specific context
+OPENCLAW.md     <-- OpenClaw specific context
+```
+
+## Add A New Skill
+
+1. Create a new folder in `skills/`.
+2. Create a `SKILL.md` file following the standard format (Frontmatter + APIs + Example).
+3. Update documentation and manifests.
 
 ## License
 
