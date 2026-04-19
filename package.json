@@ -1,6 +1,6 @@
 {
   "name": "public-api-toolkit",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "43 agent skills for real-time public data. Free. No keys. Token-efficient.",
   "keywords": [
     "gemini-cli",

@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Public API Toolkit — 43 Skills. Zero Config.</title>
+<title>Public API Toolkit — 43 Agent Skills. Zero Config. Zero Waste.</title>
 <meta
   name="description"
-  content="Stop wasting tokens on things free APIs can answer instantly. 43 agent-ready skills give your AI agent structured access to weather, crypto, Wikipedia, maps, holidays, and 38 more APIs."
+  content="The definitive collection of 43 agent-ready skills. Give your AI agents structured, real-time access to Weather, Crypto, Dev Tools, and more without the token waste of web scraping."
 />
 <script>
   document.documentElement.classList.add("js");
@@ -19,6 +19,17 @@
 />
 <link rel="icon" href="./assets/logo.png" />
 <link rel="stylesheet" href="./styles.css" />
+<style>
+  /* Local overrides for high-content layout */
+  .category-section { margin-top: 4rem; }
+  .category-title { font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--accent); border-left: 4px solid var(--accent); padding-left: 1rem; }
+  .feature-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem; }
+  .feature-item h3 { color: var(--accent); margin-bottom: 0.5rem; }
+  .stats-grid { display: flex; justify-content: space-around; background: var(--card-bg); padding: 2rem; border-radius: 12px; border: 1px solid var(--border); margin: 3rem 0; }
+  .stat-card { text-align: center; }
+  .stat-card strong { display: block; font-size: 2.5rem; color: var(--accent); }
+  .stat-card span { font-size: 0.9rem; opacity: 0.8; }
+</style>
 </head>
 <body>
   <div class="page-shell">
@@ -27,13 +38,13 @@
         <span class="brand-mark"></span>
         <span class="brand-copy">
           <strong>Public API Toolkit</strong>
-          <span>Structured public data for AI agents</span>
+          <span>Real-time data skills for AI agents</span>
         </span>
       </a>
       <nav class="site-nav" aria-label="Primary">
         <a href="#why">Why</a>
-        <a href="#tools">Skills</a>
-        <a href="#compare">Compare</a>
+        <a href="#skills">Catalog</a>
+        <a href="#architecture">How it Works</a>
         <a href="#install">Install</a>
         <a href="#faq">FAQ</a>
       </nav>
@@ -41,18 +52,20 @@
         class="button button-small button-accent"
         href="https://github.com/nikhilreddy3888/public-api-toolkit"
       >
-        &#9733; Star on GitHub
+        &#9733; GitHub
       </a>
     </header>
 
     <main id="top">
+      <!-- HERO SECTION -->
       <section class="hero section-reveal">
         <div class="hero-copy">
-          <p class="eyebrow">Agent Skills &middot; v2.0.0 &middot; MIT &middot; Zero config</p>
-          <h1><span class="accent">43 Skills.</span> One install. <span class="accent">Zero waste.</span></h1>
+          <p class="eyebrow">Agent Skills &middot; v2.0.1 &middot; MIT &middot; Zero config</p>
+          <h1><span class="accent">43 Skills.</span> One install. <span class="accent">Zero token waste.</span></h1>
           <p class="hero-text">
-            Your AI agent shouldn't scrape Wikipedia to tell you the weather.
-            <strong>43 structured skills. Instant data. No server needed.</strong>
+            Your AI agent shouldn't have to scrape the web to find simple facts.
+            Give them direct, structured access to <strong>43 real-time APIs</strong>.
+            Faster than search, cheaper than scraping, and 100% reliable.
           </p>
 
           <div class="install-line section-reveal">
@@ -66,360 +79,236 @@
           </div>
 
           <div class="hero-actions">
-            <a
-              class="button button-accent"
-              href="https://github.com/nikhilreddy3888/public-api-toolkit"
-            >
-              &#9733; Star on GitHub
-            </a>
-            <a class="button button-ghost" href="#install">
-              &#8595; Install guide
-            </a>
-          </div>
-
-          <div class="proof-strip" aria-label="Directional proof points">
-            <article>
-              <strong>10&ndash;40x</strong>
-              <span>fewer output tokens when agents call structured APIs instead of scraping</span>
-            </article>
-            <article>
-              <strong>&lt;300ms</strong>
-              <span>response time for live weather, FX rates, and country data</span>
-            </article>
-            <article>
-              <strong>Zero Config</strong>
-              <span>Replaces 43 separate API setups with one simple install</span>
-            </article>
+            <a class="button button-accent" href="#install">Get Started Now</a>
+            <a class="button button-ghost" href="#skills">Explore the 43 Skills</a>
           </div>
         </div>
 
-        <div class="hero-visual" aria-label="Public API Toolkit logo and use cases">
+        <div class="hero-visual">
           <div class="visual-halo"></div>
-          <img
-            src="./assets/logo.png"
-            alt="Public API Toolkit logo"
-            class="hero-logo"
-          />
+          <img src="./assets/logo.png" alt="Public API Toolkit" class="hero-logo" />
           <div class="floating-chip chip-top-left">Weather</div>
-          <div class="floating-chip chip-top-right">Crypto</div>
-          <div class="floating-chip chip-bottom-left">Wikipedia</div>
+          <div class="floating-chip chip-top-right">Dev Tools</div>
+          <div class="floating-chip chip-bottom-left">Crypto</div>
           <div class="floating-chip chip-bottom-right">Open Data</div>
         </div>
       </section>
 
+      <!-- STATS STRIP -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <strong>10-40x</strong>
+          <span>Token Efficiency</span>
+        </div>
+        <div class="stat-card">
+          <strong>&lt;300ms</strong>
+          <span>Latency</span>
+        </div>
+        <div class="stat-card">
+          <strong>43</strong>
+          <span>Native Skills</span>
+        </div>
+        <div class="stat-card">
+          <strong>0</strong>
+          <span>API Keys Needed</span>
+        </div>
+      </div>
+
+      <!-- VALUE PROPOSITION -->
       <section id="why" class="content-section section-reveal">
         <div class="section-heading">
-          <p class="eyebrow">The problem</p>
-          <h2>AI is solving easy problems the hard way.</h2>
+          <p class="eyebrow">The value</p>
+          <h2>Stop Letting Agents Hallucinate Data.</h2>
           <p>
-            Every time an AI assistant browses for weather, hallucinates exchange rates,
-            or scrapes news HTML for a one-line factual answer &mdash; it burns tokens and time
-            that a structured API call would solve in 200ms.
+            Standard agents rely on web search or stale training data for real-time facts.
+            This results in slow performance, massive token bills, and often, incorrect answers.
           </p>
         </div>
 
         <div class="problem-grid">
           <div class="problem-callout">
-            <p class="problem-title">What agents do today (expensive)</p>
+            <p class="problem-title">Agents without Toolkit</p>
             <ul>
-              <li>Search the web for BTC price &mdash; burns 800+ tokens parsing finance pages</li>
-              <li>Reason about FX rates from stale training data &mdash; answer might be months old</li>
-              <li>Scrape weather.com HTML for tomorrow's forecast &mdash; brittle, slow, wasteful</li>
-              <li>Fetch full Wikipedia pages just to summarize one paragraph</li>
-              <li>Install a different setup for every single capability</li>
+              <li><strong>Slow:</strong> Spends 10-20s scraping and parsing HTML.</li>
+              <li><strong>Expensive:</strong> Burns 1,500+ tokens on a single weather check.</li>
+              <li><strong>Brittle:</strong> Broken selectors on websites lead to "I can't find that."</li>
+              <li><strong>Stale:</strong> Hallucinates FX rates or stock prices from data months old.</li>
             </ul>
           </div>
           <div class="problem-callout warm">
-            <p class="problem-title">What they should do (instant)</p>
+            <p class="problem-title">Agents with Toolkit</p>
             <ul>
-              <li>Use <code>crypto</code> skill &mdash; structured JSON in &lt;300ms</li>
-              <li>Use <code>currency</code> skill &mdash; live rates, zero hallucination</li>
-              <li>Use <code>weather</code> skill &mdash; clean forecast, 0 HTML parsing</li>
-              <li>Use <code>wikipedia</code> skill &mdash; structured summary, minimal tokens</li>
-              <li>One toolkit covers all 43 skills</li>
+              <li><strong>Instant:</strong> Structured JSON returned in sub-300ms.</li>
+              <li><strong>Lean:</strong> Uses only 50-100 tokens for precise, factual data.</li>
+              <li><strong>Robust:</strong> Direct API calls that never change structure.</li>
+              <li><strong>Real-time:</strong> Live data from the world's most trusted public sources.</li>
             </ul>
           </div>
         </div>
 
-        <div class="comparison-table">
+        <div class="comparison-table" style="margin-top: 3rem;">
           <div class="comparison-row comparison-head">
-            <span>User asks</span>
-            <span>What AI often does</span>
-            <span>What it should do</span>
-            <span>Skill name</span>
+            <span>Scenario</span>
+            <span>Web Search / Scrape</span>
+            <span>Public API Toolkit</span>
           </div>
           <div class="comparison-row">
-            <span>What's the weather in Tokyo?</span>
-            <span>Search, scrape, summarize &mdash; 800+ tokens</span>
-            <span>Call forecast endpoint, return clean conditions</span>
-            <span><code>weather</code></span>
+            <span>Check Bitcoin Price</span>
+            <span class="comparison-bad">1,200 tokens + 10s wait</span>
+            <span class="comparison-good">60 tokens + 150ms wait</span>
           </div>
           <div class="comparison-row">
-            <span>Convert &euro;450 to USD</span>
-            <span>Guess from training data or browse</span>
-            <span>Use live FX APIs with exact rates</span>
-            <span><code>currency</code></span>
+            <span>Convert 500 EUR to JPY</span>
+            <span class="comparison-bad">High hallucination risk</span>
+            <span class="comparison-good">Live verified FX rate</span>
           </div>
           <div class="comparison-row">
-            <span>What's Bitcoin trading at?</span>
-            <span>Search finance sites or refuse</span>
-            <span>Fetch live quote with market context</span>
-            <span><code>crypto</code></span>
-          </div>
-          <div class="comparison-row">
-            <span>Is today a holiday in France?</span>
-            <span>Google search + HTML parse. Unreliable.</span>
-            <span>Call holiday API, get definitive answer</span>
-            <span><code>holidays</code></span>
-          </div>
-          <div class="comparison-row">
-            <span>Total install time</span>
-            <span>43 separate configs</span>
-            <span>One install. Every skill.</span>
-            <span><code>43-in-1</code></span>
+            <span>Upcoming LeetCode Contests</span>
+            <span class="comparison-bad">Hard to find via search</span>
+            <span class="comparison-good">Direct API schedule</span>
           </div>
         </div>
       </section>
 
-      <section class="content-section section-reveal">
+      <!-- SKILLS CATALOG -->
+      <section id="skills" class="content-section section-reveal">
         <div class="section-heading">
-          <p class="eyebrow">Why it matters</p>
-          <h2>Less tokens. Less compute. <span class="accent">More signal.</span></h2>
+          <p class="eyebrow">The Catalog</p>
+          <h2>43 Skills. Categorized for Discovery.</h2>
+          <p>One install gives your agent access to all of these. No individual setup required.</p>
+        </div>
+
+        <div class="category-section">
+          <h3 class="category-title">Development & Tools</h3>
+          <div class="tools-grid">
+            <div class="tool-card">
+              <span class="tool-name">mock_data</span>
+              <span class="tool-desc">Users, posts, and products from JSONPlaceholder & FakeStore.</span>
+            </div>
+            <div class="tool-card">
+              <span class="tool-name">coding_contests</span>
+              <span class="tool-desc">Schedules for LeetCode, Codeforces, HackerRank, etc.</span>
+            </div>
+            <div class="tool-card">
+              <span class="tool-name">dev_tools</span>
+              <span class="tool-desc">npm stats, GitHub repo details, and CDNJS search.</span>
+            </div>
+            <div class="tool-card">
+              <span class="tool-name">http_utils</span>
+              <span class="tool-desc">IP check, headers, QR code generation, and timestamps.</span>
+            </div>
+            <div class="tool-card">
+              <span class="tool-name">dns_network</span>
+              <span class="tool-desc">Google DNS lookups and network diagnostics.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="category-section">
+          <h3 class="category-title">Finance & Markets</h3>
+          <div class="tools-grid">
+            <div class="tool-card">
+              <span class="tool-name">crypto</span>
+              <span class="tool-desc">Live BTC, ETH prices, market cap, and 24h volume.</span>
+            </div>
+            <div class="tool-card">
+              <span class="tool-name">currency</span>
+              <span class="tool-desc">Real-time FX rates for 150+ fiat currencies.</span>
+            </div>
+            <div class="tool-card">
+              <span class="tool-name">market_brief</span>
+              <span class="tool-desc">A snapshot of the global crypto and fiat markets.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="category-section">
+          <h3 class="category-title">Science & Nature</h3>
+          <div class="tools-grid">
+            <div class="tool-card">
+              <span class="tool-name">weather</span>
+              <span class="tool-desc">Hyper-local forecasts and current conditions (Open-Meteo).</span>
+            </div>
+            <div class="tool-card">
+              <span class="tool-name">air_quality</span>
+              <span class="tool-desc">Real-time AQI and carbon intensity data.</span>
+            </div>
+            <div class="tool-card">
+              <span class="tool-name">space</span>
+              <span class="tool-desc">NASA imagery, ISS position, and SpaceX launch data.</span>
+            </div>
+            <div class="tool-card">
+              <span class="tool-name">science_facts</span>
+              <span class="tool-desc">Mathematical and scientific trivia from Numbers API.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="category-section">
+          <h3 class="category-title">Entertainment & Lifestyle</h3>
+          <div class="tools-grid">
+            <div class="tool-card">
+              <span class="tool-name">anime</span>
+              <span class="tool-desc">Quotes, facts, and Studio Ghibli film information.</span>
+            </div>
+            <div class="tool-card">
+              <span class="tool-name">entertainment</span>
+              <span class="tool-desc">Star Wars, Rick & Morty, and Harry Potter lore.</span>
+            </div>
+            <div class="tool-card">
+              <span class="tool-name">movie_tv_data</span>
+              <span class="tool-desc">TVmaze search, episode guides, and schedules.</span>
+            </div>
+            <div class="tool-card">
+              <span class="tool-name">horoscope</span>
+              <span class="tool-desc">Daily astrological insights and predictions.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="category-section" style="text-align: center; margin-top: 3rem;">
+          <p>...and 20+ more including <strong>Geocoding, News, Books, Transport, Animals, and Dictionaries.</strong></p>
+          <a href="https://github.com/nikhilreddy3888/public-api-toolkit#skills" class="button button-ghost">See Full List &rarr;</a>
+        </div>
+      </section>
+
+      <!-- ARCHITECTURE SECTION -->
+      <section id="architecture" class="content-section section-reveal">
+        <div class="section-heading">
+          <p class="eyebrow">How it works</p>
+          <h2>Markdown-Based Skill Intelligence.</h2>
           <p>
-            Every avoidable web search is wasted compute &mdash; on the GPU that generates it,
-            the data center that processes it, and the energy that powers it. Structured API
-            calls return exactly what the agent needs in a fraction of the tokens, time, and electricity.
+            Unlike traditional tools that require a running server, Public API Toolkit uses the
+            <strong>Skills Architecture</strong>. Each tool is defined by a simple, highly-optimized
+            Markdown file that agents can parse instantly.
           </p>
         </div>
 
-        <div class="use-case-grid mission-grid">
-          <article class="use-case-card">
-            <h3>&#9889; 10&ndash;40x fewer output tokens</h3>
-            <p>
-              Structured JSON replaces pages of parsed HTML. The model spends tokens reasoning &mdash; not reading noise.
-            </p>
-          </article>
-          <article class="use-case-card">
-            <h3>&#127793; Less compute, less energy</h3>
-            <p>
-              Fewer generated tokens means less GPU time, less data center load, and a smaller carbon footprint per lookup.
-            </p>
-          </article>
-          <article class="use-case-card">
-            <h3>&#128274; Safe by default</h3>
-            <p>
-              Every upstream is vetted. No scraping brittle websites, no secrets in prompts, no user data in transit.
-              Pure markdown-based skill definitions.
-            </p>
-          </article>
-          <article class="use-case-card">
-            <h3>&#129309; Built with contributors</h3>
-            <p>
-              This project thrives because contributors keep adding safe, useful, free APIs.
-              Every new skill means one fewer reason for agents to scrape the web.
-              <a href="https://github.com/nikhilreddy3888/public-api-toolkit/blob/main/CONTRIBUTING.md">Add yours &rarr;</a>
-            </p>
-          </article>
-        </div>
-      </section>
-
-      <section id="tools" class="content-section section-reveal">
-        <div class="section-heading">
-          <p class="eyebrow">43 skills &middot; 12 categories</p>
-          <h2>Stop scraping. Start calling.</h2>
-          <p>
-            Related capabilities are grouped into domain skills. No server code required &mdash;
-            agents discover and use them directly.
-          </p>
-        </div>
-
-        <div class="tools-grid">
-          <div class="tool-card">
-            <span class="tool-icon">&#127781;&#65039;</span>
-            <span class="tool-name">weather</span>
-            <span class="tool-label">Weather &amp; Sky</span>
-            <span class="tool-desc">Forecasts, current conditions, alerts, sun times</span>
+        <div class="feature-list">
+          <div class="feature-item">
+            <h3>&#128640; Zero-Latency Activation</h3>
+            <p>No local server to start. No Node.js process to keep alive. The agent reads the <code>SKILL.md</code> definition and calls the API directly from its runtime.</p>
           </div>
-          <div class="tool-card">
-            <span class="tool-icon">&#127988;</span>
-            <span class="tool-name">air_quality</span>
-            <span class="tool-label">Air &amp; Carbon</span>
-            <span class="tool-desc">Air quality, AQI, carbon intensity</span>
+          <div class="feature-item">
+            <h3>&#128274; Privacy First</h3>
+            <p>Your data never passes through our servers. Calls go directly from your agent to the public API provider (like NASA or Google).</p>
           </div>
-          <div class="tool-card">
-            <span class="tool-icon">&#128176;</span>
-            <span class="tool-name">currency</span>
-            <span class="tool-label">Currency Exchange</span>
-            <span class="tool-desc">Live FX rates, 150+ currencies, historical series</span>
+          <div class="feature-item">
+            <h3>&#128736; Zero Maintenance</h3>
+            <p>Public APIs are vetted for stability. If an endpoint changes, we update the Markdown file, and your agent gets the fix instantly upon the next update.</p>
           </div>
-          <div class="tool-card">
-            <span class="tool-icon">&#8383;</span>
-            <span class="tool-name">crypto</span>
-            <span class="tool-label">Crypto Markets</span>
-            <span class="tool-desc">Bitcoin, altcoins, market cap, 24h change</span>
-          </div>
-          <div class="tool-card">
-            <span class="tool-icon">&#127758;</span>
-            <span class="tool-name">country_data</span>
-            <span class="tool-label">Countries &amp; Regions</span>
-            <span class="tool-desc">Country profiles, flags, populations, capitals</span>
-          </div>
-          <div class="tool-card">
-            <span class="tool-icon">&#128205;</span>
-            <span class="tool-name">geocoding</span>
-            <span class="tool-label">Geocoding</span>
-            <span class="tool-desc">Forward geocoding, reverse geocoding, postal lookups</span>
-          </div>
-          <div class="tool-card">
-            <span class="tool-icon">&#127752;</span>
-            <span class="tool-name">ip_geolocation</span>
-            <span class="tool-label">IP Geolocation</span>
-            <span class="tool-desc">IP lookup for city, region, timezone, network</span>
-          </div>
-          <div class="tool-card">
-            <span class="tool-icon">&#128214;</span>
-            <span class="tool-name">wikipedia</span>
-            <span class="tool-label">Wikipedia</span>
-            <span class="tool-desc">Structured summaries, search, Wikidata</span>
-          </div>
-          <div class="tool-card">
-            <span class="tool-icon">&#128218;</span>
-            <span class="tool-name">dictionary</span>
-            <span class="tool-label">Dictionaries &amp; Words</span>
-            <span class="tool-desc">Definitions, synonyms, rhymes, autocomplete</span>
-          </div>
-          <div class="tool-card">
-            <span class="tool-icon">&#128187;</span>
-            <span class="tool-name">dev_tools</span>
-            <span class="tool-label">Developer Tools</span>
-            <span class="tool-desc">npm registry, GitHub search, CDNJS libraries</span>
-          </div>
-          <div class="tool-card">
-            <span class="tool-icon">&#127916;</span>
-            <span class="tool-name">entertainment</span>
-            <span class="tool-label">Movies &amp; Fandom</span>
-            <span class="tool-desc">Star Wars, Rick & Morty, Harry Potter, MCU</span>
-          </div>
-          <div class="tool-card">
-            <span class="tool-icon">&#128640;</span>
-            <span class="tool-name">space</span>
-            <span class="tool-label">Space &amp; Earth</span>
-            <span class="tool-desc">NASA, ISS tracking, Mars photos, SpaceX</span>
-          </div>
-          <div class="tool-card">
-            <span class="tool-icon">&#127881;</span>
-            <span class="tool-name">holidays</span>
-            <span class="tool-label">Holidays</span>
-            <span class="tool-desc">Public holidays and bank holidays</span>
-          </div>
-          <div class="tool-card">
-            <span class="tool-icon">&#128652;</span>
-            <span class="tool-name">transport</span>
-            <span class="tool-label">Transport</span>
-            <span class="tool-desc">Flight tracking, bike share, EV charging</span>
-          </div>
-          <div class="tool-card">
-            <span class="tool-icon">&#128274;</span>
-            <span class="tool-name">security_intel</span>
-            <span class="tool-label">Security Intel</span>
-            <span class="tool-desc">Vulnerability, Shodan, and threat feeds</span>
-          </div>
-          <div class="tool-card">
-            <span class="tool-icon">&#127793;</span>
-            <span class="tool-name">food_recipes</span>
-            <span class="tool-label">Food &amp; Drink</span>
-            <span class="tool-desc">Recipes, nutrition, breweries</span>
-          </div>
-          <div class="tool-card">
-            <span class="tool-icon">&#128187;</span>
-            <span class="tool-name">mock_data</span>
-            <span class="tool-label">Mocking & Prototyping</span>
-            <span class="tool-desc">Fake users, products, posts for testing</span>
-          </div>
-          <div class="tool-card">
-            <span class="tool-icon">&#127926;</span>
-            <span class="tool-name">anime</span>
-            <span class="tool-label">Anime & Ghibli</span>
-            <span class="tool-desc">Quotes, facts, and Studio Ghibli films</span>
-          </div>
-          <div class="tool-card">
-            <span class="tool-icon">&#127757;</span>
-            <span class="tool-name">coding_contests</span>
-            <span class="tool-label">Competitive Coding</span>
-            <span class="tool-desc">LeetCode, Codeforces, HackerRank schedules</span>
-          </div>
-          <div class="tool-card">
-            <span class="tool-icon">&#128202;</span>
-            <span class="tool-name">avatar_generator</span>
-            <span class="tool-label">Avatars</span>
-            <span class="tool-desc">Robots, pixel art, identicons from seeds</span>
-          </div>
-          <div class="tool-card">
-            <span class="tool-icon">&#128240;</span>
-            <span class="tool-name">tech_news</span>
-            <span class="tool-label">Tech News</span>
-            <span class="tool-desc">HackerNews top stories, Dev.to articles</span>
-          </div>
-          <div class="tool-card tool-card-more">
-            <span class="tool-icon">+</span>
-            <span class="tool-name">...and 22 more</span>
-            <span class="tool-label">See all 43 skills</span>
-            <span class="tool-desc">Books, universities, name insights, random facts, animals, pokemon, and more</span>
+          <div class="feature-item">
+            <h3>&#11088; Token Optimized</h3>
+            <p>Every skill definition is "token-shaved" to ensure it provides maximum utility to the agent while consuming minimum prompt space.</p>
           </div>
         </div>
       </section>
 
-      <section id="clients" class="content-section section-reveal">
-        <div class="section-heading">
-          <p class="eyebrow">Client support</p>
-          <h2>Works where you already work.</h2>
-          <p>
-            Designed for the agent ecosystem people are actually using.
-            Gemini CLI, Claude Code, OpenClaw, Codex &mdash;
-            each has a native install path.
-          </p>
-        </div>
-
-        <div class="client-grid">
-          <a class="client-card" href="#install">
-            <strong>Gemini CLI</strong>
-            <span>Extension install</span>
-          </a>
-          <a class="client-card" href="#install">
-            <strong>Claude Code</strong>
-            <span>Plugin install</span>
-          </a>
-          <a class="client-card" href="#install">
-            <strong>OpenClaw</strong>
-            <span>Plugin install</span>
-          </a>
-          <a class="client-card" href="#install">
-            <strong>Codex</strong>
-            <span>Skill install</span>
-          </a>
-          <a class="client-card" href="#install">
-            <strong>Cursor</strong>
-            <span>Direct rules</span>
-          </a>
-          <a class="client-card" href="#install">
-            <strong>Copilot CLI</strong>
-            <span>Extension install</span>
-          </a>
-          <a class="client-card" href="#install">
-            <strong>Generic Agents</strong>
-            <span>Markdown parsing</span>
-          </a>
-        </div>
-      </section>
-
+      <!-- INSTALL SECTION -->
       <section id="install" class="content-section section-reveal">
         <div class="section-heading">
-          <p class="eyebrow">Get started in 30 seconds</p>
-          <h2>One install. Every client.</h2>
-          <p>
-            No servers to run. No keys needed.
-            Pure agent-ready skills.
-          </p>
+          <p class="eyebrow">Quick Setup</p>
+          <h2>Ready in 30 Seconds.</h2>
         </div>
 
         <div class="install-tabs" id="tabs">
@@ -428,15 +317,18 @@
           <button class="tab-btn" onclick="switchTab('openclaw', this)">OpenClaw</button>
           <button class="tab-btn" onclick="switchTab('codex', this)">Codex</button>
         </div>
+
         <div class="tab-panel active" id="tab-gemini">
           <div class="code-panel">
             <div class="code-panel-header">
-              <span>Gemini CLI</span>
+              <span>Universal Install</span>
               <button class="copy-button" type="button" data-copy-target="install-gemini">Copy</button>
             </div>
             <pre><code id="install-gemini">gemini extensions install https://github.com/nikhilreddy3888/public-api-toolkit</code></pre>
+            <p class="code-note">Then activate any skill with: <code>gemini activate_skill weather</code></p>
           </div>
         </div>
+
         <div class="tab-panel" id="tab-claude">
           <div class="code-panel">
             <div class="code-panel-header">
@@ -444,120 +336,91 @@
               <button class="copy-button" type="button" data-copy-target="install-claude">Copy</button>
             </div>
             <pre><code id="install-claude">claude plugin marketplace add nikhilreddy3888/public-api-toolkit</code></pre>
+            <p class="code-note">Claude will automatically detect and use the 43 skills in the <code>skills/</code> folder.</p>
           </div>
         </div>
+
         <div class="tab-panel" id="tab-openclaw">
           <div class="code-panel">
             <div class="code-panel-header">
-              <span>OpenClaw</span>
+              <span>OpenClaw Plugin</span>
               <button class="copy-button" type="button" data-copy-target="install-openclaw">Copy</button>
             </div>
             <pre><code id="install-openclaw">openclaw plugins install https://github.com/nikhilreddy3888/public-api-toolkit</code></pre>
+            <p class="code-note">Full OpenClaw support with automatic discovery of all 43 skills.</p>
           </div>
         </div>
+
         <div class="tab-panel" id="tab-codex">
           <div class="code-panel">
             <div class="code-panel-header">
-              <span>Codex</span>
+              <span>Codex Skill</span>
               <button class="copy-button" type="button" data-copy-target="install-codex">Copy</button>
             </div>
             <pre><code id="install-codex">codex install-skill https://github.com/nikhilreddy3888/public-api-toolkit</code></pre>
+            <p class="code-note">Direct skill-pack integration for the Codex ecosystem.</p>
           </div>
         </div>
-
-        <p class="more-clients" style="margin-top: 2rem; text-align: center;">
-          <a href="https://github.com/nikhilreddy3888/public-api-toolkit#readme">Read the full documentation &rarr;</a>
-        </p>
       </section>
 
+      <!-- FAQ SECTION -->
       <section id="faq" class="content-section section-reveal">
         <div class="section-heading">
           <p class="eyebrow">FAQ</p>
-          <h2>Common questions.</h2>
+          <h2>Common Questions.</h2>
         </div>
 
         <div class="faq-list">
           <div class="faq-item">
-            <div class="faq-q" onclick="toggleFaq(this)">
-              Do I need API keys for all 43 skills?
-              <span class="faq-arrow">+</span>
-            </div>
-            <div class="faq-a">
-              No. All 43 tools work without any API keys &mdash; they use free public APIs
-              that don't require authentication. The toolkit is built to be zero-config.
-            </div>
+            <div class="faq-q" onclick="toggleFaq(this)">Are these APIs really free?<span class="faq-arrow">+</span></div>
+            <div class="faq-a">Yes. Every skill in this toolkit uses high-quality public APIs that do not require an API key or account for their base tiers. We focus on "Zero Key" providers.</div>
           </div>
           <div class="faq-item">
-            <div class="faq-q" onclick="toggleFaq(this)">
-              How is this different from just letting the agent use web search?
-              <span class="faq-arrow">+</span>
-            </div>
-            <div class="faq-a">
-              Web search returns noisy HTML that costs 500&ndash;2000+ tokens per lookup.
-              Structured API calls return clean JSON in &lt;300ms using 50&ndash;100 tokens.
-              It's more accurate and significantly cheaper.
-            </div>
+            <div class="faq-q" onclick="toggleFaq(this)">Do I need to run a server?<span class="faq-arrow">+</span></div>
+            <div class="faq-a">No. Unlike MCP servers, this is a <strong>Skill Pack</strong>. It is purely Markdown-based, which your agent interprets and executes using its own built-in tools.</div>
           </div>
           <div class="faq-item">
-            <div class="faq-q" onclick="toggleFaq(this)">
-              Is this an MCP server?
-              <span class="faq-arrow">+</span>
-            </div>
-            <div class="faq-a">
-              No. It is a <strong>Skill Pack</strong>. While MCP servers require running a local Node/Python process,
-              Skills are pure Markdown instructions that agents interpret. This means zero overhead,
-              zero local execution risks, and instant setup.
-            </div>
+            <div class="faq-q" onclick="toggleFaq(this)">Is my data safe?<span class="faq-arrow">+</span></div>
+            <div class="faq-a">Yes. We do not proxy your requests. All data stays between your agent and the API provider. We simply provide the "map" (the SKILL.md files) on how to talk to them.</div>
           </div>
           <div class="faq-item">
-            <div class="faq-q" onclick="toggleFaq(this)">
-              Can I contribute new APIs?
-              <span class="faq-arrow">+</span>
-            </div>
-            <div class="faq-a">
-              Yes! Adding a skill takes about 10 minutes. Check the <a href="https://github.com/nikhilreddy3888/public-api-toolkit/blob/main/CONTRIBUTING.md">Contributing Guide</a>.
-            </div>
+            <div class="faq-q" onclick="toggleFaq(this)">How do I contribute a new skill?<span class="faq-arrow">+</span></div>
+            <div class="faq-a">Check out our <a href="https://github.com/nikhilreddy3888/public-api-toolkit/blob/main/CONTRIBUTING.md">Contributing Guide</a>. It takes about 10 minutes to add a new API.</div>
           </div>
         </div>
       </section>
 
+      <!-- FINAL CTA -->
       <section class="content-section cta-section section-reveal">
         <div>
-          <p class="eyebrow">Get started</p>
-          <h2>Stop scraping. <span class="accent">Start calling.</span></h2>
+          <p class="eyebrow">Ready for Launch</p>
+          <h2>Stop Scraping. <span class="accent">Start Calling.</span></h2>
           <p>
-            43 agent skills for structured public data.
-            Give your agents the data they need without the token waste.
+            The most efficient way to give your AI agent real-time knowledge.
+            43 skills. One install. Zero noise.
           </p>
           <div class="hero-actions">
-            <a
-              class="button button-accent"
-              href="https://github.com/nikhilreddy3888/public-api-toolkit"
-            >
+            <a class="button button-accent" href="https://github.com/nikhilreddy3888/public-api-toolkit">
               &#9733; Star on GitHub
             </a>
-            <a class="button button-ghost" href="https://github.com/nikhilreddy3888/public-api-toolkit#readme">
-              Read the docs
+            <a class="button button-ghost" href="#install">
+              Install Guide
             </a>
           </div>
         </div>
-        <div class="hero-visual cta-visual" aria-label="Public API Toolkit logo">
+        <div class="hero-visual cta-visual">
           <div class="visual-halo"></div>
-          <img
-            src="./assets/logo.png"
-            alt="Public API Toolkit logo"
-            class="hero-logo"
-          />
+          <img src="./assets/logo.png" alt="Public API Toolkit" class="hero-logo" />
         </div>
       </section>
     </main>
 
     <footer class="site-footer">
-      <p>Public API Toolkit &middot; v2.0.0 &middot; MIT</p>
+      <p>Public API Toolkit &middot; v2.0.1 &middot; MIT &middot; Built for the Agent Ecosystem</p>
       <div>
         <a href="https://github.com/nikhilreddy3888/public-api-toolkit">GitHub</a>
-        <a href="https://github.com/nikhilreddy3888/public-api-toolkit#readme">Docs</a>
         <a href="https://github.com/nikhilreddy3888/public-api-toolkit/blob/main/CONTRIBUTING.md">Contribute</a>
+        <a href="https://github.com/nikhilreddy3888/public-api-toolkit#readme">Docs</a>
       </div>
     </footer>
   </div>
